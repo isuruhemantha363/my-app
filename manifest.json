@@ -1,7 +1,7 @@
 {
   "name": "Handy Lanka Service",
   "short_name": "HandyLanka",
-  "start_url": "./index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#f5b400",
