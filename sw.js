@@ -1,3 +1,10 @@
-self.addEventListener('fetch', (event) => {
-  // මේකෙන් ඇප් එක Offline වුණත් වැඩ කරන්න උදව් වෙනවා
+const CACHE_NAME = 'handy-lanka-v1';
+const assets = ['index.html', 'style.css', 'n logo.png'];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(assets)));
+});
+
+self.addEventListener('fetch', (e) => {
+  e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
 });
