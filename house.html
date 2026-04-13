@@ -23,7 +23,6 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* ---------- DYNAMIC ANIMATED BG ---------- */
     body {
       background: linear-gradient(-45deg, #e4c3c2, #ded4af, #a8d3e0, #eab5b5);
       background-size: 400% 400%;
@@ -31,6 +30,7 @@
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     @keyframes gradientBG {
@@ -55,149 +55,109 @@
 
     .n_logo {
       height: auto;
-      width: 130px;
+      width: 100px; /* Reduced for mobile */
     }
 
     nav a {
       text-decoration: none;
       color: var(--black);
       font-weight: 600;
-      font-size: 18px;
-      margin-left: 20px;
+      font-size: 15px; /* Scaled down */
+      margin-left: 15px;
       transition: 0.3s;
     }
-    nav a:hover { color: var(--primary); }
-
-    /* Language Switcher */
-    .lang-switcher {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .lang-btn {
-      background: rgba(255,255,255,0.7);
-      border: 1px solid var(--black);
-      padding: 5px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-      font-size: 14px;
-    }
-    .lang-btn:hover { background: var(--yellow); }
 
     /* ---------- HERO SECTION ---------- */
     .hero {
       text-align: center;
-      padding: 40px 20px 20px;
-      animation: fadeIn 0.8s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      padding: 40px 15px 10px;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem; /* Mobile friendly size */
       font-weight: 800;
       color: var(--black);
       margin-bottom: 10px;
     }
-
     .hero h1 span { color: var(--primary); }
 
     .hero p {
-      color: #4b5563;
-      max-width: 600px;
+      font-size: 0.95rem;
+      max-width: 90%;
       margin: 0 auto;
-      font-size: 1.1rem;
     }
 
     /* ---------- SERVICES GRID ---------- */
     .services-grid {
       max-width: 1100px;
-      margin: 20px auto 60px;
-      padding: 0 20px;
+      margin: 20px auto 40px;
+      padding: 0 15px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Better sizing for mobile */
+      gap: 20px;
     }
 
     .service-card {
       background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 30px;
+      padding: 30px 20px;
+      border-radius: 25px;
       text-align: center;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      cursor: pointer;
+      transition: 0.3s;
       border: 2px solid transparent;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .service-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      border-color: var(--yellow);
+    .service-card:active { /* Better response for touch */
+      transform: scale(0.98);
+      background: #f9f9f9;
     }
 
     .icon-box {
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       background: #fffbeb;
       border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
-      margin-bottom: 20px;
-      transition: 0.3s;
-    }
-
-    .service-card:hover .icon-box {
-      background: var(--yellow);
-      transform: rotate(-5deg);
+      font-size: 35px;
+      margin-bottom: 15px;
     }
 
     .service-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--black);
-      margin-bottom: 12px;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
     }
 
     .service-card p {
-      font-size: 0.9rem;
-      color: #6b7280;
-      margin-bottom: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
     }
 
     .btn-select {
-      background: #f3f4f6;
-      padding: 10px 20px;
+      background: #1f2937;
+      color: white;
+      padding: 12px 25px;
       border-radius: 12px;
       font-weight: 700;
-      font-size: 0.8rem;
-      transition: 0.3s;
-    }
-
-    .service-card:hover .btn-select {
-      background: var(--black);
-      color: #fff;
+      font-size: 0.85rem;
+      width: 100%; /* Full width on mobile is easier to tap */
     }
 
     footer {
       text-align: center;
-      padding: 40px;
-      color: #6b7280;
-      font-size: 0.9rem;
+      padding: 30px;
+      font-size: 0.8rem;
     }
 
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 1.8rem; }
-      nav a { font-size: 16px; }
+    /* ---------- RESPONSIVE TWEAKS ---------- */
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 1.6rem; }
+      header { padding: 10px 3%; }
+      nav a { margin-left: 10px; font-size: 14px; }
     }
   </style>
 </head>
@@ -213,41 +173,41 @@
     </nav>
   </header>
 
-  <div class="lang-switcher">
-    <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
+  <div class="lang-switcher" style="text-align: center; margin-top: 15px;">
+    <button class="lang-btn" onclick="toggleLanguage()" style="background: white; border: 1px solid #ccc; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Switch to සිංහල</button>
   </div>
 
   <section class="hero">
     <h1 id="hero-title">Cleaning & <span>Painting</span></h1>
-    <p id="hero-desc">Professional solutions for a spotless home and vibrant, fresh walls.</p>
+    <p id="hero-desc">Professional solutions for a spotless home and vibrant walls.</p>
   </section>
 
   <section class="services-grid">
     <div class="service-card" onclick="bookService('house_cleaning_painting', 'Deep Cleaning')">
       <div class="icon-box">✨</div>
       <h3 id="s1-title">Full House Cleaning</h3>
-      <p id="s1-desc">Complete deep cleaning from floors to ceiling for a fresh start.</p>
+      <p id="s1-desc">Complete deep cleaning from floors to ceiling.</p>
       <div class="btn-select" id="btn1">Select Service</div>
     </div>
 
     <div class="service-card" onclick="bookService('house_cleaning_painting', 'Kitchen & Bath')">
       <div class="icon-box">🧼</div>
       <h3 id="s2-title">Kitchen & Bathroom</h3>
-      <p id="s2-desc">Specialized scrubbing and sanitization for your home's vital areas.</p>
+      <p id="s2-desc">Specialized scrubbing and sanitization.</p>
       <div class="btn-select" id="btn2">Select Service</div>
     </div>
 
     <div class="service-card" onclick="bookService('house_cleaning_painting', 'Interior Painting')">
       <div class="icon-box">🎨</div>
       <h3 id="s3-title">Interior Painting</h3>
-      <p id="s3-desc">Premium wall painting and color matching for your indoor spaces.</p>
+      <p id="s3-desc">Premium wall painting and color matching.</p>
       <div class="btn-select" id="btn3">Select Service</div>
     </div>
 
     <div class="service-card" onclick="bookService('house_cleaning_painting', 'Exterior Painting')">
       <div class="icon-box">🏠</div>
       <h3 id="s4-title">Exterior Painting</h3>
-      <p id="s4-desc">Weather-resistant coatings to protect and beautify your outer walls.</p>
+      <p id="s4-desc">Weather-resistant coatings for outer walls.</p>
       <div class="btn-select" id="btn4">Select Service</div>
     </div>
   </section>
@@ -265,15 +225,15 @@
         navHelp: "Help",
         langBtn: "Switch to සිංහල",
         heroTitle: "Cleaning & <span>Painting</span>",
-        heroDesc: "Professional solutions for a spotless home and vibrant, fresh walls.",
+        heroDesc: "Professional solutions for a spotless home and vibrant walls.",
         s1Title: "Full House Cleaning",
-        s1Desc: "Complete deep cleaning from floors to ceiling for a fresh start.",
+        s1Desc: "Complete deep cleaning from floors to ceiling.",
         s2Title: "Kitchen & Bathroom",
-        s2Desc: "Specialized scrubbing and sanitization for your home's vital areas.",
+        s2Desc: "Specialized scrubbing and sanitization.",
         s3Title: "Interior Painting",
-        s3Desc: "Premium wall painting and color matching for your indoor spaces.",
+        s3Desc: "Premium wall painting and color matching.",
         s4Title: "Exterior Painting",
-        s4Desc: "Weather-resistant coatings to protect and beautify your outer walls.",
+        s4Desc: "Weather-resistant coatings for outer walls.",
         btnSelect: "Select Service",
         footer: "&copy; 2026 Handy Lanka. All rights reserved."
       },
@@ -282,15 +242,15 @@
         navHelp: "උදවු",
         langBtn: "Switch to English",
         heroTitle: "පිරිසිදු කිරීම සහ <span>තීන්ත ආලේපනය</span>",
-        heroDesc: "පිරිසිදු නිවසක් සහ අලංකාර වර්ණවත් බිත්ති සඳහා වෘත්තීය විසඳුම්.",
+        heroDesc: "පිරිසිදු නිවසක් සහ අලංකාර බිත්ති සඳහා වෘත්තීය විසඳුම්.",
         s1Title: "සම්පූර්ණ නිවස පිරිසිදු කිරීම",
-        s1Desc: "පොළොවේ සිට වහලය දක්වා සම්පූර්ණ ගැඹුරු පිරිසිදු කිරීමේ සේවාව.",
+        s1Desc: "පොළොවේ සිට වහලය දක්වා සම්පූර්ණ පිරිසිදු කිරීම.",
         s2Title: "කුස්සිය සහ නානකාමරය",
-        s2Desc: "විශේෂිත පිරිසිදු කිරීමේ දියර යොදා විෂබීජහරණය කිරීම.",
+        s2Desc: "විශේෂිත පිරිසිදු කිරීම සහ විෂබීජහරණය.",
         s3Title: "ඇතුළත තීන්ත ආලේපනය",
-        s3Desc: "නිවසේ ඇතුළත බිත්ති සඳහා උසස් තත්ත්වයේ තීන්ත ආලේප කිරීම.",
+        s3Desc: "නිවසේ ඇතුළත බිත්ති සඳහා උසස් තත්ත්වයේ තීන්ත.",
         s4Title: "පිටත තීන්ත ආලේපනය",
-        s4Desc: "කාලගුණයට ඔරොත්තු දෙන පරිදි පිටත බිත්ති ආරක්ෂා කර අලංකාර කිරීම.",
+        s4Desc: "කාලගුණයට ඔරොත්තු දෙන පරිදි පිටත බිත්ති අලංකාර කිරීම.",
         btnSelect: "සේවාව තෝරන්න",
         footer: "&copy; 2026 Handy Lanka. සියලුම හිමිකම් ඇවිරිණි."
       }

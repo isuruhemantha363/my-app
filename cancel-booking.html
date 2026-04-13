@@ -2,96 +2,152 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
   <title>Cancel Appointment | Handy Lanka</title>
+  
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
-    authDomain: "handylanka-6f7b3.firebaseapp.com",
-    databaseURL: "https://handylanka-6f7b3-default-rtdb.firebaseio.com",
-    projectId: "handylanka-6f7b3",
-    storageBucket: "handylanka-6f7b3.firebasestorage.app",
-    messagingSenderId: "932726552349",
-    appId: "1:932726552349:web:e7a51b17fd381b168d93f4"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-</script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
+      authDomain: "handylanka-6f7b3.firebaseapp.com",
+      databaseURL: "https://handylanka-6f7b3-default-rtdb.firebaseio.com",
+      projectId: "handylanka-6f7b3",
+      storageBucket: "handylanka-6f7b3.firebasestorage.app",
+      messagingSenderId: "932726552349",
+      appId: "1:932726552349:web:e7a51b17fd381b168d93f4"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --primary: #f5b400;
       --danger: #ef4444;
-      --dark: #111827;
-      --card-bg: rgba(255, 255, 255, 0.98);
-      --shadow: 0 15px 35px rgba(0,0,0,0.12);
+      --dark: #1e293b;
+      --bg-light: #f8fafc;
     }
 
-    body { 
+    * { 
       margin: 0; 
-      font-family: 'Segoe UI', Roboto, sans-serif; 
-      color: var(--dark);
-      background: linear-gradient(-45deg, #fef3c7, #fff8dc, #fee2e2, #fef2f2);
-      background-size: 400% 400%;
-      animation: multiColorBG 15s ease infinite;
-      min-height: 100vh;
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-light);
       display: flex;
       flex-direction: column;
+      height: 100vh;
+      overflow-x: hidden;
     }
 
-    @keyframes multiColorBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* Header Styling */
+    header {
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
-    .n_logo { width: 120px; height: auto; cursor: pointer; }
+    .n_logo { width: 100px; height: auto; cursor: pointer; }
 
-    .lang-switcher { display: flex; gap: 5px; background: #f3f4f6; padding: 5px; border-radius: 12px; }
-    .lang-btn { border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 13px; transition: 0.3s; }
-    .lang-btn.active { background: var(--primary); color: white; }
+    .lang-switcher {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 12px;
+    }
 
-    .cancel-container { max-width: 500px; margin: 40px auto; padding: 0 20px; width: 100%; }
-    .cancel-card {
-      background: var(--card-bg);
-      border-radius: 30px;
-      padding: 40px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.5);
+    .lang-btn {
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 12px;
+      color: #64748b;
+      background: transparent;
+      transition: 0.2s;
+    }
+
+    .lang-btn.active {
+      background: white;
+      color: var(--dark);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* Content Area */
+    .container {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    .card-header {
       text-align: center;
+      margin-bottom: 25px;
     }
 
     .icon-box {
-      width: 70px; height: 70px; background: #fee2e2; color: var(--danger);
+      width: 60px; height: 60px; 
+      background: #fee2e2; color: var(--danger);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 30px; margin: 0 auto 20px;
+      font-size: 24px; margin: 0 auto 15px;
     }
 
-    h2 { color: #991b1b; font-weight: 800; margin-bottom: 10px; }
-    #desc_text { color: #6b7280; font-size: 14px; margin-bottom: 30px; line-height: 1.5; }
+    h2 { font-size: 20px; color: var(--dark); font-weight: 700; margin-bottom: 8px; }
+    #desc_text { font-size: 13px; color: #64748b; line-height: 1.5; }
 
-    .form-group { text-align: left; margin-bottom: 20px; }
-    label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: #4b5563; }
+    /* Form Styling */
+    #cancelForm { width: 100%; max-width: 400px; }
+
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--dark); }
     
     input, textarea, select { 
-      width: 100%; padding: 15px; border: 2px solid #e5e7eb; border-radius: 14px; 
-      font-size: 15px; box-sizing: border-box; font-family: inherit; transition: 0.3s;
+      width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; 
+      font-size: 15px; background: white; transition: 0.2s;
     }
 
-    input:focus, textarea:focus { border-color: var(--danger); outline: none; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1); }
+    input:focus, textarea:focus, select:focus { 
+      border-color: var(--danger); outline: none; background: #fffafb;
+    }
+
+    /* Action Buttons */
+    .action-sheet {
+      background: white;
+      padding: 20px;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+      margin-top: auto;
+    }
 
     .confirm-btn { 
-      width: 100%; background: var(--danger); color: white; border: none; padding: 18px; 
-      border-radius: 18px; font-size: 17px; font-weight: 800; cursor: pointer; transition: 0.4s;
-      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+      width: 100%; background: var(--danger); color: white; border: none; padding: 16px; 
+      border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer;
     }
-    .confirm-btn:hover { background: #dc2626; transform: translateY(-3px); }
 
-    .back-link { display: inline-block; margin-top: 20px; color: #6b7280; text-decoration: none; font-size: 14px; font-weight: 600; }
+    .confirm-btn:disabled { opacity: 0.6; }
+
+    .back-link { 
+      display: block; text-align: center; margin-top: 15px; 
+      color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 500; 
+    }
   </style>
 </head>
 <body>
@@ -99,45 +155,46 @@
 <header>
   <img src="n logo.png" class="n_logo" alt="Logo" onclick="window.location.href='page1.html'">
   <div class="lang-switcher">
-    <button class="lang-btn active" onclick="switchLang('si', this)">සිංහල</button>
-    <button class="lang-btn" onclick="switchLang('en', this)">English</button>
+    <button class="lang-btn active" id="btn_si" onclick="switchLang('si', this)">සිංහල</button>
+    <button class="lang-btn" id="btn_en" onclick="switchLang('en', this)">English</button>
   </div>
 </header>
 
-<div class="cancel-container">
-  <div class="cancel-card">
+<div class="container">
+  <div class="card-header">
     <div class="icon-box">✕</div>
     <h2 id="title_text">Cancel Booking</h2>
     <p id="desc_text">ඇණවුම අවලංගු කිරීමට කරුණාකර පහත තොරතුරු සම්පූර්ණ කරන්න.</p>
-
-    <form id="cancelForm">
-      <div class="form-group">
-        <label id="lbl_phone">Phone Number</label>
-        <input type="tel" id="cancel_ref" placeholder="0771234567" maxlength="10" required>
-      </div>
-
-      <div class="form-group">
-        <label id="lbl_reason">Reason for Cancellation</label>
-        <select id="cancel_reason" required>
-          <option value="" id="opt_default">-- හේතුව තෝරන්න --</option>
-          <option value="Changed Mind" class="opt-text" data-si="මනස වෙනස් විය" data-en="Changed my mind">මනස වෙනස් විය</option>
-          <option value="Found Another" class="opt-text" data-si="වෙනත් අයෙකු සොයාගත්තා" data-en="Found another service">වෙනත් අයෙකු සොයාගත්තා</option>
-          <option value="Emergency" class="opt-text" data-si="හදිසි අවශ්‍යතාවයක්" data-en="Emergency case">හදිසි අවශ්‍යතාවයක්</option>
-          <option value="Rescheduling" class="opt-text" data-si="දිනය වෙනස් කිරීමට අවශ්‍යයි" data-en="Want to reschedule">දිනය වෙනස් කිරීමට අවශ්‍යයි</option>
-          <option value="Other" class="opt-text" data-si="වෙනත් කරුණක්" data-en="Other reason">වෙනත් කරුණක්</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label id="lbl_msg">Message (Optional)</label>
-        <textarea id="cancel_msg" rows="3"></textarea>
-      </div>
-
-      <button type="submit" class="confirm-btn" id="submitBtn">Confirm Cancellation</button>
-    </form>
-
-    <a href="page1.html" class="back-link" id="back_btn">← පසුවට (Keep my booking)</a>
   </div>
+
+  <form id="cancelForm">
+    <div class="form-group">
+      <label id="lbl_phone">Phone Number</label>
+      <input type="tel" id="cancel_ref" placeholder="0771234567" maxlength="10" required>
+    </div>
+
+    <div class="form-group">
+      <label id="lbl_reason">Reason for Cancellation</label>
+      <select id="cancel_reason" required>
+        <option value="" id="opt_default">-- හේතුව තෝරන්න --</option>
+        <option value="Changed Mind" class="opt-text" data-si="මනස වෙනස් විය" data-en="Changed my mind">මනස වෙනස් විය</option>
+        <option value="Found Another" class="opt-text" data-si="වෙනත් අයෙකු සොයාගත්තා" data-en="Found another service">වෙනත් අයෙකු සොයාගත්තා</option>
+        <option value="Emergency" class="opt-text" data-si="හදිසි අවශ්‍යතාවයක්" data-en="Emergency case">හදිසි අවශ්‍යතාවයක්</option>
+        <option value="Rescheduling" class="opt-text" data-si="දිනය වෙනස් කිරීමට අවශ්‍යයි" data-en="Want to reschedule">දිනය වෙනස් කිරීමට අවශ්‍යයි</option>
+        <option value="Other" class="opt-text" data-si="වෙනත් කරුණක්" data-en="Other reason">වෙනත් කරුණක්</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label id="lbl_msg">Message (Optional)</label>
+      <textarea id="cancel_msg" rows="3" placeholder="..."></textarea>
+    </div>
+  </form>
+</div>
+
+<div class="action-sheet">
+  <button type="submit" form="cancelForm" class="confirm-btn" id="submitBtn">Confirm Cancellation</button>
+  <a href="page1.html" class="back-link" id="back_btn">← පසුවට (Keep my booking)</a>
 </div>
 
 <script>
@@ -163,7 +220,7 @@
   document.getElementById('cancelForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    const currentLang = document.querySelector('.lang-btn.active').innerText === 'සිංහල' ? 'si' : 'en';
+    const currentLang = document.getElementById('btn_si').classList.contains('active') ? 'si' : 'en';
     const phone = document.getElementById('cancel_ref').value; 
     const reason = document.getElementById('cancel_reason').value;
     const msg = document.getElementById('cancel_msg').value;
@@ -171,7 +228,7 @@
     btn.innerText = trans[currentLang].proc;
     btn.disabled = true;
 
-    // 1. Firebase එක Update කිරීම
+    // Firebase Update
     database.ref('bookings').orderByChild('Customer_Phone').equalTo(phone).once('value', snapshot => {
         if (snapshot.exists()) {
             let updates = {};
@@ -181,19 +238,17 @@
             });
             database.ref().update(updates).then(() => sendToGoogleSheet(phone, reason, msg, btn, currentLang));
         } else {
-            // සොයාගත නොහැකි වුවත් Sheet එකට යවන්න (සමහර විට Firebase හි format එක වෙනස් විය හැක)
             sendToGoogleSheet(phone, reason, msg, btn, currentLang);
         }
     });
   });
 
   function sendToGoogleSheet(phone, reason, msg, btn, currentLang) {
-    // *** ඔබේ නිවැරදි Google Script URL එක මෙතැනට දමන්න ***
     const scriptURL = "https://script.google.com/macros/s/AKfycbyDSqVumIVqOJ3NtgjQuFG55oQjByYRKKi00w-ONbJY_aXQqNepg8ryDB12SsZuIgkFUA/exec";
     
     const params = new URLSearchParams();
     params.append("mode", "cancel");
-    params.append("reference", phone); // Sheet එකේ F column එකේ ඇති අංකය සමග සැසඳීමට
+    params.append("reference", phone); 
     params.append("reason", reason + (msg ? " - " + msg : ""));
 
     fetch(scriptURL, { 
@@ -208,7 +263,6 @@
     })
     .catch(err => {
         console.error(err);
-        alert("Done!"); 
         window.location.href = "c_thank.html";
     });
   }

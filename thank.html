@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Booking Successful | Handy Lanka</title>
   
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     :root {
       --primary: #f5b400;
@@ -21,6 +23,7 @@
       flex-direction: column;
       min-height: 100vh;
       color: var(--dark);
+      overflow-x: hidden;
     }
 
     header {
@@ -48,49 +51,74 @@
 
     .thankyou-card {
       background: white;
-      max-width: 450px;
+      max-width: 480px;
       width: 100%;
-      padding: 60px 30px;
+      padding: 50px 35px;
       border-radius: 30px;
       box-shadow: var(--shadow);
       text-align: center;
-      border-top: 6px solid var(--primary);
+      border-top: 8px solid var(--primary);
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .success-icon {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       background: #dcfce7;
       color: var(--success);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
+      font-size: 45px;
       margin: 0 auto 25px;
+      animation: pulse 2s infinite;
     }
 
-    h2 { font-size: 30px; margin-bottom: 15px; font-weight: 800; }
-    p { color: #4b5563; margin-bottom: 40px; line-height: 1.7; font-size: 16px; }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    h2 { font-size: 32px; margin-bottom: 15px; font-weight: 800; color: #111827; }
+    p { color: #4b5563; margin-bottom: 35px; line-height: 1.7; font-size: 17px; }
+
+    .info-box {
+      background: #f9fafb;
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--primary);
+      text-align: left;
+      font-size: 14px;
+    }
 
     .btn-home {
-      display: inline-block;
-      padding: 14px 40px;
+      display: block;
+      padding: 16px;
       background: var(--dark);
       color: white;
-      border-radius: 12px;
+      border-radius: 15px;
       font-weight: 700;
       text-decoration: none;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
 
     .btn-home:hover {
-      background: #374151;
-      transform: translateY(-2px);
+      background: var(--primary);
+      color: var(--dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(245, 180, 0, 0.2);
     }
 
     footer {
-      padding: 20px;
+      padding: 25px;
       text-align: center;
       color: #9ca3af;
       font-size: 13px;
@@ -107,8 +135,17 @@
     <div class="thankyou-card">
       <div class="success-icon">✓</div>
       <h2>Thank You!</h2>
-      <p>Your booking request has been received successfully. Our representative will contact you shortly to confirm the date and time.</p>
+      <p>ඔබේ වෙන්කරවා ගැනීම සාර්ථකව ලැබුණි. සේවාව ස්ථිර කිරීම සඳහා අපගේ නියෝජිතයෙකු කෙටි වේලාවකින් ඔබව අමතනු ඇත.</p>
       
+      <div class="info-box">
+        <strong>මීළඟ පියවර:</strong>
+        <ul style="margin: 10px 0 0 18px; padding: 0;">
+          <li>ඇමතුමක් මගින් දිනය සහ වේලාව තහවුරු කිරීම.</li>
+          <li>සේවකයා ඔබේ නිවසට පැමිණීම.</li>
+          <li>සේවාව අවසානයේ ගෙවීම් සිදු කිරීම.</li>
+        </ul>
+      </div>
+
       <a href="page1.html" class="btn-home">Back to Home</a>
     </div>
   </div>
@@ -119,6 +156,16 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // පිටුව Load වන විට Confetti animation එක පෙන්වීම
+    window.onload = function() {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#f5b400', '#111827', '#22c55e']
+      });
+    };
   </script>
 
 </body>

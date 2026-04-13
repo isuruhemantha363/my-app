@@ -2,59 +2,249 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Profile - Handy Lanka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>Professional Profile | Handy Lanka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .container { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
-        input { width: 90%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; outline: none; }
-        button#findBtn { background-color: #27ae60; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
-        .back-btn { background-color: transparent; color: #7f8c8d; border: 1px solid #ccc; padding: 10px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 14px; transition: 0.3s; text-decoration: none; display: block; box-sizing: border-box; }
-        .back-btn:hover { background-color: #eee; color: #333; }
-        #profileCard { display: none; margin-top: 30px; text-align: left; }
-        .profile-header { text-align: center; border-bottom: 2px solid #f1f1f1; padding-bottom: 20px; margin-bottom: 20px; }
-        .profile-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid #27ae60; margin-bottom: 10px; }
-        .emp-name { font-size: 22px; font-weight: bold; color: #2c3e50; margin: 0; }
-        .order-title { font-size: 18px; font-weight: bold; color: #2c3e50; margin: 20px 0 15px; display: flex; align-items: center; gap: 8px; }
-        .appointment-item { background: #fff; padding: 15px; border-radius: 12px; border-left: 5px solid #f5b400; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 12px; border: 1px solid #eee; position: relative; }
-        .status-cancelled { border-left-color: #e74c3c; background-color: #fff5f5; }
-        .order-info { font-size: 14px; margin: 5px 0; color: #555; }
-        .badge { font-size: 10px; padding: 3px 8px; border-radius: 5px; color: white; float: right; }
-        .cancel-order-btn { background-color: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; margin-top: 10px; transition: 0.3s; }
-        .cancel-order-btn:hover { background-color: #ff6b81; }
-        .error { color: #e74c3c; margin-top: 15px; display: none; font-weight: bold; }
-        #appointments-list { max-height: 300px; overflow-y: auto; padding-right: 5px; }
+        :root {
+            --primary: #f5b400;
+            --secondary: #1e293b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-light: #f8fafc;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        header {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-link { 
+            text-decoration: none; 
+            font-size: 20px; 
+            color: var(--secondary); 
+            margin-right: 15px;
+        }
+
+        header h1 { font-size: 18px; font-weight: 700; }
+
+        /* Search Section */
+        .search-area {
+            background: white;
+            padding: 24px 20px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            text-align: center;
+        }
+
+        .search-area p { font-size: 13px; color: #64748b; margin-bottom: 15px; }
+
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus { border-color: var(--primary); background: #fffdf7; }
+
+        .find-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+        }
+
+        /* Profile Card */
+        #profileCard {
+            display: none;
+            padding: 20px;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            margin-bottom: 20px;
+        }
+
+        .profile-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .emp-name { font-size: 20px; font-weight: 800; color: var(--secondary); }
+        .emp-tag { 
+            background: #fef3c7; 
+            color: var(--accent); 
+            padding: 4px 12px; 
+            border-radius: 8px; 
+            font-size: 11px; 
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .stat-box {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-box small { display: block; font-size: 10px; color: #64748b; font-weight: 600; }
+        .stat-box span { font-weight: 700; font-size: 14px; }
+
+        /* Appointments Section */
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 10px 0 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .appointment-item {
+            background: white;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .item-status {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-cancelled { background: #fee2e2; color: #ef4444; }
+
+        .item-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+        .item-detail { font-size: 12px; color: #64748b; display: flex; align-items: center; gap: 5px; margin-top: 3px; }
+
+        .cancel-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px;
+            background: #fff1f2;
+            color: var(--danger);
+            border: 1px solid #fecaca;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .error-msg { color: var(--danger); font-size: 13px; text-align: center; margin-top: 15px; display: none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h3>Handy Lanka Profile Search</h3>
-    <input type="email" id="emailInput" placeholder="Enter employee email">
-    <button id="findBtn" onclick="getProfile()">View Professional Profile</button>
-    
-    <a href="owner.html" class="back-btn">⬅ Back to Dashboard</a>
+<header>
+    <a href="owner.html" class="back-link">⬅</a>
+    <h1>Professional Profile</h1>
+</header>
 
-    <p id="err" class="error">User account not found!</p>
+<div class="search-area">
+    <p>සේවක විස්තර බැලීමට විද්‍යුත් තැපෑල ඇතුළත් කරන්න</p>
+    <input type="email" id="emailInput" placeholder="employee@handylanka.com">
+    <button class="find-btn" onclick="getProfile()">Find Profile</button>
+    <p id="err" class="error-msg">User account not found!</p>
+</div>
 
-    <div id="profileCard">
-        <div class="profile-header">
+<div id="profileCard">
+    <div class="card">
+        <div class="profile-top">
             <img src="" id="pImg" class="profile-img">
-            <h1 id="pName" class="emp-name"></h1>
-            <p id="pService" style="color:#27ae60; font-weight:bold; margin:5px 0;"></p>
+            <h2 id="pName" class="emp-name"></h2>
+            <div id="pService" class="emp-tag"></div>
         </div>
 
-        <div class="info-grid">
-            <p><b>📞 Phone:</b> <span id="pPhone"></span></p>
-            <p><b>⏳ Experience:</b> <span id="pExp"></span></p>
-            <p><b>🏆 Skill Level:</b> <span id="pSkill"></span>%</p>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <small>Phone</small>
+                <span id="pPhone"></span>
+            </div>
+            <div class="stat-box">
+                <small>Skill Level</small>
+                <span id="pSkill"></span>%
+            </div>
         </div>
-
-        <div class="order-title">📅 New Job Appointments</div>
-        <div id="appointments-list">
-            <p style="text-align: center; color: #999; font-size: 13px;">No bookings found.</p>
+        <div style="margin-top: 12px; text-align: center;">
+            <small style="color: #94a3b8;">Experience: </small>
+            <span id="pExp" style="font-size: 13px; font-weight: 600;"></span>
         </div>
     </div>
+
+    <div class="section-title">
+        <span>📅 New Job Appointments</span>
+    </div>
+    <div id="appointments-list">
+        </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -97,9 +287,6 @@
                 document.getElementById('profileCard').style.display = 'block';
                 document.getElementById('err').style.display = 'none';
 
-                // Sheet එකේ D column එක පරීක්ෂා කිරීමට සේවක email එක යවයි
-                sendToGoogleSheet(email, "Profile Accessed", "Login Success");
-
                 fetchOrders(empName);
             } else {
                 document.getElementById('profileCard').style.display = 'none';
@@ -115,78 +302,63 @@
             if (snapshot.exists()) {
                 snapshot.forEach(child => {
                     const order = child.val();
-                    const orderId = child.key; // මෙය Booking ID එක ලෙස ක්‍රියා කරයි
+                    const orderId = child.key;
                     const status = (order.Status || "").toLowerCase();
                     const isCancelled = status === "cancelled";
 
                     const html = `
-                        <div class="appointment-item ${isCancelled ? 'status-cancelled' : ''}">
-                            ${isCancelled ? '<span class="badge" style="background:#e74c3c">CANCELLED</span>' : '<span class="badge" style="background:#f5b400">PENDING</span>'}
-                            <div style="font-weight:bold; color:#333;">👤 ${order.Customer_Name}</div>
-                            <div class="order-info">🛠️ <b>Job:</b> ${order.Work_Description || 'Not Specified'}</div>
-                            <div class="order-info">📅 ${order.Date} | ⏰ ${order.Time}</div>
-                            ${isCancelled ? `<div class="order-info" style="color:#e74c3c; font-size:12px;">❗ Reason: ${order.Cancellation_Reason || 'N/A'}</div>` : 
-                            `<button class="cancel-order-btn" onclick="cancelOrder('${orderId}', '${order.Customer_Name}')">Cancel Order</button>`}
+                        <div class="appointment-item" style="border-left-color: ${isCancelled ? '#ef4444' : '#f5b400'}">
+                            <span class="item-status ${isCancelled ? 'status-cancelled' : 'status-pending'}">
+                                ${isCancelled ? 'CANCELLED' : 'PENDING'}
+                            </span>
+                            <div class="item-name">👤 ${order.Customer_Name}</div>
+                            <div class="item-detail">🛠️ <b>Job:</b> ${order.Work_Description || 'General Service'}</div>
+                            <div class="item-detail">📅 ${order.Date} | ⏰ ${order.Time}</div>
+                            ${isCancelled ? 
+                                `<div class="item-detail" style="color:#ef4444; margin-top:8px;">Reason: ${order.Cancellation_Reason || 'N/A'}</div>` : 
+                                `<button class="cancel-btn" onclick="cancelOrder('${orderId}', '${order.Customer_Name}')">Cancel This Order</button>`
+                            }
                         </div>
                     `;
                     listContainer.innerHTML += html;
                 });
             } else {
-                listContainer.innerHTML = `<p style="text-align: center; color: #999; font-size: 13px; padding:20px;">No appointments found.</p>`;
+                listContainer.innerHTML = `<p style="text-align: center; color: #94a3b8; font-size: 13px; padding:40px;">No bookings found yet.</p>`;
             }
         });
     }
+
     function cancelOrder(orderId, customerName) {
-    const reason = prompt("Please enter the reason for cancellation:");
-    if (!reason || reason.trim() === "") return;
+        const reason = prompt("Enter cancellation reason:");
+        if (!reason) return;
 
-    const employeeEmail = document.getElementById('emailInput').value.trim().toLowerCase();
+        const email = document.getElementById('emailInput').value.trim().toLowerCase();
 
-    // 1. Firebase එකෙන් ඇණවුමේ සියලුම විස්තර ලබාගැනීම
-    db.ref('bookings/' + orderId).once('value', snapshot => {
-        if (snapshot.exists()) {
-            const orderData = snapshot.val();
+        db.ref('bookings/' + orderId).once('value', snapshot => {
+            if (snapshot.exists()) {
+                const orderData = snapshot.val();
+                db.ref('bookings/' + orderId).update({
+                    Status: "Cancelled",
+                    Cancellation_Reason: reason
+                }).then(() => {
+                    sendToGoogleSheet(email, orderData.Customer_Name, orderData.Customer_Phone, reason);
+                    alert("Order Cancelled!");
+                });
+            }
+        });
+    }
 
-            // 2. Firebase Database එක Update කිරීම
-            db.ref('bookings/' + orderId).update({
-                Status: "Cancelled",
-                Cancellation_Reason: reason
-            }).then(() => {
-                // 3. Google Sheet එක Update කිරීමට දත්ත යැවීම
-                sendToGoogleSheet(
-                    employeeEmail, 
-                    orderData.Customer_Name, 
-                    orderData.Customer_Phone, // Phone එක අනිවාර්යයෙන්ම යැවිය යුතුයි
-                    reason
-                );
-                alert("Order Cancelled Successfully!");
-            }).catch(err => {
-                alert("Error: " + err.message);
-            });
-        }
-    });
-}
+    function sendToGoogleSheet(email, customer, phone, reason) {
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwK_aWFnANascCbA698bNKtlESBMSosyQKIddg0LcvLTzsha56-kgQJi4Jm1JH3PEBEMQ/exec";
+        const formData = new URLSearchParams();
+        formData.append("mode", "cancel"); 
+        formData.append("reference", email);
+        formData.append("customer", customer);
+        formData.append("phone", phone);
+        formData.append("reason", reason);
 
-function sendToGoogleSheet(email, customer, phone, reason) {
-    // ඔබ ලබාගත් අලුත්ම Deployment URL එක මෙතැනට ඇතුළත් කරන්න
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwK_aWFnANascCbA698bNKtlESBMSosyQKIddg0LcvLTzsha56-kgQJi4Jm1JH3PEBEMQ/exec";
-    
-    const formData = new URLSearchParams();
-    formData.append("mode", "cancel"); 
-    formData.append("reference", email);   // D Column සෙවීමට
-    formData.append("customer", customer); // E Column සෙවීමට
-    formData.append("phone", phone);       // F Column සෙවීමට
-    formData.append("reason", reason);     // Cancel විස්තරය සඳහා
-
-    fetch(scriptURL, { 
-        method: 'POST', 
-        body: formData, 
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-    .then(response => console.log('Sheet Update Request Sent'))
-    .catch(error => console.error('Sheet Update Error!', error.message));
-}
-   
+        fetch(scriptURL, { method: 'POST', body: formData });
+    }
 </script>
 </body>
 </html>

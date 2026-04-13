@@ -35,98 +35,103 @@
 
     /* --- NAVIGATION --- */
     .navbar {
-      height: 90px;
+      height: 70px; /* Reduced for mobile feel */
       background: var(--navbar-bg);
       backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 8%;
+      padding: 0 5%;
       position: sticky;
       top: 0;
       z-index: 2000;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
-    .logo img { height: 70px; cursor: pointer; transition: var(--transition); }
-    .n-menu { display: flex; list-style: none; gap: 35px; }
+    .logo img { height: 50px; cursor: pointer; transition: var(--transition); }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 5px;
+    }
+
+    .n-menu { display: flex; list-style: none; gap: 25px; }
     .n-menu li a {
       text-decoration: none; color: var(--text-main);
       font-weight: 600; cursor: pointer; transition: var(--transition);
       position: relative;
     }
     .n-menu li a:hover, .n-menu li a.active { color: var(--primary); }
-    .n-menu li a.active::after {
-      content: ''; position: absolute; width: 100%; height: 2px;
-      bottom: -5px; left: 0; background: var(--primary);
-    }
 
     /* --- SECTION CONTROL --- */
-    .page-section { display: none; min-height: calc(100vh - 90px); }
+    .page-section { display: none; min-height: calc(100vh - 70px); padding-bottom: 40px; }
     .page-section.active { display: block; animation: fadeIn 0.5s ease; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* --- HOME SECTION --- */
-    .hero { text-align: center; padding: 100px 20px; }
-    .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; color: #000; }
+    .hero { text-align: center; padding: 60px 20px; }
+    .hero h1 { font-size: 2.2rem; font-weight: 800; color: #000; margin-bottom: 15px; }
     .hero h1 span { color: var(--primary); }
-    .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; color: #4b5563; }
-    .cta-btn { background: var(--primary); color: white; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
+    .hero p { font-size: 1rem; max-width: 600px; margin: 0 auto 30px; color: #4b5563; }
+    .cta-btn { background: var(--primary); color: white; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3); }
 
     /* --- SERVICES SECTION --- */
-    .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
-    .card { background: var(--card-bg); border-radius: 25px; overflow: hidden; width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.4); transition: 0.3s; cursor: pointer; }
-    .card:hover { transform: translateY(-10px); }
-    .card img { width: 100%; height: 300px; object-fit: cover; }
-    .card-info { padding: 20px; text-align: center; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: 0 auto; }
+    .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.4); transition: 0.3s; cursor: pointer; }
+    .card img { width: 100%; height: 220px; object-fit: cover; }
+    .card-info { padding: 15px; text-align: center; }
+    .card-info h3 { font-size: 1.2rem; margin-bottom: 5px; }
 
-    /* Service Detail Box (Modal Style) */
+    /* Service Detail Box */
     .service-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
       display: none; justify-content: center; align-items: center; z-index: 3000;
     }
     .detail-box {
-      background: white; padding: 30px; border-radius: 20px; max-width: 500px; width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; position: relative;
+      background: white; padding: 25px; border-radius: 20px; max-width: 90%; width: 400px;
+      text-align: center; position: relative;
     }
-    .detail-box h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--primary); }
-    .detail-box p { font-size: 1rem; line-height: 1.6; color: #4b5563; margin-bottom: 20px; }
-    .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; font-weight: bold; }
-    .detail-lang { margin-bottom: 15px; }
-    .detail-lang button { 
-      background: #eee; border: none; padding: 5px 12px; border-radius: 10px; 
-      cursor: pointer; margin: 0 5px; font-size: 0.8rem; font-weight: 600;
-    }
-    .detail-lang button.active { background: var(--primary); color: white; }
 
     /* --- ABOUT SECTION --- */
-    .about-container { max-width: 1000px; margin: 0 auto; padding: 80px 20px; }
-    .about-card { background: var(--card-bg); border-radius: 24px; padding: 60px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); position: relative; }
-    .about-card h2 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 800; color: #000; }
-    .about-card p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 20px; color: #374151; text-align: justify; }
-
-    .lang-switch { margin-bottom: 20px; text-align: right; }
-    .lang-btn { background: #e5e7eb; border: none; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; margin-left: 5px; transition: 0.3s; }
-    .lang-btn.active { background: var(--primary); color: white; }
+    .about-container { max-width: 1000px; margin: 0 auto; padding: 40px 15px; }
+    .about-card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
+    .about-card h2 { font-size: 1.8rem; margin-bottom: 20px; }
+    .about-card p { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; text-align: left; }
 
     /* --- CONTACT SECTION --- */
-    .contact-container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-    .grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
-    .form-card { background: var(--card-bg); padding: 50px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-    .cs-info { background: #111827; color: #ffffff; padding: 50px; border-radius: 25px; display: flex; flex-direction: column; justify-content: center; }
-    .cs-info h2 { color: #fbbf24; margin-bottom: 30px; font-size: 2rem; }
+    .contact-container { max-width: 1200px; margin: 0 auto; padding: 40px 15px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 20px; } /* Forced to 1 column for mobile */
+    .form-card { background: var(--card-bg); padding: 25px; border-radius: 20px; }
+    .cs-info { background: #111827; color: #ffffff; padding: 30px; border-radius: 20px; }
     
-    input, textarea { width: 100%; padding: 16px; margin-bottom: 20px; border-radius: 12px; border: 1px solid #ddd; font-size: 1rem; }
-    .submit-btn { background: #fbbf24; border: none; padding: 18px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; font-size: 1.1rem; transition: 0.3s; }
-    .submit-btn:hover { background: #f59e0b; transform: scale(1.02); }
+    input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ddd; }
+    .submit-btn { background: #fbbf24; border: none; padding: 15px; border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%; }
 
-    footer { text-align: center; padding: 60px; color: var(--text-muted); font-weight: 600; }
+    footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9rem; }
 
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .about-card, .form-card, .cs-info { padding: 30px; }
-      .n-menu { display: none; }
+    /* --- MOBILE RESPONSIVE --- */
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .n-menu {
+        position: fixed; top: 70px; right: -100%; width: 70%; height: calc(100vh - 70px);
+        background: white; flex-direction: column; padding: 40px 30px; 
+        transition: 0.4s; box-shadow: -10px 0 20px rgba(0,0,0,0.1);
+      }
+      .n-menu.active { right: 0; }
+      .hero h1 { font-size: 1.8rem; }
+      .about-card h2, .cs-info h2 { font-size: 1.5rem; }
+      .services-grid { padding: 10px; }
     }
   </style>
 </head>
@@ -136,6 +141,13 @@
     <div class="logo" onclick="showPage('home')">
       <img src="n logo.png" alt="HANDY LANKA">
     </div>
+    
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <ul class="n-menu" id="nav-links">
       <li><a onclick="showPage('home')" id="btn-home" class="active">Home</a></li>
       <li><a onclick="showPage('services')" id="btn-services">Services</a></li>
@@ -144,35 +156,34 @@
     </ul>
   </nav>
 
-  <!-- Service Details Modal -->
   <div id="service-overlay" class="service-overlay" onclick="closeDetail()">
     <div class="detail-box" onclick="event.stopPropagation()">
-      <span class="close-btn" onclick="closeDetail()">&times;</span>
-      <div class="detail-lang">
-        <button id="s-en" class="active" onclick="switchServiceLang('en')">English</button>
-        <button id="s-si" onclick="switchServiceLang('si')">සිංහල</button>
+      <span class="close-btn" onclick="closeDetail()" style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:1.5rem;">&times;</span>
+      <div class="detail-lang" style="margin-top:10px; margin-bottom:15px;">
+        <button id="s-en" class="active" onclick="switchServiceLang('en')" style="padding:5px 10px; border-radius:5px; border:none; cursor:pointer;">English</button>
+        <button id="s-si" onclick="switchServiceLang('si')" style="padding:5px 10px; border-radius:5px; border:none; cursor:pointer;">සිංහල</button>
       </div>
-      <h3 id="detail-title">Service Name</h3>
-      <p id="detail-desc">Service details will appear here.</p>
+      <h3 id="detail-title" style="margin-bottom:10px; color:var(--primary);">Service Name</h3>
+      <p id="detail-desc" style="font-size:0.95rem; line-height:1.5; color:#555;">Service details will appear here.</p>
     </div>
   </div>
 
   <section id="home" class="page-section active">
     <div class="hero">
-      <h1>Welcome to <span>HANDY LANKA</span></h1>
+      <h1>Welcome to <br><span>HANDY LANKA</span></h1>
       <p>Your trusted partner for professional and reliable home services across Sri Lanka.</p>
       <a href="login page1.html" class="cta-btn">Get Started &raquo;</a>
     </div>
     <div class="services-grid">
-      <div class="card"><img src="image2.jpg" alt=""></div>
-      <div class="card"><img src="image4.jpg" alt=""></div>
-      <div class="card"><img src="image5.jpg" alt=""></div>
+      <div class="card"><img src="image2.jpg" alt="Cleaning"></div>
+      <div class="card"><img src="image4.jpg" alt="Electrical"></div>
+      <div class="card"><img src="image5.jpg" alt="Plumbing"></div>
     </div>
   </section>
 
   <section id="services" class="page-section">
-    <div style="text-align:center; padding: 60px 20px 20px;">
-        <h1 style="font-size:3.5rem; font-weight:800;">Our <span>Services</span></h1>
+    <div style="text-align:center; padding: 40px 20px 10px;">
+        <h1 style="font-size:2rem; font-weight:800;">Our <span>Services</span></h1>
     </div>
     <div class="services-grid">
       <div class="card" onclick="openDetail('house')"><img src="hou.png" alt=""><div class="card-info"><h3>House Cleaning & Painting</h3><p>Shine & Color for your home.</p></div></div>
@@ -186,20 +197,19 @@
 
   <section id="about" class="page-section">
     <div class="about-container">
-      <header style="text-align: center; margin-bottom: 50px;">
-        <h1 style="font-size: 3.5rem; font-weight:800;">HANDY <span>LANKA</span></h1>
-        <p id="about-sub" style="font-size:1.2rem; color:var(--text-muted);">Reliable solutions for your household needs</p>
+      <header style="text-align: center; margin-bottom: 30px;">
+        <h1 style="font-size: 2rem; font-weight:800;">HANDY <span>LANKA</span></h1>
+        <p id="about-sub" style="font-size:0.9rem; color:var(--text-muted);">Reliable solutions for your household needs</p>
       </header>
       <div class="about-card">
-        <div class="lang-switch">
-          <button class="lang-btn active" id="btn-en" onclick="changeAboutLang('en')">English</button>
-          <button class="lang-btn" id="btn-si" onclick="changeAboutLang('si')">සිංහල</button>
+        <div class="lang-switch" style="text-align:right; margin-bottom:15px;">
+          <button class="lang-btn active" id="btn-en" onclick="changeAboutLang('en')" style="padding:5px 10px; border-radius:15px; border:none; cursor:pointer;">English</button>
+          <button class="lang-btn" id="btn-si" onclick="changeAboutLang('si')" style="padding:5px 10px; border-radius:15px; border:none; cursor:pointer;">සිංහල</button>
         </div>
         <h2 id="about-title">About Us</h2>
         <div id="about-text">
-          <p>At <strong>HANDY LANKA</strong>, we believe every home deserves care, comfort, and reliability. Founded with the mission to make household services simple and trustworthy, we bring professional expertise right to your doorstep.</p>
-          <p>Our team specializes in a wide range of home services including cleaning, plumbing, electrical repairs, gardening, handyman work, and moving assistance.</p>
-          <p>We pride ourselves on being more than just a service provider—we’re your partner in creating a safe, well-maintained, and welcoming home environment.</p>
+          <p>At <strong>HANDY LANKA</strong>, we believe every home deserves care, comfort, and reliability.</p>
+          <p>Our team specializes in a wide range of home services including cleaning, plumbing, electrical repairs, and more.</p>
         </div>
       </div>
     </div>
@@ -207,58 +217,32 @@
 
   <section id="contact" class="page-section">
     <div class="contact-container">
-      <div style="text-align: center; margin-bottom: 60px;">
-        <h1 style="font-size: 3.5rem; font-weight:800;">Contact <span>Us</span></h1>
-        <p>We're here to help you with all your home maintenance needs.</p>
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="font-size: 2rem; font-weight:800;">Contact <span>Us</span></h1>
       </div>
       <div class="grid">
         <div class="form-card">
           <form id="contact-form" action="https://script.google.com/macros/s/AKfycbxLZcOwEnHD9KgIPryjuYOTjOUtiG3Y7yYUO3P6P_FpTACsH2nj3BkqvYsrkPFAKyQ5/exec" method="POST">
-            <label style="font-weight:600;">Full Name</label>
-            <input type="text" name="Name" placeholder="Enter your name" required>
-            <label style="font-weight:600;">Email Address</label>
-            <input type="email" name="Email" placeholder="example@mail.com" required>
-            <label style="font-weight:600;">Subject</label>
-            <input type="text" name="Subject" placeholder="What is this about?" required>
-            <label style="font-weight:600;">Message</label>
-            <textarea name="Message" rows="5" placeholder="Write your message here..." required></textarea>
+            <input type="text" name="Name" placeholder="Full Name" required>
+            <input type="email" name="Email" placeholder="Email Address" required>
+            <input type="text" name="Subject" placeholder="Subject" required>
+            <textarea name="Message" rows="4" placeholder="Message" required></textarea>
             <button type="submit" id="submit-btn" class="submit-btn">Send Message</button>
             <p id="status-msg" style="margin-top: 15px; text-align: center; font-weight: 600; display: none;"></p>
           </form>
         </div>
         <div class="cs-info">
           <h2>Contact Info</h2>
-          <div style="margin-bottom: 25px;">
-            <p style="color:#fbbf24; font-size:0.9rem; font-weight:700;">LOCATION</p>
-            <p>123 Galle Road, Colombo 03, Sri Lanka</p>
-          </div>
-          <div style="margin-bottom: 25px;">
-             <p style="color:#fbbf24; font-size:0.9rem; font-weight:700;">PHONE</p>
-    
-              <!-- කෙලින්ම Call Keypad එකට යන්න (tel: link) -->
-               <p>
-                   <a href="tel:+94782345678" style="text-decoration: none; color:rgb(175, 175, 227);">
-                 +94 78 234 5678
-                 </a>
-                </p>
-    
-           <!-- කෙලින්ම WhatsApp එකට යන්න (wa.me link) -->
-          <p>
-           <a href="https://wa.me/94782345678" target="_blank" style="text-decoration: none; color: rgb(175, 175, 227);" >
-            +94 78 234 5678 (WhatsApp)
-        </a>
-    </p>
-</div>
-          <div style="margin-bottom: 25px;">
-    <p style="color:#fbbf24; font-size:0.9rem; font-weight:700;">EMAIL</p>
-    <p>
-        <a href="mailto:support@handylanka.com" style="text-decoration: none; color:rgb(232, 152, 152); transition: 0.3s;">
-            support@handylanka.com
-        </a>
-    </p>
-</div>
-            <p style="color:#fbbf24; font-size:0.9rem; font-weight:700;">WORKING HOURS</p>
-            <p>Mon – Fri: 9:00 AM – 5:00 PM</p>
+          <div style="margin-top:20px;">
+            <p style="color:#fbbf24; font-size:0.8rem; font-weight:700;">LOCATION</p>
+            <p style="margin-bottom:15px;">123 Galle Road, Colombo 03</p>
+            
+            <p style="color:#fbbf24; font-size:0.8rem; font-weight:700;">PHONE</p>
+            <p><a href="tel:+94782345678" style="color:#fff; text-decoration:none;">+94 78 234 5678</a></p>
+            <p style="margin-bottom:15px;"><a href="https://wa.me/94782345678" style="color:#fff; text-decoration:none;">WhatsApp Us</a></p>
+
+            <p style="color:#fbbf24; font-size:0.8rem; font-weight:700;">EMAIL</p>
+            <p><a href="mailto:support@handylanka.com" style="color:#fff; text-decoration:none;">support@handylanka.com</a></p>
           </div>
         </div>
       </div>
@@ -266,38 +250,34 @@
   </section>
 
   <footer>
-    &copy; <span id="year"></span> HANDY LANKA. Reliable Solutions for Modern Living.
+    &copy; <span id="year"></span> HANDY LANKA.
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Menu Toggle Logic
+    function toggleMenu() {
+      document.getElementById('nav-links').classList.toggle('active');
+    }
+
     function showPage(pageId) {
       const sections = document.querySelectorAll('.page-section');
       sections.forEach(s => s.classList.remove('active'));
       const target = document.getElementById(pageId);
-      if (target) {
-        target.classList.add('active');
-        // Update URL hash without jumping
-        history.pushState(null, null, "#" + pageId);
-      }
+      if (target) target.classList.add('active');
       
       const links = document.querySelectorAll('.n-menu li a');
       links.forEach(l => l.classList.remove('active'));
       const activeBtn = document.getElementById('btn-' + pageId);
       if (activeBtn) activeBtn.classList.add('active');
+
+      // Close mobile menu after clicking
+      document.getElementById('nav-links').classList.remove('active');
       window.scrollTo(0,0);
     }
 
-    // Handle initial load based on URL hash (e.g., home.html#about)
-    window.addEventListener('load', () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && document.getElementById(hash)) {
-        showPage(hash);
-      }
-    });
-
-    // --- SERVICE DETAILS LOGIC ---
+    // [පවතින අනෙකුත් සියලුම Scripts එලෙසම පවතී]
     let currentService = '';
     const serviceData = {
       house: { 
@@ -343,19 +323,18 @@
       document.getElementById('s-si').classList.toggle('active', lang === 'si');
     }
 
-    // --- ABOUT LANGUAGE LOGIC ---
     const aboutContent = {
       en: {
         title: "About Us", sub: "Reliable solutions for your household needs",
-        p1: "At <strong>HANDY LANKA</strong>, we believe every home deserves care, comfort, and reliability. Founded with the mission to make household services simple and trustworthy, we bring professional expertise right to your doorstep.",
-        p2: "Our team specializes in a wide range of home services including cleaning, plumbing, electrical repairs, gardening, handyman work, and moving assistance.",
-        p3: "We pride ourselves on being more than just a service provider—we’re your partner in creating a safe, well-maintained, and welcoming home environment."
+        p1: "At <strong>HANDY LANKA</strong>, we believe every home deserves care, comfort, and reliability.",
+        p2: "Our team specializes in a wide range of home services including cleaning, plumbing, electrical repairs, gardening, and moving assistance.",
+        p3: "We pride ourselves on being your partner in creating a safe, well-maintained home."
       },
       si: {
         title: "අප ගැන", sub: "ඔබේ ගෘහස්ථ අවශ්‍යතා සඳහා විශ්වාසදායක විසඳුම්",
-        p1: "<strong>HANDY LANKA</strong> හිදී, සෑම නිවසක්ම රැකවරණය, සුවපහසුව සහ විශ්වාසදායකත්වය ලැබිය යුතු බව අපි විශ්වාස කරමු. ගෘහස්ථ සේවාවන් සරල හා විශ්වාසදායක කිරීමේ මෙහෙවර ඇතිව ආරම්භ කරන ලද අපි, වෘත්තීය විශේෂඥතාව ඔබේ දොරකඩටම ගෙන එන්නෙමු.",
-        p2: "අපගේ කණ්ඩායම පිරිසිදු කිරීම, ජලනල කාර්මික ශිල්පය, විදුලි අලුත්වැඩියාව, ගෙවතු වගාව සහ ප්‍රවාහන සහාය ඇතුළු පුළුල් පරාසයක ගෘහස්ථ සේවාවන් සඳහා විශේෂඥතාවක් දක්වයි.",
-        p3: "අපි හුදෙක් සේවා සපයන්නෙකුට වඩා වැඩි යමක් වීම ගැන ආඩම්බර වෙමු - අපි ආරක්ෂිත සහ පිළිවෙලට ඇති නිවසක් නිර්මාණය කිරීමේදී ඔබේ සහකරු වෙමු."
+        p1: "<strong>HANDY LANKA</strong> හිදී, සෑම නිවසක්ම රැකවරණය, සුවපහසුව සහ විශ්වාසදායකත්වය ලැබිය යුතු බව අපි විශ්වාස කරමු.",
+        p2: "අපගේ කණ්ඩායම පිරිසිදු කිරීම, ජලනල කාර්මික ශිල්පය, විදුලි අලුත්වැඩියාව, සහ ප්‍රවාහන සහාය ඇතුළු සේවාවන් සපයයි.",
+        p3: "අපි ආරක්ෂිත සහ පිළිවෙලට ඇති නිවසක් නිර්මාණය කිරීමේදී ඔබේ සහකරු වෙමු."
       }
     };
 
@@ -367,28 +346,19 @@
       document.getElementById('btn-si').classList.toggle('active', lang === 'si');
     }
 
-    // --- FORM LOGIC ---
     const form = document.getElementById('contact-form');
-    const btn = document.getElementById('submit-btn');
-    const statusMsg = document.getElementById('status-msg');
-
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const statusMsg = document.getElementById('status-msg');
       btn.disabled = true; btn.innerHTML = "Sending...";
-      const formData = new FormData(form);
-      fetch(form.action, { method: 'POST', body: formData })
-      .then(response => {
-          statusMsg.innerHTML = "Success! Your message has been sent.";
-          statusMsg.style.color = "#10b981"; statusMsg.style.display = "block";
+      fetch(form.action, { method: 'POST', body: new FormData(form) })
+      .then(() => {
+          statusMsg.innerHTML = "Sent Successfully!";
+          statusMsg.style.display = "block";
           btn.disabled = false; btn.innerHTML = "Send Message"; form.reset();
-      })
-      .catch(error => {
-          statusMsg.innerHTML = "Error! Something went wrong.";
-          statusMsg.style.color = "#ef4444"; statusMsg.style.display = "block";
-          btn.disabled = false; btn.innerHTML = "Send Message";
       });
     });
   </script>
- 
 </body>
-</html>.
+</html>

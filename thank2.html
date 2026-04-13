@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You - HANDY LANKA</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
     <style>
         :root {
             --primary: #d97706;
             --secondary: #059669;
+            --dark: #111827;
             --bg-gradient: linear-gradient(-45deg, #fdfc47, #fef3c7, #a7f3d0, #fef3c7);
             --card-bg: rgba(255, 255, 255, 0.95);
             --transition: all 0.3s ease;
@@ -17,6 +20,8 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -24,6 +29,12 @@
             text-align: center;
             padding: 20px;
             margin: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .thank-you-card {
@@ -34,6 +45,7 @@
             max-width: 600px;
             width: 100%;
             animation: fadeIn 0.8s ease;
+            backdrop-filter: blur(10px);
         }
 
         @keyframes fadeIn {
@@ -49,13 +61,13 @@
             margin-bottom: 20px;
         }
 
-        .lang-label { font-size: 0.8rem; font-weight: 600; color: #6b7280; }
+        .lang-label { font-size: 0.8rem; font-weight: 700; color: #6b7280; }
 
         .switch {
             position: relative;
             display: inline-block;
-            width: 45px;
-            height: 22px;
+            width: 50px;
+            height: 24px;
         }
 
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -64,7 +76,7 @@
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #ccc;
+            background-color: #d1d5db;
             transition: .4s;
             border-radius: 34px;
         }
@@ -72,7 +84,7 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 16px; width: 16px;
+            height: 18px; width: 18px;
             left: 3px; bottom: 3px;
             background-color: white;
             transition: .4s;
@@ -80,69 +92,94 @@
         }
 
         input:checked + .slider { background-color: var(--primary); }
-        input:checked + .slider:before { transform: translateX(23px); }
+        input:checked + .slider:before { transform: translateX(26px); }
 
-        h1 { color: var(--primary); font-weight: 800; font-size: 1.8rem; margin-bottom: 10px; }
-        .sub-text { font-size: 1rem; color: #4b5563; margin-bottom: 30px; line-height: 1.5; }
+        .success-icon {
+            font-size: 50px;
+            background: #fef3c7;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            color: var(--primary);
+        }
+
+        h1 { color: var(--primary); font-weight: 800; font-size: 1.8rem; margin: 0 0 10px; }
+        .sub-text { font-size: 1rem; color: #4b5563; margin-bottom: 30px; line-height: 1.6; }
 
         .btn-container { display: flex; flex-direction: column; gap: 12px; align-items: center; }
 
         .btn {
-            padding: 14px 25px;
-            border-radius: 15px;
+            padding: 16px 25px;
+            border-radius: 18px;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             border: none;
             width: 100%;
-            max-width: 350px;
+            max-width: 380px;
             font-family: 'Poppins', sans-serif;
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 0.95rem;
         }
 
-        .btn-exit { background: #ef4444; color: white; } 
-        .btn-guidelines { background: #111827; color: white; }
-        .btn-connect { background: #059669; color: white; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-exit { background: #fee2e2; color: #ef4444; border: 1px solid #fecaca; } 
+        .btn-guidelines { background: #f3f4f6; color: var(--dark); border: 1px solid #e5e7eb; }
+        .btn-connect { background: #ecfdf5; color: #059669; border: 1px solid #d1fae5; }
+        
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .btn-exit:hover { background: #ef4444; color: white; }
+        .btn-guidelines:hover { background: var(--dark); color: white; }
+        .btn-connect:hover { background: #059669; color: white; }
 
         #guidelines, #connection-info {
             display: none;
             margin-top: 25px;
             text-align: left;
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 20px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #f3f4f6;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            animation: slideDown 0.4s ease-out;
         }
 
-        .guide-content h3 { border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; margin-bottom: 15px; color: var(--primary); font-size: 1.1rem; }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .guide-content h3 { border-bottom: 2px solid #fff7ed; padding-bottom: 10px; margin-bottom: 15px; color: var(--primary); font-size: 1.1rem; font-weight: 800; }
         .guide-content ul { list-style: none; padding: 0; }
-        .guide-content li { margin-bottom: 12px; padding-left: 25px; position: relative; font-size: 0.9rem; line-height: 1.5; color: #374151; }
-        .guide-content li::before { content: "•"; color: var(--primary); font-weight: bold; position: absolute; left: 0; font-size: 1.5rem; top: -5px; }
+        .guide-content li { margin-bottom: 15px; padding-left: 30px; position: relative; font-size: 0.9rem; line-height: 1.6; color: #374151; }
+        .guide-content li::before { content: "✔"; color: var(--secondary); font-weight: bold; position: absolute; left: 0; font-size: 1rem; top: 2px; }
 
         .example-box {
             background: #fffbeb;
-            border: 1px dashed #d97706;
-            padding: 12px;
+            border-left: 5px solid #d97706;
+            padding: 15px;
             border-radius: 10px;
-            margin-top: 10px;
+            margin: 15px 0;
             font-weight: 600;
             color: #92400e;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .bank-details {
-            margin-top: 15px;
-            background: #f0fdf4;
-            border: 1px solid #16a34a;
-            padding: 12px;
-            border-radius: 12px;
+            margin-top: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 18px;
+            border-radius: 15px;
         }
-        .bank-info-row { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; border-bottom: 1px solid #e2e8f0; }
+        .bank-info-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; border-bottom: 1px solid #f1f5f9; padding-bottom: 5px; }
+        .bank-info-row span { color: #64748b; }
+        .bank-info-row strong { color: var(--dark); }
     </style>
 </head>
 <body>
@@ -157,22 +194,24 @@
         <span class="lang-label">English</span>
     </div>
 
+    <div class="success-icon">🏆</div>
+
     <div id="main-content">
         <h1 id="title">බොහොම ස්තුතියි!</h1>
         <p class="sub-text" id="desc">ලියාපදිංචිය සාර්ථකයි. <br>HANDY LANKA වෙත ඔබව සාදරයෙන් පිළිගනිමු.</p>
     </div>
 
     <div class="btn-container">
-        <button class="btn btn-exit" onclick="exitPage()">
-            🚪 <span id="btn-exit-text">පිටවීම</span>
+        <button class="btn btn-connect" onclick="toggleConnectionInfo()">
+            📱 <span id="btn-connect-text">සම්බන්ධතාවය පවත්වා ගන්නා ආකාරය</span>
         </button>
-        
+
         <button class="btn btn-guidelines" onclick="toggleGuidelines()">
             📜 <span id="btn-guide-text">උපදෙස් පෙන්වන්න</span>
         </button>
 
-        <button class="btn btn-connect" onclick="toggleConnectionInfo()">
-            📱 <span id="btn-connect-text">සම්බන්ධතාවය පවත්වා ගන්නා ආකාරය</span>
+        <button class="btn btn-exit" onclick="exitPage()">
+            🚪 <span id="btn-exit-text">පිටවීම</span>
         </button>
     </div>
 
@@ -180,23 +219,19 @@
         <div id="connect-si" class="guide-content">
             <h3>සම්බන්ධතාවය පවත්වා ගන්නා ආකාරය</h3>
             <ul>
-                <li>ඔබට ඇණවුමක් පැමිණි විට SMS පණිවිඩයක් මගින් ඒ පිළිබඳව දැනුම් දෙනු ලැබේ. එවිට අපගේ App එක මගින් ඇණවුමේ විස්තර පරීක්ෂා කළ හැකිය.</li>
-                <li>එම ඇණවුම භාර ගත හැකි නම් 'Confirm' බොත්තම ද, නොහැකි නම් 'Reject' බොත්තම ද ඔබන්න. ඔබගේ ඉක්මන් ප්‍රතිචාරයක් අපි බලාපොරොත්තු වෙමු.</li>
-                <li>තාක්ෂණික දෝෂ නිසා SMS පණිවිඩය නොලැබිය හැකි බැවින් නිතරම App එක සමඟ සම්බන්ධ වී සිටින්න.</li>
-                <li>ලියාපදිංචි වීමේදී ලබා දුන් Email සහ Password භාවිතා කර ඔබගේ Profile පිටුවට ඇතුළු විය හැකිය. එහි ඔබගේ සියලුම ඇණවුම් පණිවිඩ (Order Messages) පෙන්වනු ලැබේ.</li>
-                <li>ඇණවුම පිළිබඳව අවධානයෙන් සිටින්න. පාරිභෝගිකයා විසින් ඇණවුම අවලංගු (Cancel) කළ හැකි අතර, එවිට ඒ පිළිබඳව App එක මගින් දැනුම් දෙනු ලැබේ.</li>
-                <li>අවලංගු කරන ලද ඇණවුම් පිළිබඳව SMS මගින් දැනුම් දෙනු ලැබුවද තාක්ෂණික දෝෂ නිසා එය නොලැබී යා හැකි බැවින් නිතරම App එක පරීක්ෂා කරන්න.</li>
+                <li>ඔබට ඇණවුමක් පැමිණි විට SMS පණිවිඩයක් මගින් දැනුම් දෙනු ලැබේ. එවිට App එක පරීක්ෂා කරන්න.</li>
+                <li>ඇණවුම භාර ගත හැකි නම් <b>'Confirm'</b> ද, නොහැකි නම් <b>'Reject'</b> ද ඉක්මනින් ඔබන්න.</li>
+                <li>තාක්ෂණික දෝෂ නිසා SMS පණිවිඩය පමාවිය හැකි බැවින් නිතරම App එක පරීක්ෂා කරන්න.</li>
+                <li>ඔබේ Email සහ Password භාවිතා කර Profile එකට ඇතුළු වී ලැබී ඇති සියලුම ඇණවුම් බැලිය හැකිය.</li>
             </ul>
         </div>
         <div id="connect-en" class="guide-content" style="display:none;">
             <h3>How to Stay Connected</h3>
             <ul>
-                <li>When you receive an order, you will be notified via SMS. You can then view the order details through our App.</li>
-                <li>If you can accept the order, press 'Confirm'; otherwise, press 'Reject'. We expect a quick response from you.</li>
-                <li>Due to technical issues, SMS notifications may sometimes fail, so please stay connected with the App at all times.</li>
-                <li>You can log in to your Profile page using the Email and Password provided during registration, where all your order messages will be displayed.</li>
-                <li>Stay updated on your orders. Customers may cancel orders, and all such updates will be reflected in the App.</li>
-                <li>While cancellation alerts are sent via SMS, please check the App regularly as technical errors may prevent SMS delivery.</li>
+                <li>You will receive an SMS notification for new orders. Please check the App immediately.</li>
+                <li>Press <b>'Confirm'</b> to accept or <b>'Reject'</b> to decline. Quick responses are expected.</li>
+                <li>SMS may be delayed due to technical issues, so check the App dashboard regularly.</li>
+                <li>Log in to your profile with your registered Email and Password to manage all orders.</li>
             </ul>
         </div>
     </div>
@@ -205,35 +240,35 @@
         <div id="guide-si" class="guide-content">
             <h3>සමාගමේ රීති සහ උපදෙස්</h3>
             <ul>
-                <li>සෑම විටම පාරිභෝගිකයා සමඟ සුහදව සහ ගෞරවාන්විතව කටයුතු කරන්න.</li>
+                <li>පාරිභෝගිකයා සමඟ සැමවිටම ගෞරවාන්විතව කටයුතු කරන්න.</li>
                 <li>නියමිත වේලාවට සේවය ලබාදීමට පැමිණීම අනිවාර්ය වේ.</li>
-                <li><strong>කොමිස් මුදල් ගෙවීම:</strong> අප ආයතනය හරහා සම්බන්ධ වන සෑම පාරිභෝගිකයෙකුගෙන්ම ඔබ ලබාගන්නා මුළු ගාස්තුවෙන් <strong>25% ක මුදලක්</strong> ආයතනය වෙත ගෙවිය යුතුය.</li>
-                <li>මෙම ගාස්තුව ගෙවීම පැහැර හැරියහොත් ඔබගේ සාමාජජිකත්වය වහාම අත්හිටුවනු ලැබේ.</li>
+                <li><b>කොමිස් මුදල්:</b> ඔබ ලබාගන්නා මුළු ගාස්තුවෙන් <b>25% ක මුදලක්</b> ආයතනය වෙත ගෙවිය යුතුය.</li>
+                <li>ගාස්තුව ගෙවීම පැහැර හැරියහොත් සාමාජිකත්වය අත්හිටුවනු ලැබේ.</li>
             </ul>
             <div class="example-box">
-                💡 උදාහරණයක් ලෙස: ඔබ පාරිභෝගිකයෙකුගෙන් රු. 1000 ක් ලබා ගන්නේ නම්, රු. 250 ක් ආයතනය වෙත තැන්පත් කළ යුතුය.
+                💡 උදාහරණ: ඔබ රු. 1000 ක් උපයන්නේ නම්, රු. 250 ක් ආයතනයට ගෙවිය යුතුය.
             </div>
             <div class="bank-details">
-                <div class="bank-info-row"><span>බැංකුව:</span> <strong>[බැංකුවේ නම]</strong></div>
-                <div class="bank-info-row"><span>ගිණුම් අංකය:</span> <strong>[ගිණුම් අංකය]</strong></div>
-                <div class="bank-info-row"><span>ගිණුමේ නම:</span> <strong>HANDY LANKA PVT LTD</strong></div>
+                <div class="bank-info-row"><span>බැංකුව:</span> <strong>සම්පත් බැංකුව (Sampath Bank)</strong></div>
+                <div class="bank-info-row"><span>ගිණුම් අංකය:</span> <strong>1234 5678 9012</strong></div>
+                <div class="bank-info-row"><span>නම:</span> <strong>HANDY LANKA PVT LTD</strong></div>
             </div>
         </div>
 
         <div id="guide-en" class="guide-content" style="display:none;">
             <h3>Company Rules & Guidelines</h3>
             <ul>
-                <li>Always interact with customers in a friendly and respectful manner.</li>
-                <li>Punctuality is mandatory for all service appointments.</li>
-                <li><strong>Commission Payment:</strong> You are required to pay <strong>25% of your total earnings</strong> to the company.</li>
-                <li>Failure to settle the company share will result in immediate suspension.</li>
+                <li>Always maintain professional behavior with customers.</li>
+                <li>Punctuality is mandatory for all service calls.</li>
+                <li><b>Commission:</b> You must pay <b>25% of your total service fee</b> to the company.</li>
+                <li>Failure to settle the commission will lead to account suspension.</li>
             </ul>
             <div class="example-box">
                 💡 Example: If you earn Rs. 1000, you must deposit Rs. 250 to the company.
             </div>
             <div class="bank-details">
-                <div class="bank-info-row"><span>Bank:</span> <strong>[Bank Name]</strong></div>
-                <div class="bank-info-row"><span>Acc No:</span> <strong>[Account Number]</strong></div>
+                <div class="bank-info-row"><span>Bank:</span> <strong>Sampath Bank</strong></div>
+                <div class="bank-info-row"><span>Acc No:</span> <strong>1234 5678 9012</strong></div>
                 <div class="bank-info-row"><span>Name:</span> <strong>HANDY LANKA PVT LTD</strong></div>
             </div>
         </div>
@@ -241,60 +276,81 @@
 </div>
 
 <script>
+    // පූටුව load වූ සැනින් Confetti පෙන්වීමට
+    window.onload = function() {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#d97706', '#059669', '#111827']
+        });
+    };
+
     function exitPage() {
         if (confirm("ඔබට පිටවීමට අවශ්‍යද? / Do you want to exit?")) {
-            window.location.href = "https://www.google.com"; 
+            window.location.href = "page1.html"; // නැතිනම් ඔයාගේ Home page එකට
         }
     }
 
     function toggleLanguage() {
         const isEnglish = document.getElementById('langToggle').checked;
-        const title = document.getElementById('title');
-        const desc = document.getElementById('desc');
-        const btnExit = document.getElementById('btn-exit-text');
-        const btnGuide = document.getElementById('btn-guide-text');
-        const btnConnect = document.getElementById('btn-connect-text');
-        
-        const guideSi = document.getElementById('guide-si');
-        const guideEn = document.getElementById('guide-en');
-        const connectSi = document.getElementById('connect-si');
-        const connectEn = document.getElementById('connect-en');
+        const elements = {
+            title: document.getElementById('title'),
+            desc: document.getElementById('desc'),
+            btnExit: document.getElementById('btn-exit-text'),
+            btnGuide: document.getElementById('btn-guide-text'),
+            btnConnect: document.getElementById('btn-connect-text'),
+            guideSi: document.getElementById('guide-si'),
+            guideEn: document.getElementById('guide-en'),
+            connectSi: document.getElementById('connect-si'),
+            connectEn: document.getElementById('connect-en')
+        };
 
         if(isEnglish) {
-            title.innerText = "Thank You!";
-            desc.innerHTML = "Registration Successful. <br>Welcome to HANDY LANKA.";
-            btnExit.innerText = "Exit";
-            btnGuide.innerText = "Show Guidelines";
-            btnConnect.innerText = "How to stay connected";
-            guideSi.style.display = "none";
-            guideEn.style.display = "block";
-            connectSi.style.display = "none";
-            connectEn.style.display = "block";
+            elements.title.innerText = "Thank You!";
+            elements.desc.innerHTML = "Registration Successful. <br>Welcome to HANDY LANKA.";
+            elements.btnExit.innerText = "Exit";
+            elements.btnGuide.innerText = "Show Guidelines";
+            elements.btnConnect.innerText = "How to Stay Connected";
+            elements.guideSi.style.display = "none";
+            elements.guideEn.style.display = "block";
+            elements.connectSi.style.display = "none";
+            elements.connectEn.style.display = "block";
         } else {
-            title.innerText = "බොහොම ස්තුතියි!";
-            desc.innerHTML = "ලියාපදිංචිය සාර්ථකයි. <br>HANDY LANKA වෙත ඔබව සාදරයෙන් පිළිගනිමු.";
-            btnExit.innerText = "පිටවීම";
-            btnGuide.innerText = "උපදෙස් පෙන්වන්න";
-            btnConnect.innerText = "සම්බන්ධතාවය පවත්වා ගන්නා ආකාරය";
-            guideSi.style.display = "block";
-            guideEn.style.display = "none";
-            connectSi.style.display = "block";
-            connectEn.style.display = "none";
+            elements.title.innerText = "බොහොම ස්තුතියි!";
+            elements.desc.innerHTML = "ලියාපදිංචිය සාර්ථකයි. <br>HANDY LANKA වෙත ඔබව සාදරයෙන් පිළිගනිමු.";
+            elements.btnExit.innerText = "පිටවීම";
+            elements.btnGuide.innerText = "උපදෙස් පෙන්වන්න";
+            elements.btnConnect.innerText = "සම්බන්ධතාවය පවත්වා ගන්නා ආකාරය";
+            elements.guideSi.style.display = "block";
+            elements.guideEn.style.display = "none";
+            elements.connectSi.style.display = "block";
+            elements.connectEn.style.display = "none";
         }
     }
 
     function toggleGuidelines() {
         const g = document.getElementById('guidelines');
         const c = document.getElementById('connection-info');
-        c.style.display = 'none'; // අනෙක වසා දමයි
-        g.style.display = (g.style.display === 'block') ? 'none' : 'block';
+        c.style.display = 'none'; 
+        if (g.style.display === 'block') {
+            g.style.display = 'none';
+        } else {
+            g.style.display = 'block';
+            g.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
     function toggleConnectionInfo() {
         const c = document.getElementById('connection-info');
         const g = document.getElementById('guidelines');
-        g.style.display = 'none'; // අනෙක වසා දමයි
-        c.style.display = (c.style.display === 'block') ? 'none' : 'block';
+        g.style.display = 'none';
+        if (c.style.display === 'block') {
+            c.style.display = 'none';
+        } else {
+            c.style.display = 'block';
+            c.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 </script>
 

@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Booking Success | HANDY LANKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #d97706;
@@ -11,112 +12,127 @@
       --success: #10b981;
       --danger: #ef4444;
       --warning: #f59e0b;
-      --glass: rgba(255, 255, 255, 0.9);
+      --bg-light: #f8fafc;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Poppins', sans-serif; 
+      -webkit-tap-highlight-color: transparent;
+    }
 
     body {
-      min-height: 100vh;
-      background: linear-gradient(-45deg, #fef3c7, #d1fae5, #fef3c7, #fde68a);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
+      background-color: var(--bg-light);
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* App Header Like Bar */
+    .app-header {
       padding: 20px;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .lang-switcher {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: transparent;
       position: absolute;
-      top: 20px;
-      right: 20px;
+      width: 100%;
+      top: 0;
+      z-index: 10;
     }
 
     .lang-btn {
-      padding: 8px 16px;
+      padding: 6px 16px;
       background: white;
-      border: 2px solid var(--primary);
-      border-radius: 50px;
+      border: 1.5px solid var(--primary);
+      border-radius: 20px;
       cursor: pointer;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--primary);
-      transition: 0.3s;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      font-size: 13px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
 
-    .lang-btn:hover { background: var(--primary); color: white; }
-
-    .card {
-      background: var(--glass);
-      backdrop-filter: blur(15px);
-      padding: 35px;
-      border-radius: 35px;
-      width: 100%;
-      max-width: 550px;
+    /* Main Container */
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
       text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      margin-top: 40px;
+    }
+
+    .status-icon-wrapper {
       position: relative;
+      margin-bottom: 24px;
     }
 
     .icon-box {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       background: var(--success);
       color: white;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 40px;
-      margin: 0 auto 20px;
-      box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
-      animation: pulse 2s infinite;
+      font-size: 45px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+      animation: checkPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    @keyframes checkPop {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
     }
 
-    h2 { font-weight: 800; color: #111827; margin-bottom: 10px; font-size: 24px; }
+    h2 { 
+      font-weight: 700; 
+      color: #1e293b; 
+      margin-bottom: 12px; 
+      font-size: 22px; 
+    }
     
     .msg-box {
-      background: #ecfdf5;
-      padding: 15px;
-      border-radius: 15px;
-      border-left: 5px solid var(--success);
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 16px;
       margin-bottom: 20px;
-      font-size: 13px;
-      color: #065f46;
-      text-align: left;
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+      border: 1px solid #e2e8f0;
+      width: 100%;
+      max-width: 350px;
     }
 
-    /* Cancellation Box Special Styling */
+    .msg-box strong { color: var(--success); }
+
+    /* Cancellation Policy Card */
     .cancel-notice {
       background: #fffbeb;
       padding: 18px;
       border-radius: 20px;
-      border: 1.5px dashed var(--warning);
-      margin-bottom: 25px;
+      border-left: 4px solid var(--warning);
+      margin-bottom: 30px;
       text-align: left;
+      width: 100%;
+      max-width: 350px;
     }
 
     .cancel-notice h4 {
       color: #92400e;
       font-size: 15px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 5px;
+      gap: 6px;
     }
 
     .cancel-notice p {
@@ -125,59 +141,71 @@
       line-height: 1.5;
     }
 
-    .btn-group {
+    /* Bottom Button Sheet */
+    .action-sheet {
+      background: white;
+      padding: 24px;
+      border-radius: 30px 30px 0 0;
+      box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
 
     .btn {
-      padding: 12px;
+      padding: 14px;
       border: none;
-      border-radius: 15px;
-      font-weight: 700;
+      border-radius: 14px;
+      font-weight: 600;
       cursor: pointer;
-      transition: 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       font-size: 14px;
+      transition: opacity 0.2s;
     }
 
-    .btn-home { background: var(--primary); color: white; }
-    .btn-home:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(217, 119, 6, 0.3); }
+    .btn:active { opacity: 0.7; }
 
-    .btn-cancel { background: #fee2e2; color: var(--danger); border: 1px solid #fecaca; }
-    .btn-cancel:hover { background: var(--danger); color: white; }
+    .btn-home { background: var(--primary); color: white; }
+    .btn-cancel { background: #f1f5f9; color: var(--danger); }
 
     .btn-wa {
       grid-column: span 2;
       background: #25d366;
       color: white;
-      margin-top: 5px;
+      margin-top: 4px;
     }
-    .btn-wa:hover { background: #16a34a; transform: translateY(-2px); }
 
     .footer-links {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
+      grid-column: span 2;
+      margin-top: 15px;
+      text-align: center;
     }
-    .footer-links a { font-size: 12px; text-decoration: none; color: #94a3b8; font-weight: 600; }
+
+    .footer-links a { 
+      font-size: 13px; 
+      text-decoration: none; 
+      color: #94a3b8; 
+      font-weight: 500;
+      padding: 10px;
+      display: inline-block;
+    }
 
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="lang-switcher">
+  <div class="app-header">
     <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">සිංහල</button>
   </div>
 
-  <div class="card">
-    <div class="icon-box">✓</div>
+  <div class="container">
+    <div class="status-icon-wrapper">
+      <div class="icon-box">✓</div>
+    </div>
     
     <h2 id="title">Booking Successful!</h2>
     
@@ -186,22 +214,21 @@
       We will confirm your booking via Email or SMS within 1 hour.
     </div>
 
-    <!-- Cancellation Special Notice -->
     <div class="cancel-notice">
       <h4 id="cancelTitle">⚠️ Cancellation Policy</h4>
       <p id="cancelDesc">
         If you need to cancel this booking, please do so via the <b>App</b> or by <b>Calling us</b> at least <b>24 hours</b> in advance.
       </p>
     </div>
+  </div>
 
-    <div class="btn-group">
-      <button class="btn btn-home" onclick="goHome()" id="homeBtn">🏠 Home</button>
-      <button class="btn btn-cancel" onclick="goCancel()" id="cancelBtn">✕ Cancel Booking</button>
-      <button class="btn btn-wa" onclick="chatWA()" id="waBtn">💬 WhatsApp Help</button>
-    </div>
-
+  <div class="action-sheet">
+    <button class="btn btn-home" onclick="goHome()" id="homeBtn">🏠 Home</button>
+    <button class="btn btn-cancel" onclick="goCancel()" id="cancelBtn">✕ Cancel</button>
+    <button class="btn btn-wa" onclick="chatWA()" id="waBtn">💬 WhatsApp Help</button>
+    
     <div class="footer-links">
-        <a href="#" onclick="logout()" id="logoutText">Logout</a>
+      <a href="#" onclick="logout()" id="logoutText">Logout from website</a>
     </div>
   </div>
 
@@ -215,7 +242,7 @@
         cancelTitle: "⚠️ Cancellation Policy",
         cancelDesc: "If you need to cancel this booking, please do so via the <b>App</b> or by <b>Calling us</b> at least <b>24 hours</b> before the scheduled time.",
         homeBtn: "🏠 Home",
-        cancelBtn: "✕ Cancel Booking",
+        cancelBtn: "✕ Cancel",
         waBtn: "💬 WhatsApp Help",
         logoutText: "Logout from website",
         langBtn: "සිංහල",
@@ -227,7 +254,7 @@
         cancelTitle: "⚠️ අවලංගු කිරීමේ පියවර",
         cancelDesc: "ඔබට මෙම ඇණවුම අවලංගු කිරීමට අවශ්‍ය නම්, කරුණාකර නියමිත වේලාවට අවම වශයෙන් <b>පැය 24කට පෙර</b> අපගේ <b>App එක මගින්</b> හෝ <b>දුරකථන ඇමතුමක්</b> මගින් දැනුම් දෙන්න.",
         homeBtn: "🏠 මුල් පිටුව",
-        cancelBtn: "✕ ඇණවුම අවලංගු කරන්න",
+        cancelBtn: "✕ අවලංගු කරන්න",
         waBtn: "💬 වට්ස්ඇප් සහය",
         logoutText: "ගිණුමෙන් ඉවත් වන්න",
         langBtn: "English",
@@ -255,7 +282,6 @@
     }
 
     function goCancel() {
-      // මෙතනට ඔබේ cancel page එකේ link එක දාන්න
       window.location.href = "cancel-booking.html";
     }
 

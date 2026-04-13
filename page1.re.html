@@ -2,146 +2,148 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Welcome - HANDY LANKA</title>
   <style>
     :root {
-      /* Handy Lanka Gold Theme */
-      --bg: #ede2c4;
+      --bg: #f8f9fa; /* App එකකට ගැළපෙන පිරිසිදු පසුබිමක් */
       --card: #ffffff;
       --text: #111827;
       --muted: #6b7280;
-      --accent-gold: #f5b400; /* Primary Gold */
-      --accent-dark: #111827; /* For Primary Buttons */
-      --shadow: rgba(0,0,0,0.1);
+      --accent-gold: #f5b400;
+      --accent-dark: #111827;
+      --shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent; /* Mobile ස්පර්ශ කිරීමේදී එන නිල් පාට ඉවත් කිරීමට */
     }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
       display: flex;
       flex-direction: column;
+      justify-content: center; /* මැදට පෙළගැස්වීම */
+      align-items: center;
       min-height: 100vh;
+      padding: 20px;
     }
 
-    header {
+    /* Logo එක App එකක මෙන් ඉහළින් */
+    .app-header {
+      position: absolute;
+      top: 40px;
       text-align: center;
-      padding: 30px 20px;
-      background: #fff; /* පිරිසිදු සුදු පසුබිම */
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      height: 50px;
+      width: 100%;
     }
 
     .n_logo {
-      width: 150px; /* Logo එකේ ප්‍රමාණය */
+      width: 140px;
       height: auto;
-      display: block;
-      margin: 0 auto;
-      margin-left: 30px;
-      margin-top: -20px;
     }
 
-    .welcome-container {
-      max-width: 600px;
-      margin: 60px auto;
+    /* App Card Layout */
+    .welcome-card {
+      width: 100%;
+      max-width: 400px; /* Mobile width එකට සීමා කිරීම */
       background: var(--card);
-      padding: 50px 40px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px var(--shadow); /* වඩාත් කැපී පෙනෙන shadow එකක් */
+      padding: 40px 30px;
+      border-radius: 30px; /* App වල මෙන් රවුම් දාර */
+      box-shadow: var(--shadow);
       text-align: center;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255,255,255,0.2);
+      animation: slideUp 0.6s ease-out;
     }
 
-    .welcome-container h2 {
-      color: #000;
-      font-size: 2.2rem;
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .welcome-card h2 {
+      font-size: 1.8rem;
       font-weight: 800;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      line-height: 1.3;
     }
 
-    /* Welcome text එකට Gold වර්ණය */
     .lanka-text {
       color: var(--accent-gold);
+      display: block; /* Handy Lanka කොටස වෙනම පේළියකට ගැනීමට */
     }
 
-    .welcome-container p {
+    .welcome-card p {
       color: var(--muted);
-      font-size: 1.1rem;
-      margin-bottom: 40px;
-      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 35px;
+      padding: 0 10px;
     }
 
-    /* Primary Button Style (View Services) */
+    /* Mobile එකට ගැළපෙන Stacked Buttons */
+    .btn-group {
+      display: flex;
+      flex-direction: column; /* බොත්තම් එක පිට එක සිටින ලෙස */
+      gap: 15px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: transform 0.2s;
+      display: block;
+      text-align: center;
+    }
+
+    .btn:active {
+      transform: scale(0.98); /* බොත්තම එබූ විට සිදුවන වෙනස */
+    }
+
     .btn-primary {
-      display: inline-block;
-      padding: 14px 30px;
       background: var(--accent-dark);
       color: #fff;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
-    .btn-primary:hover {
-      background: #333;
-      transform: translateY(-2px);
-    }
-
-    /* Secondary Button Style (Logout) */
     .btn-secondary {
-      display: inline-block;
-      padding: 14px 30px;
-      background: var(--accent-gold);
-      color: #000;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      margin-left: 15px;
-      box-shadow: 0 4px 15px rgba(245, 180, 0, 0.3);
+      background: #f3f4f6; /* Logout බොත්තම සරල කිරීම */
+      color: #ef4444; /* රතු පැහැය ඉවත් වීමට */
+      border: 1px solid #e5e7eb;
     }
 
-    .btn-secondary:hover {
-      background: #e2a500;
-      transform: translateY(-2px);
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
+    .footer-text {
+      margin-top: 30px;
+      font-size: 0.8rem;
       color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: auto;
-      border-top: 1px solid rgba(0,0,0,0.05);
     }
+
   </style>
 </head>
 <body>
-  <header>
-    <img src="n logo.png" class="n_logo" alt="HANDY LANKA Logo">
-  </header>
 
-  <div class="welcome-container">
-    <h2>Welcome to <span class="lanka-text">HANDY LANKA</span>!</h2>
-    <p>Your registration was successful. You can now explore our reliable household services or logout.</p>
-    
-    <div class="btn-group">
-      <a href="page1.html" class="btn-primary">View Services</a>
-      <a href="home.html" class="btn-secondary">Logout</a>
-    </div>
+  <div class="app-header">
+    <img src="n logo.png" class="n_logo" alt="HANDY LANKA">
   </div>
 
-  <footer>
-    &copy; <span id="year"></span> HANDY LANKA. All rights reserved.
-  </footer>
+  <div class="welcome-card">
+    <h2>Welcome to <span class="lanka-text">HANDY LANKA</span></h2>
+    <p>Registration Successful! <br> Explore our services and find the best experts for your home.</p>
+    
+    <div class="btn-group">
+      <a href="page1.html" class="btn btn-primary">Go to Dashboard</a>
+      <a href="home.html" class="btn btn-secondary">Sign Out</a>
+    </div>
+
+    <div class="footer-text">
+      &copy; <span id="year"></span> HANDY LANKA
+    </div>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();

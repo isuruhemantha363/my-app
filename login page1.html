@@ -222,10 +222,19 @@
             text-decoration: underline;
         }
 
+        /* --- Mobile Responsive Style --- */
         @media (max-width: 768px) {
-            header { padding: 15px 5%; }
-            .navigation { display: none; }
-            .wrapper { width: 90%; padding: 30px; }
+            header { 
+                padding: 15px 5%; 
+                justify-content: center;
+            }
+            .navigation { display: none; } /* Mobile වල Navigation හංගන්න */
+            .wrapper { 
+                width: 90%; 
+                padding: 40px 25px; 
+            }
+            .form-box h2 { font-size: 2em; }
+            .n_logo { width: 140px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -235,15 +244,15 @@
 
     <header>
         <div class="logo">
-            <img src="n logo.png" class="n_logo">
+            <img src="n logo.png" class="n_logo" alt="Handy Lanka">
         </div>
         
-       <nav class="navigation">
-        <a class="word" href="home.html#home">Home</a>
-        <a class="word" href="home.html#about">About</a>
-        <a class="word" href="home.html#services">Services</a>
-        <a class="word" href="home.html#contact">Contact</a>
-    </nav>
+        <nav class="navigation">
+            <a class="word" href="home.html#home">Home</a>
+            <a class="word" href="home.html#about">About</a>
+            <a class="word" href="home.html#services">Services</a>
+            <a class="word" href="home.html#contact">Contact</a>
+        </nav>
     </header>
 
     <div class="main-content">
@@ -283,6 +292,7 @@
     </div>
 
     <script>
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDDXkRpZm2JA_Dz4U8iemCoFNtu9_3ebqI",
             authDomain: "handylanka.firebaseapp.com",
@@ -293,16 +303,23 @@
             measurementId: "G-9FHZXXPBZD"
         };
 
+        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
         async function validateLogin() {
-            const email = document.getElementById("email").value;
+            const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value;
             const btn = document.querySelector(".b2-btn");
 
-            // --- Owner Specific Check ---
+            // Empty field validation
+            if (!email || !password) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            // Owner Login (Hardcoded)
             if (email === "isuru123@gmail.com" && password === "123321123") {
                 window.location.href = "owner.html";
                 return;
@@ -312,13 +329,17 @@
                 btn.innerHTML = "Authenticating...";
                 btn.disabled = true;
 
+                // Sign in with Firebase Auth
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
                 const user = userCredential.user;
 
+                // Fetch User Data from Firestore
                 const doc = await db.collection("users").doc(user.uid).get();
 
                 if (doc.exists) {
                     const userData = doc.data();
+                    
+                    // Route based on role
                     if (userData.role === 'customer') {
                         window.location.href = "page1.html";
                     } else {
@@ -326,11 +347,20 @@
                         window.location.href = "profile.html";
                     }
                 } else {
-                    alert("User data not found.");
+                    alert("User record not found in database.");
                 }
 
             } catch (error) {
-                alert("Login Failed: " + error.message);
+                // Better error messages
+                let errorMsg = "Login Failed: ";
+                if (error.code === 'auth/wrong-password') {
+                    errorMsg += "Incorrect password.";
+                } else if (error.code === 'auth/user-not-found') {
+                    errorMsg += "No account found with this email.";
+                } else {
+                    errorMsg += error.message;
+                }
+                alert(errorMsg);
             } finally {
                 btn.innerHTML = "Login Now";
                 btn.disabled = false;

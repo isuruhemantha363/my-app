@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
   <title>Service Feedback - HANDY LANKA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --yellow: #f9c846;
-      --dark-yellow: #eab308;
-      --black: #1f2937;
-      --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+      --primary: #f5b400;
+      --secondary: #1e293b;
+      --bg-light: #f8fafc;
       --card-bg: #ffffff;
-      --text: #374151;
-      --primary: #d97706;
+      --text-main: #1e293b;
+      --text-sub: #64748b;
+      --accent: #d97706;
     }
 
     * {
@@ -22,152 +22,143 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      min-height: 100vh;
-      background: var(--bg-gradient);
+      background-color: var(--bg-light);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
-      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
     }
 
-    /* ---------- HEADER ---------- */
+    /* Header Styling */
     header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 15px 8%;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      z-index: 100;
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--black);
+    .n_logo {
+      width: 90px;
+      height: auto;
       cursor: pointer;
-      text-decoration: none;
     }
 
-    .logo span { color: var(--primary); }
-
-    /* ---------- CONTAINER ---------- */
-    .feedback-container {
-      max-width: 600px;
-      width: 90%;
-      margin: 50px auto;
-      background: var(--card-bg);
-      padding: 40px;
-      border-radius: 30px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-      animation: fadeInUp 0.8s ease;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h2 {
-      text-align: center;
-      font-size: 1.8rem;
+    .logo-text {
+      font-size: 16px;
       font-weight: 800;
-      margin-bottom: 30px;
-      color: var(--black);
+      color: var(--secondary);
+    }
+    .logo-text span { color: var(--primary); }
+
+    /* Scrollable Container */
+    .scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 20px;
     }
 
-    h2 span { color: var(--primary); }
+    .page-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
+    .page-header h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .page-header p {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    /* Form Styling */
     .form-group { margin-bottom: 20px; }
 
     label {
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--black);
+      font-size: 13px;
+      color: var(--secondary);
     }
     
     input, select, textarea {
       width: 100%;
-      padding: 14px 18px;
-      border: 2px solid #f3f4f6;
-      border-radius: 15px;
-      font-size: 0.95rem;
-      background: #f9fafb;
-      transition: 0.3s;
+      padding: 14px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      font-size: 14px;
+      background: white;
+      transition: 0.2s;
       outline: none;
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: var(--yellow);
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(249, 200, 70, 0.1);
+      border-color: var(--primary);
+      background: #fffdf7;
     }
 
     .loading-text {
-      font-size: 0.8rem;
-      color: var(--primary);
-      margin-top: 5px;
+      font-size: 11px;
+      color: var(--accent);
+      margin-top: 6px;
       font-weight: 600;
+      font-style: italic;
     }
 
-    button {
+    /* Action Bar (Fixed at bottom) */
+    .action-bar {
+      background: white;
+      padding: 20px;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+    }
+
+    .submit-btn {
       width: 100%;
       padding: 16px;
-      background: var(--yellow);
-      color: #000;
+      background: var(--secondary);
+      color: white;
       border: none;
-      border-radius: 15px;
-      font-size: 1.1rem;
+      border-radius: 16px;
+      font-size: 16px;
       font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+      transition: 0.2s;
     }
 
-    button:hover {
-      background: var(--dark-yellow);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    }
+    .submit-btn:active { transform: scale(0.98); opacity: 0.9; }
 
-    button:active { transform: translateY(0); }
-
-    /* ---------- FOOTER ---------- */
     footer {
-      margin-top: auto;
       text-align: center;
-      padding: 30px;
-      color: #9ca3af;
-      font-size: 0.9rem;
+      padding: 10px;
+      font-size: 10px;
+      color: #94a3b8;
     }
-
-    .n_logo {
-      height: 65px;
-      width: auto;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .n_logo:hover { transform: scale(1.05); }
   </style>
 </head>
 <body>
 
   <header>
     <img src="n logo.png" class="n_logo" onclick="window.location.href='page1.html'">
-    <a href="index.html" class="logo">HANDY <span>LANKA</span></a>
-    <p style="font-size: 0.85rem; font-weight: 600; color: #6b7280;">Service Experience</p>
+    <div class="logo-text">HANDY <span>LANKA</span></div>
   </header>
 
-  <div class="feedback-container">
-    <h2>Service <span>Feedback</span></h2>
+  <div class="scroll-container">
+    <div class="page-header">
+      <h2>Service <span>Feedback</span></h2>
+      <p>Your reviews help us grow</p>
+    </div>
     
     <form id="feedbackForm">
       <div class="form-group">
@@ -179,7 +170,6 @@
         <label>Service Category</label>
         <select id="service_cat" onchange="updateSubAndEmployees()" required>
           <option value="">-- Select Category --</option>
-          <!-- Category Updated -->
           <option value="house_cleaning_painting">House Cleaning & Painting</option>
           <option value="electrical">Electrical Repairs</option>
           <option value="gardening">Gardening</option>
@@ -201,13 +191,13 @@
         <select id="employee_select" required>
           <option value="">-- Select Employee --</option>
         </select>
-        <p id="loadingEmp" class="loading-text" style="display:none;">Searching for experts...</p>
+        <p id="loadingEmp" class="loading-text" style="display:none;">Finding specialists...</p>
       </div>
 
       <div class="form-group">
         <label>Rating</label>
         <select id="rating" required>
-          <option value="">-- How was the service? --</option>
+          <option value="">-- Rate our service --</option>
           <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
           <option value="4">⭐⭐⭐⭐ Good</option>
           <option value="3">⭐⭐⭐ Average</option>
@@ -218,23 +208,22 @@
 
       <div class="form-group">
         <label>Your Feedback</label>
-        <textarea id="comments" rows="3" placeholder="How can we improve?" required></textarea>
+        <textarea id="comments" rows="3" placeholder="Share your experience..." required></textarea>
       </div>
-
-      <button type="submit" id="submitBtn">Submit Review</button>
     </form>
   </div>
 
-  <footer>
-    &copy; 2026 Handy Lanka. All rights reserved.
-  </footer>
+  <div class="action-bar">
+    <button type="submit" form="feedbackForm" id="submitBtn" class="submit-btn">Submit Review</button>
+    <footer>
+      &copy; 2026 Handy Lanka. All rights reserved.
+    </footer>
+  </div>
 
-  <!-- Firebase Integration -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
   <script>
-    // Sub-services Updated for Cleaning & Painting
     const subServiceData = {
       'house_cleaning_painting': [
         {v:'full_house_painting', t:'Full House Painting'}, 
