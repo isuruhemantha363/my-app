@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Service Feedback - HANDY LANKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --yellow: #f9c846;
+      --dark-yellow: #eab308;
+      --black: #1f2937;
+      --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+      --card-bg: #ffffff;
+      --text: #374151;
+      --primary: #d97706;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      display: flex;
+      flex-direction: column;
+      color: var(--text);
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--black);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--primary); }
+
+    /* ---------- CONTAINER ---------- */
+    .feedback-container {
+      max-width: 600px;
+      width: 90%;
+      margin: 50px auto;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+      color: var(--black);
+    }
+
+    h2 span { color: var(--primary); }
+
+    .form-group { margin-bottom: 20px; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--black);
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #f3f4f6;
+      border-radius: 15px;
+      font-size: 0.95rem;
+      background: #f9fafb;
+      transition: 0.3s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--yellow);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(249, 200, 70, 0.1);
+    }
+
+    .loading-text {
+      font-size: 0.8rem;
+      color: var(--primary);
+      margin-top: 5px;
+      font-weight: 600;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: var(--yellow);
+      color: #000;
+      border: none;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    button:hover {
+      background: var(--dark-yellow);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    button:active { transform: translateY(0); }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 30px;
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+
+    .n_logo {
+      height: 65px;
+      width: auto;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .n_logo:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="n logo.png" class="n_logo" onclick="window.location.href='page1.html'">
+    <a href="index.html" class="logo">HANDY <span>LANKA</span></a>
+    <p style="font-size: 0.85rem; font-weight: 600; color: #6b7280;">Service Experience</p>
+  </header>
+
+  <div class="feedback-container">
+    <h2>Service <span>Feedback</span></h2>
+    
+    <form id="feedbackForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="customer_name" placeholder="Enter your name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Service Category</label>
+        <select id="service_cat" onchange="updateSubAndEmployees()" required>
+          <option value="">-- Select Category --</option>
+          <!-- Category Updated -->
+          <option value="house_cleaning_painting">House Cleaning & Painting</option>
+          <option value="electrical">Electrical Repairs</option>
+          <option value="gardening">Gardening</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="handyman">Handyman</option>
+          <option value="moving_help">Moving Help</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="subGroup" style="display:none;">
+        <label>Service Type</label>
+        <select id="service_type">
+          <option value="">-- Select Type --</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="employeeGroup" style="display:none;">
+        <label>Assigned Professional</label>
+        <select id="employee_select" required>
+          <option value="">-- Select Employee --</option>
+        </select>
+        <p id="loadingEmp" class="loading-text" style="display:none;">Searching for experts...</p>
+      </div>
+
+      <div class="form-group">
+        <label>Rating</label>
+        <select id="rating" required>
+          <option value="">-- How was the service? --</option>
+          <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+          <option value="4">⭐⭐⭐⭐ Good</option>
+          <option value="3">⭐⭐⭐ Average</option>
+          <option value="2">⭐⭐ Poor</option>
+          <option value="1">⭐ Very Poor</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Your Feedback</label>
+        <textarea id="comments" rows="3" placeholder="How can we improve?" required></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn">Submit Review</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2026 Handy Lanka. All rights reserved.
+  </footer>
+
+  <!-- Firebase Integration -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <script>
+    // Sub-services Updated for Cleaning & Painting
+    const subServiceData = {
+      'house_cleaning_painting': [
+        {v:'full_house_painting', t:'Full House Painting'}, 
+        {v:'wall_cleaning', t:'Deep Wall Cleaning'},
+        {v:'deep_cleaning', t:'Full House Deep Cleaning'},
+        {v:'window_cleaning', t:'Window & Glass Cleaning'}
+      ],
+      'electrical': [
+        {v:'wiring', t:'Full House Wiring'}, 
+        {v:'repairs', t:'Appliance Repair'},
+        {v:'lighting_install', t:'Lighting Installation'},
+        {v:'ac_service', t:'AC Electrical Service'}
+      ],
+      'gardening': [
+        {v:'landscaping', t:'Landscaping Design'}, 
+        {v:'lawn_care', t:'Lawn Mowing & Care'},
+        {v:'tree_trimming', t:'Tree Trimming'},
+        {v:'pest_control', t:'Garden Pest Control'}
+      ],
+      'plumbing': [
+        {v:'leak_repair', t:'Leak Repair'}, 
+        {v:'installation', t:'Bathroom Installation'},
+        {v:'drain_cleaning', t:'Drain Unblocking'},
+        {v:'water_tank', t:'Water Tank Cleaning'}
+      ],
+      'handyman': [
+        {v:'general_repairs', t:'General Furniture Repairs'},
+        {v:'shelf_mounting', t:'TV/Shelf Mounting'},
+        {v:'door_lock', t:'Door & Lock Fixing'},
+        {v:'painting', t:'Small Scale Painting'}
+      ],
+      'moving_help': [
+        {v:'packing', t:'Packing Assistance'},
+        {v:'loading_unloading', t:'Loading & Unloading'},
+        {v:'transport', t:'Truck & Transport'},
+        {v:'assembly', t:'Furniture Assembly'}
+      ]
+    };
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
+      authDomain: "handylanka-6f7b3.firebaseapp.com",
+      databaseURL: "https://handylanka-6f7b3-default-rtdb.firebaseio.com",
+      projectId: "handylanka-6f7b3",
+      storageBucket: "handylanka-6f7b3.firebasestorage.app",
+      messagingSenderId: "932726552349",
+      appId: "1:932726552349:web:e7a51b17fd381b168d93f4"
+    };
+
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    function updateSubAndEmployees() {
+      const cat = document.getElementById('service_cat').value;
+      const subSelect = document.getElementById('service_type');
+      const subGroup = document.getElementById('subGroup');
+      const empGroup = document.getElementById('employeeGroup');
+      const empSelect = document.getElementById('employee_select');
+
+      subSelect.innerHTML = '<option value="">-- Select Type --</option>';
+      empSelect.innerHTML = '<option value="">-- Select Employee --</option>';
+      
+      if (cat) {
+        subGroup.style.display = 'block';
+        empGroup.style.display = 'block';
+        
+        if(subServiceData[cat]) {
+          subServiceData[cat].forEach(s => {
+            let opt = document.createElement('option');
+            opt.value = s.v; opt.textContent = s.t;
+            subSelect.appendChild(opt);
+          });
+        }
+        fetchEmployees(cat); 
+      } else {
+        subGroup.style.display = 'none';
+        empGroup.style.display = 'none';
+      }
+    }
+
+    function fetchEmployees(category) {
+      const empSelect = document.getElementById('employee_select');
+      const loading = document.getElementById('loadingEmp');
+      loading.style.display = 'block';
+
+      database.ref('employees').orderByChild('service').equalTo(category).once('value', snapshot => {
+        empSelect.innerHTML = '<option value="">-- Select Employee --</option>';
+        if (snapshot.exists()) {
+          snapshot.forEach(child => {
+            const emp = child.val();
+            let opt = document.createElement('option');
+            opt.value = emp.name;
+            opt.textContent = `${emp.name} (${emp.skill}%)`;
+            empSelect.appendChild(opt);
+          });
+        } else {
+          empSelect.innerHTML = '<option value="">No Professionals Found</option>';
+        }
+        loading.style.display = 'none';
+      });
+    }
+
+    document.getElementById('feedbackForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const data = {
+        customer: document.getElementById('customer_name').value,
+        category: document.getElementById('service_cat').value,
+        type: document.getElementById('service_type').value,
+        employee: document.getElementById('employee_select').value,
+        rating: document.getElementById('rating').value,
+        comments: document.getElementById('comments').value,
+        date: new Date().toLocaleString()
+      };
+
+      btn.disabled = true; btn.innerText = "Submitting...";
+      database.ref('feedbacks').push().set(data).then(() => {
+        alert("Thank you! Your feedback has been successfully submitted.");
+        location.reload();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg: #dfb920;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #dfb920;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .thankyou-container {
+      max-width: 600px;
+      margin: 60px auto;
+      background: var(--card);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+      text-align: center;
+    }
+
+    .thankyou-container h2 {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .thankyou-container p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    .btn:hover {
+      background: #b45309;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+     .logo{
+            font-size: 2em;
+            color: rgb(0, 0, 0);
+            user-select: none;
+        
+        }
+        .logo .lanka {
+            font-size: 0.9em;
+            color: rgb(156, 151, 9); /* change to any color you like */
+            }
+  </style>
+</head>
+<body>
+  <header>
+    <header>
+   <h2 class="logo">
+    HANDY
+    <span class="lanka">LANKA</span>
+    </h2>
+    <p>Reliable solutions for your household needs</p>
+  </header>
+
+  <div class="thankyou-container">
+    <h2>Thank You!</h2>
+    <p>Your booking request has been received. Our team will contact you shortly to confirm the details.</p>
+    <a href="page1.html" class="btn">Back to Services</a>
+    <a href="pay.html" class="btn" style="margin-left:10px;">Select a Plumber >></a>
+  </div>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

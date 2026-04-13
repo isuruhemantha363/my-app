@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Electrical Repairs - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg: #fff8dc;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #d97706;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+      background: #fff3e0;
+    }
+    .hero h1 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .services-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px var(--shadow);
+    }
+
+    .service-icon {
+      font-size: 40px;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      margin: 10px 0;
+      color: var(--accent);
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .cta a {
+      display: inline-block;
+      padding: 14px 24px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    .cta a:hover {
+      background: #b45309;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+    .logo{
+            font-size: 2em;
+            color: rgb(0, 0, 0);
+            user-select: none;
+        
+        }
+        .logo .lanka {
+            font-size: 0.9em;
+            color: rgb(192, 186, 8); /* change to any color you like */
+            }
+  </style>
+</head>
+<body>
+  <header>
+   <h2 class="logo">
+    HANDY
+    <span class="lanka">LANKA</span>
+    </h2>
+    <p>Reliable solutions for your household needs</p>
+  </header>
+
+  <section class="hero">
+    <h1>Electrical Repairs</h1>
+    <p>Our certified electricians provide safe, reliable, and affordable solutions for all your electrical needs — from wiring to appliance installation.</p>
+  </section>
+
+  <div class="services-container">
+    <div class="service-card">
+      <div class="service-icon">💡</div>
+      <h3>Lighting Installation</h3>
+      <p>Install and repair lights, ceiling fans, and decorative fixtures.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔌</div>
+      <h3>Wiring & Rewiring</h3>
+      <p>Safe wiring solutions for new builds, renovations, and upgrades.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Power Outlets</h3>
+      <p>Install or repair sockets, switches, and circuit breakers.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📺</div>
+      <h3>Appliance Setup</h3>
+      <p>Professional installation of household appliances and electronics.</p>
+    </div>
+  </div>
+
+  <div class="cta">
+    <a href="submi.html">Book an Electrician</a>
+  </div>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

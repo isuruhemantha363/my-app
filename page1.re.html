@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome - HANDY LANKA</title>
+  <style>
+    :root {
+      /* Handy Lanka Gold Theme */
+      --bg: #ede2c4;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent-gold: #f5b400; /* Primary Gold */
+      --accent-dark: #111827; /* For Primary Buttons */
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: #fff; /* පිරිසිදු සුදු පසුබිම */
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      height: 50px;
+    }
+
+    .n_logo {
+      width: 150px; /* Logo එකේ ප්‍රමාණය */
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      margin-left: 30px;
+      margin-top: -20px;
+    }
+
+    .welcome-container {
+      max-width: 600px;
+      margin: 60px auto;
+      background: var(--card);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px var(--shadow); /* වඩාත් කැපී පෙනෙන shadow එකක් */
+      text-align: center;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .welcome-container h2 {
+      color: #000;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    /* Welcome text එකට Gold වර්ණය */
+    .lanka-text {
+      color: var(--accent-gold);
+    }
+
+    .welcome-container p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      font-weight: 500;
+    }
+
+    /* Primary Button Style (View Services) */
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 30px;
+      background: var(--accent-dark);
+      color: #fff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+
+    /* Secondary Button Style (Logout) */
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 30px;
+      background: var(--accent-gold);
+      color: #000;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-left: 15px;
+      box-shadow: 0 4px 15px rgba(245, 180, 0, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: #e2a500;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: auto;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="n logo.png" class="n_logo" alt="HANDY LANKA Logo">
+  </header>
+
+  <div class="welcome-container">
+    <h2>Welcome to <span class="lanka-text">HANDY LANKA</span>!</h2>
+    <p>Your registration was successful. You can now explore our reliable household services or logout.</p>
+    
+    <div class="btn-group">
+      <a href="page1.html" class="btn-primary">View Services</a>
+      <a href="home.html" class="btn-secondary">Logout</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

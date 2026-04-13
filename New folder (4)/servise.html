@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HANDY LANKA - Our Home Services</title>
+  <style>
+    :root {
+      --bg: #dfb920;   /* light yellow background */
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #d97706; /* warm orange accent */
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: center;   /* center horizontally */
+      align-items: baseline;     /* align text nicely */
+      gap: 450px;                 /* spacing between logo and tagline */
+      flex-wrap: wrap;           /* allow wrapping on small screens */
+    }
+
+    .logo {
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: black;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-left: -600px;
+    }
+
+    .logo .lanka {
+      color:rgb(192, 186, 8)
+    }
+
+    .tagline {
+      font-size: 2rem;
+      color: var(--accent);
+      margin: 0;
+      font-weight: 600;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    @media (min-width: 768px) {
+      .services {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 6px 16px var(--shadow);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px var(--shadow);
+    }
+
+    .icon {
+      font-size: 40px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+     .logo{
+            font-size: 2em;
+            color: rgb(0, 0, 0);
+            user-select: none;
+        
+        }
+        .logo .lanka {
+            font-size: 0.9em;
+            color: rgb(156, 151, 9); /* change to any color you like */
+            }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-row">
+      <h2 class="logo">HANDY<br> <span class="lanka">&nbsp &nbsp&nbsp&nbsp&nbspLANKA</span></h2>
+      <h1 class="tagline">Our Home Services</h1>
+    </div>
+    <p>Reliable solutions for your household needs</p>
+  </header>
+
+  <section class="services">
+    <div class="card">
+      <div class="icon">🧹</div>
+      <h2>House Cleaning</h2>
+      <p>Professional cleaning to keep your home spotless and fresh.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔧</div>
+      <h2>Plumbing</h2>
+      <p>Quick fixes and installations for all your plumbing needs.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💡</div>
+      <h2>Electrical Repairs</h2>
+      <p>Safe and efficient electrical maintenance and troubleshooting.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌳</div>
+      <h2>Gardening</h2>
+      <p>Landscaping and garden care to keep your outdoors beautiful.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛠️</div>
+      <h2>Handyman Services</h2>
+      <p>General repairs and installations around the house.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🚚</div>
+      <h2>Moving Assistance</h2>
+      <p>Helping you pack, move, and settle into your new home.</p>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Handy Lanka</title>
+  <style>
+    :root {
+      --yellow:#f9c846;
+      --black:#111;
+      --gray:#f4f4f4;
+      --bg: #fff8dc;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #d97706;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      background:#fff;
+      padding:18px 60px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      font-size:20px;
+    }
+
+    .logo span {
+      color:var(--yellow);
+      margin-left: -60px;
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin:0 14px;
+      text-decoration:none;
+      color:#080808;
+      font-size:14px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #080808;
+      transition: width 1s ease;
+    }
+
+    nav a:hover::after {
+      margin-left: 30px;
+      width: 70%;
+      transition: width 1s ease;
+    }
+
+    .btn-login {
+      background:var(--black);
+      color:#fff;
+      padding:8px 14px;
+      border-radius:4px;
+      font-size:13px;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      background:url("https://images.unsplash.com/photo-1581578731548-c64695cc6952") center/cover no-repeat;
+      padding:90px 60px;
+      color:#fff;
+      position:relative;
+    }
+    .hero::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,.35);
+    }
+    .hero-content {
+      position:relative;
+      max-width:700px;
+    }
+    .search-box {
+      display:flex;
+      background:#fff;
+      border-radius:6px;
+      overflow:hidden;
+      margin-bottom:20px;
+    }
+    .search-box input {
+      flex:1;
+      border:none;
+      padding:14px;
+      font-size:14px;
+    }
+    .search-box button {
+      background:var(--yellow);
+      border:none;
+      padding:0 18px;
+      font-size:18px;
+      cursor:pointer;
+    }
+    .hero h1 {
+      font-size:36px;
+      margin-bottom:10px;
+    }
+    .hero .tag {
+      display:inline-block;
+      background:var(--yellow);
+      color:#000;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+    }
+
+    /* ---------- SERVICES ---------- */
+    .services {
+      background:#fff;
+      padding:50px 60px;
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      flex-wrap: wrap;
+    }
+    .service-card {
+      background: var(--card);
+      box-shadow:0 4px 12px rgba(0,0,0,.08);
+      padding:25px;
+      width:220px;
+      text-align:center;
+      border-radius:8px;
+    }
+    .service-card .icon {
+      background:var(--yellow);
+      width:50px;
+      height:50px;
+      margin:0 auto 10px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+    }
+    .service-card h3 {
+      color: var(--accent);
+    }
+    .service-card p {
+      color: var(--muted);
+    }
+
+    /* ---------- HOW IT WORKS ---------- */
+    .how {
+      background:var(--gray);
+      padding:60px;
+    }
+    .how h2 {
+      margin-bottom:25px;
+    }
+    .how-box {
+      background:var(--yellow);
+      padding:35px;
+      border-radius:10px;
+      display:flex;
+      justify-content:space-between;
+      gap:30px;
+    }
+    .steps div {
+      margin-bottom:15px;
+      font-weight:600;
+    }
+    .testimonial {
+      background:#fff;
+      padding:18px;
+      border-radius:8px;
+      margin-bottom:12px;
+      font-size:13px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background:#000;
+      color:#fff;
+      padding:35px 60px;
+      display:flex;
+      justify-content:space-between;
+      font-size:13px;
+    }
+    footer a {
+      color:#fff;
+      margin-left:12px;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"> HANDY <span><br>LANKA</span></div>
+  <nav>
+    <a href="#" onclick="openNewPageF1()">Find Services</a>
+    <a href="#" onclick="openNewPageF()">Feedback</a>
+    <a href="#" onclick="openNewPageH()">Help</a>
+  </nav>
+  <script>
+    function openNewPageF1() {
+                window.open("servise.html", "_blank");}
+    function openNewPageH() {
+                window.open("help.html", "_blank");}
+    function openNewPageF() {
+                window.open("feedback.html", "_blank");}
+  </script>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="What service you need?">
+      <input placeholder="Location: Colombo" />
+      <button onclick="searchServices()">🔍</button>
+    </div>
+    <h1>Connecting Sri Lanka, One Service at a Time.</h1>
+    <span class="tag">Trusted. Verified. Local</span>
+  </div>
+</section>
+
+<section class="services" id="servicesContainer">
+  <div class="service-card" onclick="A1()">
+    <div class="icon">🧹</div>
+      <h2>House Cleaning</h2>
+      <p>Professional cleaning to keep your home spotless and fresh.</p>
+  </div>
+  <div class="service-card" onclick="A2()">
+   <div class="icon">🔧</div>
+      <h2>Plumbing</h2>
+      <p>Quick fixes and installations for all your plumbing needs.</p>
+  </div>
+  <div class="service-card" onclick="A3()">
+    <div class="icon">💡</div>
+      <h2>Electrical Repairs</h2>
+      <p>Safe and efficient electrical maintenance and troubleshooting.</p>
+  </div>
+  <div class="service-card" onclick="A4()">
+   <div class="icon">🌳</div>
+      <h2>Gardening</h2>
+      <p>Landscaping and garden care to keep your outdoors beautiful.</p>
+  </div>
+  <div class="service-card" onclick="A5()">
+    <div class="icon">🛠️</div>
+      <h2>Handyman Services</h2>
+      <p>General repairs and installations around the house.</p>
+  </div>
+  <div class="service-card" onclick="A6()">
+    <div class="icon">🚚</div>
+      <h2>Moving Assistance</h2>
+      <p>Helping you pack, move, and settle into your new home.</p>
+  </div>
+ 
+</section>
+<script>
+    function A1() {
+                window.location.href="house.html";}
+    function A2() {
+                window.location.href="plumb.html";}
+    function A3() {
+                window.location.href="elec.html";}
+    function A4() {
+                window.location.href="gard.html";}
+    function A5() {
+                window.location.href="handy.html";}
+    function A6() {
+                window.location.href="movi.html";}
+  </script>
+<section class="how">
+  <h2>How It Works</h2>
+  <div class="how-box">
+    <div class="steps">
+      <div>1. Book Online</div>
+      <div>2. Schedule Service</div>
+      <div>3. Relax & Enjoy!</div>
+    </div>
+    <div>
+      <div class="testimonial">“So easy and reliable!”</div>
+      <div class="testimonial">“Best home service platform in Sri Lanka.”</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    📞 0783 523723<br>
+    ✉️ support@handylanka.com
+  </div>
+  <div>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms

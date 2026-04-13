@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Help - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg:#dfb920;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #d97706;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .help-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: var(--card);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .faq {
+      margin-bottom: 30px;
+    }
+
+    .faq h3 {
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .faq p {
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .contact-box {
+      background: var(--bg);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .contact-box h3 {
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .contact-box p {
+      margin: 5px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+     .logo{
+            font-size: 2em;
+            color: rgb(0, 0, 0);
+            user-select: none;
+        
+        }
+        .logo .lanka {
+            font-size: 0.9em;
+            color:rgb(156, 151, 9); /* change to any color you like */
+            }
+  </style>
+</head>
+<body>
+  <header>
+     <h2 class="logo">
+    HANDY
+    <span class="lanka">LANKA</span>
+    </h2>
+    <p>Reliable solutions for your household needs</p>
+  </header>
+
+  <div class="help-container">
+    <h2>Help & Support</h2>
+
+    <div class="faq">
+      <h3>How do I book a service?</h3>
+      <p>Simply search for the service you need, click on it, and use the booking form to schedule your appointment.</p>
+
+      <h3>Can I reschedule or cancel a booking?</h3>
+      <p>Yes, you can reschedule or cancel up to 24 hours before your appointment by contacting our support team.</p>
+
+      <h3>Are your service providers verified?</h3>
+      <p>All Handy Lanka professionals are vetted and verified to ensure safety and quality service.</p>
+
+      <h3>What payment methods do you accept?</h3>
+      <p>We accept cash, credit/debit cards, and mobile payments for your convenience.</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Need More Help?</h3>
+      <p>📞 Hotline: 0783 523723</p>
+      <p>✉️ Email: support@handylanka.com</p>
+      <p>💬 Live Chat: Available on our website</p>
+    </div>
+  </div>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

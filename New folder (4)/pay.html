@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handy Lanka | Select Plumber</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#dfb920;
+}
+
+/* HEADER */
+header{
+    background:#eb9f08;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(248, 195, 2, 0.08);
+}
+.logo{
+    font-weight:bold;
+    font-size:20px;
+}
+
+/* MAIN */
+.container{
+    max-width:1100px;
+    margin:40px auto;
+}
+
+h1{
+    margin-bottom:25px;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+/* CARD */
+.card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:18px;
+    background:#fff;
+    border-radius:12px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    box-shadow:0 4px 15px rgba(0,0,0,0.06);
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+/* SELECTED */
+.card.selected{
+    border-color:#f5002d;
+    box-shadow:0 0 15px rgba(245, 0, 155, 0.6);
+}
+
+/* AVATAR */
+.avatar{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#f5b400;
+}
+
+/* INFO */
+.info h3{
+    margin:0 0 5px;
+}
+
+.stars{
+    color:#f5b400;
+    font-size:14px;
+}
+
+.rating{
+    font-size:13px;
+    color:#666;
+}
+
+.price{
+    font-weight:bold;
+    margin-top:5px;
+    color:#f5b400;
+}
+
+/* BUTTON */
+.book-btn{
+    display:block;
+    margin:40px auto 0;
+    padding:14px 30px;
+    background:#75590d;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.logo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0b0b0b; /* orange for HANDY */
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.logo .lanka {
+  color: rgb(156, 151, 9); /* dark gray or any color you want */
+}
+</style>
+</head>
+
+<body>
+
+<header>
+     <h1 class="logo">
+      HANDY <span class="lanka"><br>&nbsp&nbsp&nbspLANKA</span>
+    </h1>
+</header>
+
+<div class="container">
+    <h1>Select a Plumber</h1>
+
+    <div class="grid">
+
+        <div class="card" onclick="selectPlumber(this)">
+            <div class="avatar"></div>
+            <div class="info">
+                <h3>Nimal Rajapaksha</h3>
+                <div>
+                    <span class="stars">★★★★★</span>
+                    <span class="rating">5.0 (256)</span>
+                </div>
+                <div class="price">LKR 1,200/hr</div>
+            </div>
+        </div>
+
+        <div class="card" onclick="selectPlumber(this)">
+            <div class="avatar"></div>
+            <div class="info">
+                <h3>Sunil Perera</h3>
+                <div>
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating">4.5 (180)</span>
+                </div>
+                <div class="price">LKR 1,000/hr</div>
+            </div>
+        </div>
+
+        <div class="card" onclick="selectPlumber(this)">
+            <div class="avatar"></div>
+            <div class="info">
+                <h3>Kamal Silva</h3>
+                <div>
+                    <span class="stars">★★★★★</span>
+                    <span class="rating">5.0 (310)</span>
+                </div>
+                <div class="price">LKR 1,300/hr</div>
+            </div>
+        </div>
+
+        <div class="card" onclick="selectPlumber(this)">
+            <div class="avatar"></div>
+            <div class="info">
+                <h3>Priya Fernando</h3>
+                <div>
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating">4.7 (220)</span>
+                </div>
+                <div class="price">LKR 1,150/hr</div>
+            </div>
+        </div>
+        <div class="card" onclick="selectPlumber(this)">
+            <div class="avatar"></div>
+            <div class="info">
+                <h3>Pium Kumara</h3>
+                <div>
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating">4.7 (220)</span>
+                </div>
+                <div class="price">LKR 1,100/hr</div>
+            </div>
+        </div>
+        <div class="card" onclick="selectPlumber(this)">
+            <div class="avatar"></div>
+            <div class="info">
+                <h3>Saman Viraj</h3>
+                <div>
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating">4.0 (210)</span>
+                </div>
+                <div class="price">LKR 1,000/hr</div>
+            </div>
+        </div>
+        
+
+    </div>
+
+    <button class="book-btn" onclick="B1()">Book Now</button>
+</div>
+<script>
+    function B1(){
+        window.location.href="bookin.html"
+    }
+</script>
+<script>
+function selectPlumber(card){
+    document.querySelectorAll('.card')
+        .forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+}
+</script>
+
+</body>
+</html>

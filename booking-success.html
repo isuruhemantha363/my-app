@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Success | HANDY LANKA</title>
+  <style>
+    :root {
+      --primary: #d97706;
+      --secondary: #1e293b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --glass: rgba(255, 255, 255, 0.9);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #fef3c7, #d1fae5, #fef3c7, #fde68a);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .lang-btn {
+      padding: 8px 16px;
+      background: white;
+      border: 2px solid var(--primary);
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--primary);
+      transition: 0.3s;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    .lang-btn:hover { background: var(--primary); color: white; }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      padding: 35px;
+      border-radius: 35px;
+      width: 100%;
+      max-width: 550px;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
+
+    .icon-box {
+      width: 80px;
+      height: 80px;
+      background: var(--success);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      margin: 0 auto 20px;
+      box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    h2 { font-weight: 800; color: #111827; margin-bottom: 10px; font-size: 24px; }
+    
+    .msg-box {
+      background: #ecfdf5;
+      padding: 15px;
+      border-radius: 15px;
+      border-left: 5px solid var(--success);
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #065f46;
+      text-align: left;
+    }
+
+    /* Cancellation Box Special Styling */
+    .cancel-notice {
+      background: #fffbeb;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1.5px dashed var(--warning);
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .cancel-notice h4 {
+      color: #92400e;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .cancel-notice p {
+      font-size: 12.5px;
+      color: #78350f;
+      line-height: 1.5;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px;
+      border: none;
+      border-radius: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .btn-home { background: var(--primary); color: white; }
+    .btn-home:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(217, 119, 6, 0.3); }
+
+    .btn-cancel { background: #fee2e2; color: var(--danger); border: 1px solid #fecaca; }
+    .btn-cancel:hover { background: var(--danger); color: white; }
+
+    .btn-wa {
+      grid-column: span 2;
+      background: #25d366;
+      color: white;
+      margin-top: 5px;
+    }
+    .btn-wa:hover { background: #16a34a; transform: translateY(-2px); }
+
+    .footer-links {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    .footer-links a { font-size: 12px; text-decoration: none; color: #94a3b8; font-weight: 600; }
+
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">සිංහල</button>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">✓</div>
+    
+    <h2 id="title">Booking Successful!</h2>
+    
+    <div class="msg-box" id="msgBox">
+      <strong>🔔 Notice:</strong><br>
+      We will confirm your booking via Email or SMS within 1 hour.
+    </div>
+
+    <!-- Cancellation Special Notice -->
+    <div class="cancel-notice">
+      <h4 id="cancelTitle">⚠️ Cancellation Policy</h4>
+      <p id="cancelDesc">
+        If you need to cancel this booking, please do so via the <b>App</b> or by <b>Calling us</b> at least <b>24 hours</b> in advance.
+      </p>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-home" onclick="goHome()" id="homeBtn">🏠 Home</button>
+      <button class="btn btn-cancel" onclick="goCancel()" id="cancelBtn">✕ Cancel Booking</button>
+      <button class="btn btn-wa" onclick="chatWA()" id="waBtn">💬 WhatsApp Help</button>
+    </div>
+
+    <div class="footer-links">
+        <a href="#" onclick="logout()" id="logoutText">Logout</a>
+    </div>
+  </div>
+
+  <script>
+    let currentLang = 'en';
+
+    const translations = {
+      en: {
+        title: "Booking Successful!",
+        notice: "<strong>🔔 Notice:</strong><br>We will confirm your booking via Email or SMS within 1 hour.",
+        cancelTitle: "⚠️ Cancellation Policy",
+        cancelDesc: "If you need to cancel this booking, please do so via the <b>App</b> or by <b>Calling us</b> at least <b>24 hours</b> before the scheduled time.",
+        homeBtn: "🏠 Home",
+        cancelBtn: "✕ Cancel Booking",
+        waBtn: "💬 WhatsApp Help",
+        logoutText: "Logout from website",
+        langBtn: "සිංහල",
+        logoutConfirm: "Are you sure you want to logout?"
+      },
+      si: {
+        title: "වෙන්කරවා ගැනීම සාර්ථකයි!",
+        notice: "<strong>🔔 දැනුම්දීම:</strong><br>පැයක් ඇතුළත විද්‍යුත් තැපෑල හෝ SMS මගින් ඔබගේ වෙන්කරවා ගැනීම තහවුරු කරන්නෙමු.",
+        cancelTitle: "⚠️ අවලංගු කිරීමේ පියවර",
+        cancelDesc: "ඔබට මෙම ඇණවුම අවලංගු කිරීමට අවශ්‍ය නම්, කරුණාකර නියමිත වේලාවට අවම වශයෙන් <b>පැය 24කට පෙර</b> අපගේ <b>App එක මගින්</b> හෝ <b>දුරකථන ඇමතුමක්</b> මගින් දැනුම් දෙන්න.",
+        homeBtn: "🏠 මුල් පිටුව",
+        cancelBtn: "✕ ඇණවුම අවලංගු කරන්න",
+        waBtn: "💬 වට්ස්ඇප් සහය",
+        logoutText: "ගිණුමෙන් ඉවත් වන්න",
+        langBtn: "English",
+        logoutConfirm: "ඔබට වෙබ් අඩවියෙන් ඉවත් වීමට අවශ්‍ය බව සහතිකද?"
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'si' : 'en';
+      const t = translations[currentLang];
+      
+      document.getElementById('title').innerText = t.title;
+      document.getElementById('msgBox').innerHTML = t.notice;
+      document.getElementById('cancelTitle').innerHTML = t.cancelTitle;
+      document.getElementById('cancelDesc').innerHTML = t.cancelDesc;
+      document.getElementById('homeBtn').innerText = t.homeBtn;
+      document.getElementById('cancelBtn').innerText = t.cancelBtn;
+      document.getElementById('waBtn').innerText = t.waBtn;
+      document.getElementById('logoutText').innerText = t.logoutText;
+      document.getElementById('langBtn').innerText = t.langBtn;
+    }
+
+    function goHome() {
+      window.location.href = "page1.html";
+    }
+
+    function goCancel() {
+      // මෙතනට ඔබේ cancel page එකේ link එක දාන්න
+      window.location.href = "cancel-booking.html";
+    }
+
+    function logout() {
+      if(confirm(translations[currentLang].logoutConfirm)) {
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href = "https://www.google.com/"; 
+      }
+    }
+
+    function chatWA() {
+      const msg = currentLang === 'en' ? "Hello Handy Lanka, I need help with my booking." : "ආයුබෝවන් Handy Lanka, මගේ වෙන්කරවා ගැනීම පිළිබඳව සහයක් අවශ්‍යයි.";
+      window.open(`https://wa.me/94771234567?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  </script>
+
+</body>
+</html>

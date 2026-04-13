@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cancellation Success | Handy Lanka</title>
+  
+  <style>
+    :root {
+      --primary: #f5b400;
+      --danger: #ef4444;
+      --dark: #111827;
+      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #fff5f5 0%, #fffbeb 100%);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: var(--dark);
+      transition: 0.3s;
+    }
+
+    header {
+      background: white;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .lanka { color: var(--primary); }
+
+    .translate-btn {
+      background: var(--primary);
+      color: #451a03;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .translate-btn:hover { background: #eb9f08; }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cancel-card {
+      background: white;
+      max-width: 480px;
+      width: 100%;
+      padding: 50px 30px;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      border-top: 6px solid var(--danger);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .status-icon {
+      width: 80px;
+      height: 80px;
+      background: #fee2e2;
+      color: var(--danger);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 25px;
+    }
+
+    h2 { font-size: 28px; margin-bottom: 15px; font-weight: 800; }
+    p { color: #4b5563; margin-bottom: 35px; line-height: 1.7; font-size: 16px; }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-home {
+      display: block;
+      padding: 14px;
+      background: var(--dark);
+      color: white;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-home:hover {
+      background: #374151;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">HANDY <span class="lanka">LANKA</span></div>
+    <button class="translate-btn" onclick="toggleLanguage()" id="langBtn">සිංහල (Sinhala)</button>
+  </header>
+
+  <div class="main-content">
+    <div class="cancel-card">
+      <div class="status-icon">✕</div>
+      <h2 id="title">Cancellation Successful</h2>
+      <p id="msg">Your booking has been successfully cancelled. We are sorry to see you go, but you can always book with us again whenever you need professional help.</p>
+      
+      <div class="btn-group">
+        <a href="page1.html" class="btn-home" id="homeBtn">Return to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    let currentLang = 'en';
+
+    const content = {
+      en: {
+        title: "Cancellation Successful",
+        msg: "Your booking has been successfully cancelled. We are sorry to see you go, but you can always book with us again whenever you need professional help.",
+        btn: "Return to Home",
+        langBtn: "සිංහල (Sinhala)"
+      },
+      si: {
+        title: "අවලංගු කිරීම සාර්ථකයි",
+        msg: "ඔබේ ඇණවුම සාර්ථකව අවලංගු කරන ලදී. ඔබ අපෙන් ඉවත් වීම ගැන අප කනගාටු වෙමු. කෙසේ වෙතත්, ඔබට අවශ්‍ය ඕනෑම වෙලාවක නැවත අපගේ සේවාවන් වෙන්කරවා ගත හැක.",
+        btn: "මුල් පිටුවට යන්න",
+        langBtn: "English"
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'si' : 'en';
+      
+      document.getElementById('title').textContent = content[currentLang].title;
+      document.getElementById('msg').textContent = content[currentLang].msg;
+      document.getElementById('homeBtn').textContent = content[currentLang].btn;
+      document.getElementById('langBtn').textContent = content[currentLang].langBtn;
+      
+      // Update page title
+      document.title = currentLang === 'en' ? "Cancellation Success | Handy Lanka" : "අවලංගු කිරීම සාර්ථකයි | Handy Lanka";
+    }
+  </script>
+
+</body>
+</html>

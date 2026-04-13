@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg: #dfb920;   /* light yellow background */
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #d97706; /* warm orange accent */
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--accent);
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .about {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+    .about h2 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+    .about p {
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 1em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .logo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0b0b0b; /* orange for HANDY */
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.logo .lanka {
+  color: rgb(156, 151, 9); /* dark gray or any color you want */
+}
+  </style>
+</head>
+<body>
+  <header>
+  <header>
+  <div class="header-row">
+    <h1 class="logo">
+      HANDY <span class="lanka">LANKA</span>
+    </h1>
+   
+  </div>
+  
+</header>
+    <p>Reliable solutions for your household needs</p>
+  </header>
+
+  <section class="about">
+    <h2>About Us</h2>
+    <p>
+      At <strong>HANDY LANKA</strong>, we believe every home deserves care, comfort, and reliability.
+      Founded with the mission to make household services simple and trustworthy, we bring
+      professional expertise right to your doorstep.
+    </p>
+    <p>
+      Our team specializes in a wide range of home services including cleaning, plumbing,
+      electrical repairs, gardening, handyman work, and moving assistance. Each service is
+      delivered with attention to detail and a commitment to customer satisfaction.
+    </p>
+    <p>
+      We pride ourselves on being more than just a service provider—we’re your partner in
+      creating a safe, well‑maintained, and welcoming home environment.
+    </p>
+  </section>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

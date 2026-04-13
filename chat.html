@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with HANdy - HANDY LANKA</title>
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --bg-gradient-1: #fdfc47;
+      --text-main: #111827;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --navbar-bg: rgba(255, 255, 255, 0.95);
+      --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #fdfc47, #fef3c7, #a7f3d0, #fef3c7);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      background: var(--navbar-bg);
+      backdrop-filter: blur(10px);
+      padding: 15px 25px;
+      color: var(--text-main);
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      z-index: 10;
+      font-size: 1.2rem;
+    }
+
+    header span { color: var(--primary); }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 25px;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 75%;
+      padding: 12px 18px;
+      margin: 10px 0;
+      border-radius: 18px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .user {
+      background: var(--primary);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2);
+    }
+
+    .kamal {
+      background: var(--card-bg);
+      backdrop-filter: blur(5px);
+      color: var(--text-main);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .input-area {
+      padding: 20px;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(15px);
+      display: flex;
+      gap: 12px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 14px 20px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .input-area button {
+      padding: 14px 24px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .typing-indicator {
+      font-size: 0.8rem;
+      color: var(--primary);
+      margin-left: 10px;
+      display: none;
+      font-weight: 600;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header onclick="window.location.href='page1.html'">💬 Chat with HAN<span>dy</span></header>
+
+  <div class="chat-container" id="chat">
+    <div class="message kamal">
+      Hello! 👋 I’m <strong>HANdy</strong>, your personal assistant. How can I help you today? <br><br>
+      You can ask about our <b>Services</b>, <b>Pricing</b>, or <b>How to book</b>!
+    </div>
+  </div>
+  
+  <div id="typing" class="typing-indicator">HANdy is typing...</div>
+
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Ask me something..." autocomplete="off">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    const chat = document.getElementById("chat");
+    const userInput = document.getElementById("userInput");
+    const typing = document.getElementById("typing");
+
+    // --- Smart Bot Logic ---
+    const botReplies = {
+      "hi": "Hello! How can I help you with your home services today?",
+      "hello": "Hi there! Welcome to HANDY LANKA. What are you looking for?",
+      "services": "We offer Plumbing, Electrical work, Cleaning, Gardening, and General Handyman services. Which one do you need?",
+      "plumbing": "Our expert plumbers can fix leaks, taps, and pipes. Would you like to book one now?",
+      "cleaning": "We provide deep cleaning for houses and offices. Our team is very professional!",
+      "price": "Our service charges start from Rs. 1500. However, the total cost depends on the task. Shall I connect you with a specialist?",
+      "booking": "It's easy! Just go to our 'Services' page, select a pro, and click 'Book Now'.",
+      "thanks": "You're very welcome! Let me know if you need anything else.",
+      "bye": "Goodbye! Have a great day with HANDY LANKA!",
+      "help": "I can tell you about our services, pricing, and booking process. Just type your question!"
+    };
+
+    function getBotResponse(input) {
+      const msg = input.toLowerCase();
+      
+      // Keyword matching
+      if (msg.includes("service")) return botReplies["services"];
+      if (msg.includes("price") || msg.includes("cost") || msg.includes("how much")) return botReplies["price"];
+      if (msg.includes("book")) return botReplies["booking"];
+      if (msg.includes("plumber") || msg.includes("plumbing")) return botReplies["plumbing"];
+      if (msg.includes("clean")) return botReplies["cleaning"];
+      if (msg.includes("hi") || msg.includes("hello")) return botReplies["hi"];
+      if (msg.includes("thank")) return botReplies["thanks"];
+      
+      return "I'm sorry, I didn't quite catch that. Could you please rephrase? You can ask about our services or prices!";
+    }
+
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (text === "") return;
+
+      // Add user message
+      addMessage(text, "user");
+      userInput.value = "";
+
+      // Show typing indicator
+      typing.style.display = "block";
+      chat.scrollTop = chat.scrollHeight;
+
+      // Simulate Thinking Time
+      setTimeout(() => {
+        typing.style.display = "none";
+        const response = getBotResponse(text);
+        addMessage(response, "kamal");
+      }, 1200);
+    }
+
+    function addMessage(text, sender) {
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${sender}`;
+      msgDiv.innerHTML = text;
+      chat.appendChild(msgDiv);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    userInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+
+</body>
+</html>

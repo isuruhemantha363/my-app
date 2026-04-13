@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg: #fff8dc;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #d97706;
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image: url('picture.jpeg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+    }
+
+    .register-container {
+      max-width: 400px;
+      margin: 0px auto;
+      background: var(--card);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+      
+    
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(217,119,6,0.25);
+    }
+
+    button {
+      flex: 1; /* make both buttons equal width */
+      padding: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #b45309;
+    }
+
+    .A {
+      display: flex;
+      gap: 10px;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+    .login-link a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .logo {
+      font-size: 2em;
+      color: rgb(0, 0, 0);
+      user-select: none;
+    }
+    .logo .lanka {
+      font-size: 0.9em;
+      color: rgb(156, 151, 9);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2 class="logo">
+      HANDY <span class="lanka">LANKA</span>
+    </h2>
+    <p>Reliable solutions for your household needs</p>
+  </header>
+
+  <div class="register-container">
+    <h2>Create an Account</h2>
+    <form onsubmit="return validateLogin(event)">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter a password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password" required>
+      </div>
+
+      <div class="A">
+        <button type="submit" onclick="registerCustomer(event)">Register as a Customer</button>
+        <button type="submit" onclick="registerEmployee(event)">Register as an Employee</button>
+      </div>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="login page1.html">Login here</a>
+    </div>
+  </div>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function validateLogin(event) {
+      event.preventDefault(); // stop form submission
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      const correctEmail = "universityofruhuna@gmail.com";
+      const correctPassword = "123456789";
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+
+      if (email === correctEmail && password === correctPassword) {
+        alert("Registration Successful!");
+        return true; // allow redirect functions to run
+      } else {
+        alert("Invalid email or password.");
+        return false;
+      }
+    }
+
+    function registerCustomer(event) {
+      if (validateLogin(event)) {
+        window.location.href = "page1.re.html";
+      }
+    }
+
+    function registerEmployee(event) {
+      if (validateLogin(event)) {
+        window.location.href = "employee1.html"; // change to your employee page
+      }
+    }
+  </script>
+</body>
+</html>

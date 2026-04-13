@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Profile - HANDY LANKA</title>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #f5b400; --secondary: #eb9f08; --dark: #111827; --accent: #059669; --bg: #f8fafc; --reject-color: #dc2626; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: var(--dark); }
+        .profile-container { width: 90%; max-width: 500px; background: white; border-radius: 35px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); overflow: hidden; position: relative; animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .header-visual { height: 120px; background: linear-gradient(135deg, var(--primary), var(--secondary)); position: relative; }
+        .profile-image-wrapper { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); }
+        .profile-image-wrapper img { width: 130px; height: 130px; border-radius: 50%; border: 6px solid white; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: #eee; }
+        .status-badge { position: absolute; bottom: 10px; right: 10px; background: var(--accent); width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; }
+        .profile-content { padding: 80px 30px 40px; text-align: center; }
+        .expert-name { font-size: 26px; font-weight: 800; margin: 0; color: var(--dark); }
+        .expert-title { color: var(--secondary); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+        .rating-box { display: inline-flex; align-items: center; gap: 5px; background: #fffbeb; padding: 5px 15px; border-radius: 20px; margin-top: 15px; color: #b45309; font-weight: 700; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 35px; text-align: left; }
+        .info-item { background: #f1f5f9; padding: 15px; border-radius: 20px; }
+        .info-item span { display: block; font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 4px; }
+        .info-item b { font-size: 14px; color: var(--dark); }
+        .full-width { grid-column: span 2; }
+        .action-btns { margin-top: 35px; display: flex; flex-direction: column; gap: 12px; }
+        .btn { padding: 16px; border-radius: 18px; font-weight: 800; text-decoration: none; cursor: pointer; border: none; font-size: 15px; }
+        .btn-book { background: var(--dark); color: white; }
+        .btn-back { background: #7b99c1; color: #475569; }
+        #loading-overlay { position: fixed; inset: 0; background: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .order-btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-sm { flex: 1; padding: 10px; border-radius: 12px; font-size: 12px; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; }
+        .btn-confirm { background: #059669; color: white; }
+        .btn-reject { background: #64748b; color: white; }
+        .btn-reject:hover { background: var(--reject-color); }
+    </style>
+</head>
+<body>
+
+<div id="loading-overlay">
+    <div class="spinner"></div>
+    <p style="margin-top:15px; font-weight:600; color:#64748b;">Loading Profile...</p>
+</div>
+
+<div class="profile-container" id="profile-card" style="display:none;">
+    <div class="header-visual">
+        <div class="profile-image-wrapper">
+            <img id="emp-photo" src="" alt="Expert">
+            <div class="status-badge"></div>
+        </div>
+    </div>
+    <div class="profile-content">
+        <h1 class="expert-name" id="emp-name">Expert Name</h1>
+        <div class="expert-title" id="emp-sub-service">Specialist</div>
+        <div class="rating-box"><span>★</span> <span id="emp-rating">0.0</span> <span>Rating</span></div>
+        <div class="info-grid">
+            <div class="info-item"><span>EXPERIENCE</span><b id="emp-exp">N/A</b></div>
+            <div class="info-item"><span>HOURLY RATE</span><b id="emp-rate" style="color: var(--accent);">Rs. 0.00</b></div>
+            <div class="info-item full-width"><span>MAIN SERVICE</span><b id="emp-service">General Services</b></div>
+            <div class="info-item full-width"><span>LOCATION</span><b id="emp-location">Island Wide</b></div>
+            <div class="info-item full-width"><span>SKILLS</span><b id="emp-skill">Verified Professional</b></div>
+        </div>
+
+        <div style="margin-top: 40px; border-top: 2px solid #f1f5f9; padding-top: 20px;">
+            <h2 style="font-size: 18px; color: var(--dark); font-weight: 800; margin-bottom: 20px;">New Job Appointments</h2>
+            <div id="appointments-list" style="display: flex; flex-direction: column; gap: 15px; text-align: left;"></div>
+        </div>
+
+        <div class="action-btns">
+            <button class="btn btn-back" onclick="window.location='login page1.html'">Go Back</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
+        authDomain: "handylanka-6f7b3.firebaseapp.com",
+        databaseURL: "https://handylanka-6f7b3-default-rtdb.firebaseio.com",
+        projectId: "handylanka-6f7b3",
+        storageBucket: "handylanka-6f7b3.firebasestorage.app",
+        messagingSenderId: "932726552349",
+        appId: "1:932726552349:web:e7a51b17fd381b168d93f4"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const loggedInEmail = localStorage.getItem("userEmail");
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyr_I_l7-mrJxZ9FCaVR50oUvSq4UVVa9Q_fmuP2zCkZ1RwGFHduCkukuKDqPT-p8hJ/exec";
+
+    if (loggedInEmail) {
+        database.ref('employees').orderByChild('email').equalTo(loggedInEmail).once('value').then((snapshot) => {
+            if (snapshot.exists()) {
+                const key = Object.keys(snapshot.val())[0];
+                const data = snapshot.val()[key];
+                const expertName = data.name;
+                document.getElementById('emp-name').innerText = expertName;
+                document.getElementById('emp-sub-service').innerText = data.sub_service || 'Expert';
+                document.getElementById('emp-photo').src = data.photo || 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
+                document.getElementById('emp-rating').innerText = data.rating || 'New';
+                document.getElementById('emp-exp').innerText = data.exp || 'Not Set';
+                document.getElementById('emp-rate').innerText = data.hourly_rate || 'Negotiable';
+                document.getElementById('emp-service').innerText = data.service || 'General';
+                document.getElementById('emp-location').innerText = data.address || 'Sri Lanka';
+                document.getElementById('emp-skill').innerText = data.skill || 'Expert Level';
+                fetchAppointments(expertName);
+                document.getElementById('loading-overlay').style.display = 'none';
+                document.getElementById('profile-card').style.display = 'block';
+            }
+        });
+    }
+
+    function fetchAppointments(name) {
+        const container = document.getElementById('appointments-list');
+        database.ref('bookings').orderByChild('Professional_Name').equalTo(name.trim()).on('value', (snapshot) => {
+            container.innerHTML = "";
+            if (snapshot.exists()) {
+                snapshot.forEach((childSnapshot) => {
+                    const booking = childSnapshot.val();
+                    const bookingId = childSnapshot.key;
+                    const currentStatus = (booking.Status || "").toString().toLowerCase().trim();
+                    const confirmStatus = (booking.Confirm || "").toString().toLowerCase().trim();
+                    
+                    const isRejected = currentStatus === "rejected";
+                    const isCancelled = currentStatus === "cancelled";
+                    const isConfirmed = confirmStatus === "confirmed";
+                    
+                    let borderColor = "#f5b400"; 
+                    let badgeHTML = '<span style="background: #f5b400; color: white; padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 800;">PENDING</span>';
+                    
+                    if(isRejected) {
+                        borderColor = "#475569";
+                        badgeHTML = '<span style="background: #475569; color: white; padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 800;">REJECTED</span>';
+                    } else if(isCancelled) {
+                        borderColor = "#ef4444";
+                        badgeHTML = '<span style="background: #ef4444; color: white; padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 800;">CANCELLED</span>';
+                    } else if(isConfirmed) {
+                        borderColor = "#059669";
+                        badgeHTML = '<span style="background: #059669; color: white; padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 800;">CONFIRMED</span>';
+                    }
+
+                    const customerDetails = isConfirmed ? `
+                        <div style="margin-top: 15px; padding: 12px; background: #f0fdf4; border-radius: 12px; border: 1px dashed #059669; font-size: 13px;">
+                            <h5 style="margin: 0 0 8px 0; color: #059669; font-size: 14px;">📞 Customer Contact Details</h5>
+                            <div style="margin-bottom:4px;"><b>Phone:</b> ${booking.Customer_Phone || 'N/A'}</div>
+                            <div style="margin-bottom:4px;"><b>Email:</b> ${booking.Customer_Email || 'N/A'}</div>
+                            <div style="margin-bottom:4px;"><b>Address:</b> ${booking.Customer_Address || 'N/A'}</div>
+                            <div style="margin-bottom:4px;"><b>Location:</b> ${booking.Customer_Location || 'N/A'}</div>
+                        </div>
+                    ` : '';
+
+                    container.innerHTML += `
+                        <div style="background: white; padding: 18px; border-radius: 20px; border-left: 6px solid ${borderColor}; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 10px; opacity: ${isRejected || isCancelled ? '0.8' : '1'};">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="margin: 0; color: #111827;">Customer: ${booking.Customer_Name}</h4>
+                                ${badgeHTML}
+                            </div>
+                            <p style="margin: 8px 0; font-size: 14px; color: #4b5563;"><b>Work:</b> ${booking.Work_Description}</p>
+                            <div style="display: flex; gap: 15px; margin-top: 10px; font-size: 12px; font-weight: 700; color: #64748b;">
+                                <span>📅 ${booking.Date}</span> <span>⏰ ${booking.Time}</span>
+                            </div>
+
+                            ${customerDetails}
+
+                            ${(!isRejected && !isCancelled && !isConfirmed) ? `
+                                <div class="order-btn-group">
+                                    <button class="btn-sm btn-confirm" onclick="updateStatus('${bookingId}', 'confirmed')">Confirm to view details</button>
+                                    <button class="btn-sm btn-reject" onclick="updateStatus('${bookingId}', 'rejected')">Reject</button>
+                                </div>
+                            ` : (isRejected ? `<p style="margin: 8px 0 0; font-size: 12px; color: #475569;"><b>Reason:</b> ${booking.Cancellation_Reason || 'Job Rejected'}</p>` : '')}
+                        </div>`;
+                });
+            } else {
+                container.innerHTML = `<p style="text-align: center; color: #9ca3af; padding: 20px;">No appointments found.</p>`;
+            }
+        });
+    }
+
+    function updateStatus(id, action) {
+        const reason = action === 'rejected' ? prompt("Reason for rejection:") : "";
+        if (action === 'rejected' && reason === null) return;
+
+        const updates = {};
+        if (action === 'confirmed') {
+            updates['Confirm'] = 'Confirmed';
+            updates['Status'] = 'Active';
+        } else {
+            updates['Confirm'] = 'Rejected';
+            updates['Status'] = 'Rejected';
+            updates['Cancellation_Reason'] = reason || "Rejected by Professional";
+        }
+
+        database.ref('bookings/' + id).update(updates).then(() => {
+            database.ref('bookings/' + id).once('value').then(snap => {
+                const b = snap.val();
+                const params = new URLSearchParams();
+                params.append("mode", action);
+                params.append("reference", loggedInEmail);
+                params.append("customer", b.Customer_Name);
+                params.append("phone", b.Customer_Phone);
+                params.append("reason", reason);
+
+                fetch(SCRIPT_URL, { 
+                    method: 'POST', 
+                    body: params,
+                    mode: 'no-cors'
+                });
+                
+                alert(action === 'confirmed' ? "Job Confirmed! Details are now visible." : "Job Rejected!");
+            });
+        });
+    }
+
+    function cleanupFirebaseOrders() {
+        const oneMonthAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+        database.ref('bookings').once('value', (snapshot) => {
+            if (snapshot.exists()) {
+                snapshot.forEach((child) => {
+                    const booking = child.val();
+                    const orderDate = new Date(booking.Date).getTime();
+                    if (orderDate < oneMonthAgo) {
+                        database.ref('bookings/' + child.key).remove();
+                    }
+                });
+            }
+        });
+    }
+    cleanupFirebaseOrders();
+</script>
+</body>
+</html>

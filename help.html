@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Help & Support - HANDY LANKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --yellow: #f9c846;
+      --dark-yellow: #eab308;
+      --black: #1f2937;
+      --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+      --card-bg: #ffffff;
+      --text: #374151;
+      --primary: #d97706;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 10px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    .n_logo {
+      height: 60px;
+      width: auto;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .n_logo:hover { transform: scale(1.05); }
+
+    nav a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 14px;
+      margin-left: 20px;
+      transition: 0.3s;
+    }
+    nav a:hover { color: var(--primary); }
+
+    /* ---------- MAIN CONTENT ---------- */
+    .help-wrapper {
+      max-width: 900px;
+      width: 90%;
+      margin: 60px auto;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .section-title h1 span { color: var(--primary); }
+
+    /* Language Switcher */
+    .lang-toggle {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .lang-btn {
+      background: #e5e7eb;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-left: 5px;
+      transition: 0.3s;
+    }
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ---------- FAQ ACCORDION ---------- */
+    .faq-container {
+      background: var(--card-bg);
+      border-radius: 25px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 40px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--black);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .faq-question:hover { color: var(--primary); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding: 0 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ---------- CONTACT CARDS ---------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: #111827; 
+      color: #fff;
+      padding: 30px;
+      border-radius: 25px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .contact-card:hover { transform: translateY(-10px); }
+
+    .contact-card .icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .contact-card h3 {
+      color: var(--yellow);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .contact-card p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 40px;
+      background: #fff;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-top: 1px solid #eee;
+    }
+
+    @media (max-width: 600px) {
+      .section-title h1 { font-size: 1.8rem; }
+      header { padding: 10px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="n logo.png" class="n_logo" onclick="window.location.href='index.html'">
+    <nav>
+      <a href="page1.html">Home</a>
+      <a href="feedback.html">Feedback</a>
+    </nav>
+  </header>
+
+  <main class="help-wrapper">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="changeLang('en')">English</button>
+      <button class="lang-btn" id="btn-si" onclick="changeLang('si')">සිංහල</button>
+    </div>
+
+    <div class="section-title">
+      <h1 id="main-title">Help & <span>Support</span></h1>
+      <p id="sub-title">Find answers to common questions or get in touch with us.</p>
+    </div>
+
+    <div class="faq-container" id="faq-list">
+      </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="icon">📞</span>
+        <h3 id="c1-title">Hotline</h3>
+        <p>0783 523723</p>
+        <p id="c1-desc">Available 24/7</p>
+      </div>
+      <div class="contact-card">
+        <span class="icon">✉️</span>
+        <h3 id="c2-title">Email Us</h3>
+        <p>support@handylanka.com</p>
+        <p id="c2-desc">Response within 2 hours</p>
+      </div>
+      <div class="contact-card">
+        <span class="icon">💬</span>
+        <h3 id="c3-title">Live Chat</h3>
+        <p id="c3-desc1">Chat with our team</p>
+        <p id="c3-desc2">Directly on website</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> HANDY LANKA. <span id="footer-text">All rights reserved.</span>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const translations = {
+      en: {
+        title: "Help & <span>Support</span>",
+        sub: "Find answers to common questions or get in touch with us.",
+        contact: {
+          h1: "Hotline", h1d: "Available 24/7",
+          h2: "Email Us", h2d: "Response within 2 hours",
+          h3: "Live Chat", h3d1: "Chat with our team", h3d2: "Directly on website"
+        },
+        footer: "All rights reserved.",
+        faqs: [
+          { q: "How do I book a service?", a: "Simply search for the service you need on our home page, click on the card, and follow the instructions to book your professional." },
+          { q: "Can I reschedule or cancel a booking?", a: "Yes! You can reschedule or cancel your appointment up to 24 hours before the scheduled time through our App or our support hotline." },
+          { q: "Are the professionals verified?", a: "Absolutely. Every Handy Lanka expert goes through a strict background check and skill verification process to ensure your safety." },
+          { q: "What are the payment methods?", a: "We accept Cash after service, Credit/Debit Cards, and Mobile Wallet payments for your convenience." }
+        ]
+      },
+      si: {
+        title: "උදවු සහ <span>සහයෝගය</span>",
+        sub: "පොදු ප්‍රශ්නවලට පිළිතුරු සොයා ගන්න හෝ අප හා සම්බන්ධ වන්න.",
+        contact: {
+          h1: "හදිසි ඇමතුම්", h1d: "පැය 24 පුරාම විවෘතයි",
+          h2: "ඊමේල් කරන්න", h2d: "පැය 2ක් ඇතුළත පිළිතුරු",
+          h3: "සජීවී කතාබහ", h3d1: "අපගේ කණ්ඩායම සමඟ කතා කරන්න", h3d2: "වෙබ් අඩවිය හරහා සෘජුවම"
+        },
+        footer: "සියලුම හිමිකම් ඇවිරිණි.",
+        faqs: [
+          { q: "සේවාවක් වෙන්කර ගන්නේ කෙසේද?", a: "අපගේ මුල් පිටුවේ ඔබට අවශ්‍ය සේවාව සොයන්න, එහි ඇති කාඩ්පත මත ක්ලික් කර, වෘත්තීය ශිල්පියෙකු වෙන්කර ගැනීමට උපදෙස් අනුගමනය කරන්න." },
+          { q: "වෙන්කිරීමක් නැවත වෙනස් කිරීමට හෝ අවලංගු කළ හැකිද?", a: "ඔව්! ඔබට නියමිත වේලාවට පැය 24කට පෙර අපගේ App එක මගින් හෝ සහාය ඇමතුම් අංකය හරහා ඔබගේ වෙන්කිරීම වෙනස් කිරීමට හෝ අවලංගු කිරීමට හැකිය." },
+          { q: "වෘත්තීය ශිල්පීන් විශ්වාසදායකද?", a: "අනිවාර්යයෙන්ම. සෑම Handy Lanka ශිල්පියෙකුම ඔබගේ ආරක්ෂාව වෙනුවෙන් දැඩි පසුබිම් පරීක්ෂාවකට සහ නිපුණතා සත්‍යාපනයකට භාජනය වේ." },
+          { q: "ගෙවීම් ක්‍රම මොනවාද?", a: "ඔබේ පහසුව සඳහා සේවාවෙන් පසු මුදල් ගෙවීම (Cash), ක්‍රෙඩිට්/ඩෙබිට් කාඩ්පත් සහ මොබයිල් පසුම්බි (Mobile Wallets) ගෙවීම් අපි පිළිගනිමු." }
+        ]
+      }
+    };
+
+    function changeLang(lang) {
+      document.getElementById('main-title').innerHTML = translations[lang].title;
+      document.getElementById('sub-title').textContent = translations[lang].sub;
+      document.getElementById('footer-text').textContent = translations[lang].footer;
+      
+      document.getElementById('c1-title').textContent = translations[lang].contact.h1;
+      document.getElementById('c1-desc').textContent = translations[lang].contact.h1d;
+      document.getElementById('c2-title').textContent = translations[lang].contact.h2;
+      document.getElementById('c2-desc').textContent = translations[lang].contact.h2d;
+      document.getElementById('c3-title').textContent = translations[lang].contact.h3;
+      document.getElementById('c3-desc1').textContent = translations[lang].contact.h3d1;
+      document.getElementById('c3-desc2').textContent = translations[lang].contact.h3d2;
+
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-si').classList.toggle('active', lang === 'si');
+
+      renderFAQs(lang);
+    }
+
+    function renderFAQs(lang) {
+      const container = document.getElementById('faq-list');
+      container.innerHTML = '';
+      
+      translations[lang].faqs.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'faq-item';
+        div.innerHTML = `
+          <button class="faq-question">${item.q} <span>+</span></button>
+          <div class="faq-answer">
+            <p style="padding-bottom: 20px;">${item.a}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      attachAccordion();
+    }
+
+    function attachAccordion() {
+      const acc = document.getElementsByClassName("faq-question");
+      for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          const panel = this.nextElementSibling;
+          const span = this.querySelector("span");
+          
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            span.textContent = "+";
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            span.textContent = "-";
+          }
+        });
+      }
+    }
+
+    window.onload = () => changeLang('en');
+  </script>
+</body>
+</html>

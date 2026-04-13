@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book a Service - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg: #fff8dc;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #dfb920;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: var(--card);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #b45309;
+    }
+
+    .success-message {
+      text-align: center;
+      color: green;
+      font-weight: 600;
+      margin-top: 20px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+    .logo{
+            font-size: 2em;
+            color: rgb(0, 0, 0);
+            user-select: none;
+        
+        }
+        .logo .lanka {
+            font-size: 0.9em;
+            color: rgb(160, 155, 7); /* change to any color you like */
+            }
+  </style>
+</head>
+<body>
+  <header>
+   <header>
+   <h2 class="logo">
+    HANDY
+    <span class="lanka">LANKA</span>
+    </h2>
+    <p>Reliable solutions for your household needs</p>
+  </header>
+
+  <div class="form-container">
+    <h2>Book a Service</h2>
+    <form id="bookingForm" onsubmit="return submitBooking()">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="service">Select Service</label>
+        <select id="service" name="service" required>
+          <option value="">-- Choose a Service --</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="electrical">Electrical</option>
+          <option value="cleaning">Cleaning</option>
+          <option value="carpentry">Carpentry</option>
+          <option value="gardening">Gardening</option>
+          <option value="transport">Transport</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Additional Details</label>
+        <textarea id="message" name="message" rows="4" placeholder="Describe your request"></textarea>
+      </div>
+
+      <button type="submit" onclick="openNew()">Submit Booking</button>
+    </form>
+    <script>
+        function openNew(){
+             window.location.href="thank.html";}
+        
+
+    </script>
+    <div class="success-message" id="successMessage">
+      ✅ Thank you! Your booking request has been submitted successfully.
+    </div>
+  </div>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function submitBooking() {
+      document.getElementById("successMessage").style.display = "block";
+      document.getElementById("bookingForm").reset();
+      return false; // Prevent actual form submission
+    }
+  </script>
+</body>
+</html>

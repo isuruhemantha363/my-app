@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Confirmed</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#dfb920;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.card{
+    background:#fff;
+    padding:40px;
+    border-radius:16px;
+    width:400px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+.check{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#22c55e;
+    color:#fff;
+    font-size:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 20px;
+}
+
+h2{
+    margin-bottom:10px;
+}
+
+p{
+    color:#555;
+}
+
+.details{
+    margin:20px 0;
+    background:#f9fafb;
+    padding:15px;
+    border-radius:10px;
+}
+
+.btn{
+    display:block;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.home{
+    background:#f5b400;
+}
+
+.chat{
+    background:#000;
+    color:#fff;
+}
+.btn-row {
+  display: flex;          /* puts children side by side */
+  gap: 10px;              /* space between buttons */
+  justify-content: center;/* optional: center them */
+}
+.btn1{
+   margin-left: 100px;
+   display:block;
+    margin-top:20px;
+    padding:10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    background-color: rgb(190, 214, 235);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="check">✓</div>
+    <h2>Booking Confirmed!</h2>
+    <p>Your plumber has been successfully booked.</p>
+
+    <div class="details">
+        <strong>Plumber:</strong>
+        <span id="plumberName"></span><br><br>
+        <strong>Status:</strong> Confirmed<br>
+        <strong>Payment:</strong> Pay after service
+    </div>
+
+   <div class="btn-row">
+  <button class="btn home" onclick="goHome()">Back to Home</button>
+  <button class="btn chat" onclick="chat()">Chat with HANdy</button>
+</div>
+ <button class="btn1" onclick="chat1()">Chat with Plumber</button>
+</div>
+<script>
+    function chat(){
+        window.open("chat.html")
+    }
+    function chat1() {
+  // Replace with your business number
+  const phoneNumber = "94771234567";  
+  const message = "Hello Handy Lanka, I need help with plumbing."; 
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  
+  // Open WhatsApp chat in new tab
+  window.open(url, "_blank");
+}
+
+</script>
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("plumberName").innerText =
+    params.get("plumber") || "Selected Plumber";
+
+function goHome(){
+    window.location.href = "home.html";
+}
+</script>
+
+</body>
+</html>

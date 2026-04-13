@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to HANDY LANKA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d97706;
+            --secondary: #111827;
+            --accent: #16a34a;
+            --bg-gradient: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1100px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        /* Language Switcher Button */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .lang-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Left Side - Logo Area */
+        .left-sidebar {
+            flex: 1;
+            background: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            color: white;
+            text-align: center;
+        }
+
+        .company-logo {
+            width: 160px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .left-sidebar h2 { font-weight: 800; font-size: 1.8rem; margin-bottom: 10px; color: var(--primary); }
+        .left-sidebar p { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; }
+
+        /* Right Side - Content Area */
+        .content-area {
+            flex: 2;
+            padding: 50px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .welcome-text h1 { font-size: 2.2rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px; }
+        .welcome-text h1 span { color: var(--primary); }
+        .welcome-text p { color: #6b7280; margin-bottom: 30px; font-weight: 600; }
+
+        .section-box {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .section-box h3 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-box p, .section-box li {
+            font-size: 0.9rem;
+            color: #4b5563;
+            line-height: 1.6;
+            list-style: none;
+            margin-bottom: 5px;
+        }
+
+        .section-box li::before { content: "✔"; color: var(--accent); font-weight: bold; margin-right: 10px; }
+
+        /* Bank Section */
+        .bank-card {
+            background: #ecfdf5;
+            border: 2px solid var(--accent);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .bank-card h4 { color: var(--accent); margin-bottom: 10px; font-weight: 800; }
+        .bank-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; border-bottom: 1px solid #d1fae5; padding-bottom: 3px; }
+        
+        .commission-note {
+            background: #fff7ed;
+            border: 1px dashed var(--primary);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #9a3412;
+            font-weight: 600;
+        }
+
+        .action-btns {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-exit {
+            background: #ef4444;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+            flex: 1;
+        }
+
+        .btn-exit:hover { background: #dc2626; transform: translateY(-2px); }
+
+        /* Hidden class for toggling */
+        .hidden { display: none; }
+
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; }
+            .content-area { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn" onclick="toggleLanguage()" id="toggleBtn">Switch to English</button>
+    </div>
+
+    <!-- Left Sidebar -->
+    <div class="left-sidebar" style="background-color: #595a5c;">
+        <img src="n logo.png" alt="Logo" class="company-logo">
+        <h2>HANDY LANKA</h2>
+        <p id="left-desc-si">ශ්‍රී ලංකාවේ විශ්වාසවන්තම නිවාස සේවා ජාලය. ඔබගේ වෘත්තීය සහකරු.</p>
+        <p id="left-desc-en" class="hidden">Reliable Home Services Across Sri Lanka. Your Professional Partner.</p>
+    </div>
+
+    <!-- Right Content -->
+    <div class="content-area">
+        
+        <!-- Sinhala Content -->
+        <div id="content-si">
+            <div class="welcome-text">
+                <h1>ස්තුතියි <span>සහකරු!</span></h1>
+                <p>ඔබ සාර්ථකව ලියාපදිංචි වී අවසන්.</p>
+            </div>
+
+            <div class="section-box">
+                <h3>🏢 අප ගැන</h3>
+                <p>Handy Lanka යනු දිවයින පුරා සිටින දක්ෂ වෘත්තිකයන් සහ පාරිභෝගිකයින් එකම වහලක් යටට ගෙන එන ප්‍රමුඛතම සේවා ජාලයයි. අපගේ අරමුණ උසස් සහ විශ්වාසවන්ත සේවාවක් සැපයීමයි.</p>
+            </div>
+
+            <div class="section-box">
+                <h3>🎯 ඔබෙන් අපේක්ෂා කරන දේ</h3>
+                <ul>
+                    <li>පාරිභෝගිකයා සමඟ ඉතා සුහදව සහ ගෞරවාන්විතව කටයුතු කිරීම.</li>
+                    <li>නියමිත වේලාවට සේවය ලබාදීමට පැමිණීම.</li>
+                    <li>අවංකභාවය සහ උසස් නිමාවක් ලබාදීම.</li>
+                </ul>
+            </div>
+
+            <div class="section-box">
+                <h3>🤝 පාරිභෝගිකයාට ලැබෙන සේවාව</h3>
+                <ul>
+                    <li>විනිවිද පෙනෙන සාධාරණ මිල ගණන්.</li>
+                    <li>වෘත්තීය මට්ටමේ පළපුරුදු සේවකයින්ගේ සහය.</li>
+                    <li>ක්ෂණික සහ සුරක්ෂිත සේවා පළපුරුද්දක්.</li>
+                </ul>
+            </div>
+
+            <div class="bank-card">
+                <h4>🏦 බැංකු ගිණුම් තොරතුරු</h4>
+                <div class="bank-row"><span>බැංකුව:</span> <strong>සම්පත් බැංකුව (Sampath Bank)</strong></div>
+                <div class="bank-row"><span>ශාඛාව:</span> <strong>[ඔබේ ශාඛාව]</strong></div>
+                <div class="bank-row"><span>ගිණුම් අංකය:</span> <strong>[ගිණුම් අංකය]</strong></div>
+                <div class="bank-row"><span>ගිණුමේ නම:</span> <strong>HANDY LANKA PVT LTD</strong></div>
+                
+                <div class="commission-note">
+                    ⚠️ වැදගත්: ඔබ පාරිභෝගිකයාගෙන් අය කරන මුළු මුදලෙන් 25% ක මුදලක් ආයතනය වෙත තැන්පත් කළ යුතුය. එය පැහැර හැරියහොත් සබඳතාවය අත්හිටුවනු ලැබේ.
+                </div>
+            </div>
+        </div>
+
+        <!-- English Content -->
+        <div id="content-en" class="hidden">
+            <div class="welcome-text">
+                <h1>Thank You <span>Partner!</span></h1>
+                <p>Your registration is successful.</p>
+            </div>
+
+            <div class="section-box">
+                <h3>🏢 About Our Company</h3>
+                <p>Handy Lanka is a leading service network connecting skilled professionals with customers across the country. Our goal is to provide high-quality and reliable service.</p>
+            </div>
+
+            <div class="section-box">
+                <h3>🎯 What We Expect From You</h3>
+                <ul>
+                    <li>Maintain a friendly and respectful attitude with customers.</li>
+                    <li>Ensure punctuality for all service appointments.</li>
+                    <li>Provide honesty and high-quality workmanship.</li>
+                </ul>
+            </div>
+
+            <div class="section-box">
+                <h3>🤝 Service to the Customer</h3>
+                <ul>
+                    <li>Transparent and fair pricing for every job.</li>
+                    <li>Assistance from professional and experienced workers.</li>
+                    <li>A fast and secure service experience.</li>
+                </ul>
+            </div>
+
+            <div class="bank-card">
+                <h4>🏦 Company Bank Details</h4>
+                <div class="bank-row"><span>Bank:</span> <strong>Sampath Bank / BOC</strong></div>
+                <div class="bank-row"><span>Branch:</span> <strong>[Your Branch]</strong></div>
+                <div class="bank-row"><span>Account No:</span> <strong>[Your Account No]</strong></div>
+                <div class="bank-row"><span>Acc Name:</span> <strong>HANDY LANKA PVT LTD</strong></div>
+                
+                <div class="commission-note">
+                    ⚠️ IMPORTANT: You must deposit 25% of your total earnings per customer into the company account. Failure to do so will result in suspension.
+                </div>
+            </div>
+        </div>
+
+        <div class="action-btns">
+            <button class="btn-exit" onclick="window.location.href='employee1.html'" style="background-color:black ;">Back</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let isSinhala = true;
+
+    function toggleLanguage() {
+        const contentSi = document.getElementById('content-si');
+        const contentEn = document.getElementById('content-en');
+        const descSi = document.getElementById('left-desc-si');
+        const descEn = document.getElementById('left-desc-en');
+        const btn = document.getElementById('toggleBtn');
+
+        if (isSinhala) {
+            contentSi.classList.add('hidden');
+            contentEn.classList.remove('hidden');
+            descSi.classList.add('hidden');
+            descEn.classList.remove('hidden');
+            btn.innerText = "සිංහලට මාරු වන්න";
+            isSinhala = false;
+        } else {
+            contentSi.classList.remove('hidden');
+            contentEn.classList.add('hidden');
+            descSi.classList.remove('hidden');
+            descEn.classList.add('hidden');
+            btn.innerText = "Switch to English";
+            isSinhala = true;
+        }
+    }
+
+    function confirmExit() {
+        const msg = isSinhala ? "ඔබට පිටවීමට අවශ්‍ය බව සහතිකද?" : "Are you sure you want to exit?";
+        if(confirm(msg)) {
+            window.location.href = "https://www.google.com";
+        }
+    }
+</script>
+
+</body>
+</html>

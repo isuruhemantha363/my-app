@@ -1,0 +1,496 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee Register - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg: #dfb920;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb; /* blue accent for employees */
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image: url('employee-bg.jpeg'); /* optional background */
+      background-size: cover;
+      background-position: center;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+    }
+
+    .register-container {
+      max-width: 500px;
+      margin: 20px auto;
+      background: var(--card);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.25);
+    }
+
+    /* Skill bar styling */
+    .skill-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .skill-bar input[type=range] {
+      flex: 1;
+    }
+    .skill-value {
+      min-width: 40px;
+      text-align: center;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #1e40af;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+    .login-link a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .logo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0b0b0b; /* orange for HANDY */
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.logo .lanka {
+  color: rgb(156, 151, 9); /* dark gray or any color you want */
+}
+  </style>
+</head>
+<body>
+  <header>
+     <h1 class="logo">
+      HANDY <span class="lanka">LANKA</span>
+    </h1>
+    <p>Join our team and provide reliable services</p>
+  </header>
+
+  <div class="register-container">
+    <h2>Employee Registration</h2>
+    <form id="employeeForm" onsubmit="return validateEmployee()">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="service">Service Category</label>
+        <select id="service" name="service" required>
+          <option value="">Select your service</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="electrical">Electrical Repairs</option>
+          <option value="gardening">Gardening</option>
+          <option value="handyman">Handyman</option>
+          <option value="moving">Moving Assistance</option>
+        </select>
+      </div>
+
+      <!-- Skill bar -->
+      <div class="form-group">
+        <label for="skill">Skill Level</label>
+        <div class="skill-bar">
+          <input type="range" id="skill" name="skill" min="0" max="100" value="50" oninput="document.getElementById('skillValue').textContent=this.value+'%'">
+          <span id="skillValue" class="skill-value">50%</span>
+        </div>
+      </div>
+
+      <!-- Certificate upload -->
+      <div class="form-group">
+        <label for="certificate">Upload Certificate</label>
+        <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" required>
+      </div>
+
+      <!-- Experience -->
+      <div class="form-group">
+        <label for="experience">Previous Experience</label>
+        <textarea id="experience" name="experience" rows="4" placeholder="Describe your past work experience" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter a password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password" required>
+      </div>
+
+      <button type="submit">Register as Employee</button>
+    </form>
+
+    <div class="login-link">
+      Already registered.
+    </div>
+  </div>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function validateEmployee() {
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+
+      // For now, just show success. Later you can connect to backend.
+      alert("Employee Registration Successful!");
+      window.location.href = "suc.html"; // redirect after success
+      return false; // prevent default form submission
+    }
+  </script>
+</body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee Register - HANDY LANKA</title>
+  <style>
+    :root {
+      --bg: #dfb920;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb; /* blue accent for employees */
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image: url('employee-bg.jpeg'); /* optional background */
+      background-size: cover;
+      background-position: center;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+    }
+
+    .register-container {
+      max-width: 500px;
+      margin: 20px auto;
+      background: var(--card);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.25);
+    }
+
+    /* Skill bar styling */
+    .skill-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .skill-bar input[type=range] {
+      flex: 1;
+    }
+    .skill-value {
+      min-width: 40px;
+      text-align: center;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #1e40af;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+    .login-link a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .logo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0b0b0b; /* orange for HANDY */
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.logo .lanka {
+  color: rgb(156, 151, 9); /* dark gray or any color you want */
+}
+  </style>
+</head>
+<body>
+  <header>
+     <h1 class="logo">
+      HANDY <span class="lanka">LANKA</span>
+    </h1>
+    <p>Join our team and provide reliable services</p>
+  </header>
+
+  <div class="register-container">
+    <h2>Employee Registration</h2>
+    <form id="employeeForm" onsubmit="return validateEmployee()">
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="service">Service Category</label>
+        <select id="service" name="service" required>
+          <option value="">Select your service</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="electrical">Electrical Repairs</option>
+          <option value="gardening">Gardening</option>
+          <option value="handyman">Handyman</option>
+          <option value="moving">Moving Assistance</option>
+        </select>
+      </div>
+
+      <!-- Skill bar -->
+      <div class="form-group">
+        <label for="skill">Skill Level</label>
+        <div class="skill-bar">
+          <input type="range" id="skill" name="skill" min="0" max="100" value="50" oninput="document.getElementById('skillValue').textContent=this.value+'%'">
+          <span id="skillValue" class="skill-value">50%</span>
+        </div>
+      </div>
+
+      <!-- Certificate upload -->
+      <div class="form-group">
+        <label for="certificate">Upload Certificate</label>
+        <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" required>
+      </div>
+
+      <!-- Experience -->
+      <div class="form-group">
+        <label for="experience">Previous Experience</label>
+        <textarea id="experience" name="experience" rows="4" placeholder="Describe your past work experience" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter a password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password" required>
+      </div>
+
+      <button type="submit">Register as Employee</button>
+    </form>
+
+    <div class="login-link">
+      Already registered.
+    </div>
+  </div>
+
+  <footer>
+    © <span id="year"></span> HANDY LANKA. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function validateEmployee() {
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+
+      // For now, just show success. Later you can connect to backend.
+      alert("Employee Registration Successful!");
+      window.location.href = "suc.html"; // redirect after success
+      return false; // prevent default form submission
+    }
+  </script>
+</body>
+>>>>>>> 486df7831a70696e74ca7c8fca6eee24c641f033
+</html>

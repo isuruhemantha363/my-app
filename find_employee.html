@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile - Handy Lanka</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        input { width: 90%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; outline: none; }
+        button#findBtn { background-color: #27ae60; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
+        .back-btn { background-color: transparent; color: #7f8c8d; border: 1px solid #ccc; padding: 10px; border-radius: 10px; cursor: pointer; width: 100%; font-size: 14px; transition: 0.3s; text-decoration: none; display: block; box-sizing: border-box; }
+        .back-btn:hover { background-color: #eee; color: #333; }
+        #profileCard { display: none; margin-top: 30px; text-align: left; }
+        .profile-header { text-align: center; border-bottom: 2px solid #f1f1f1; padding-bottom: 20px; margin-bottom: 20px; }
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid #27ae60; margin-bottom: 10px; }
+        .emp-name { font-size: 22px; font-weight: bold; color: #2c3e50; margin: 0; }
+        .order-title { font-size: 18px; font-weight: bold; color: #2c3e50; margin: 20px 0 15px; display: flex; align-items: center; gap: 8px; }
+        .appointment-item { background: #fff; padding: 15px; border-radius: 12px; border-left: 5px solid #f5b400; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 12px; border: 1px solid #eee; position: relative; }
+        .status-cancelled { border-left-color: #e74c3c; background-color: #fff5f5; }
+        .order-info { font-size: 14px; margin: 5px 0; color: #555; }
+        .badge { font-size: 10px; padding: 3px 8px; border-radius: 5px; color: white; float: right; }
+        .cancel-order-btn { background-color: #ff4757; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; margin-top: 10px; transition: 0.3s; }
+        .cancel-order-btn:hover { background-color: #ff6b81; }
+        .error { color: #e74c3c; margin-top: 15px; display: none; font-weight: bold; }
+        #appointments-list { max-height: 300px; overflow-y: auto; padding-right: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Handy Lanka Profile Search</h3>
+    <input type="email" id="emailInput" placeholder="Enter employee email">
+    <button id="findBtn" onclick="getProfile()">View Professional Profile</button>
+    
+    <a href="owner.html" class="back-btn">⬅ Back to Dashboard</a>
+
+    <p id="err" class="error">User account not found!</p>
+
+    <div id="profileCard">
+        <div class="profile-header">
+            <img src="" id="pImg" class="profile-img">
+            <h1 id="pName" class="emp-name"></h1>
+            <p id="pService" style="color:#27ae60; font-weight:bold; margin:5px 0;"></p>
+        </div>
+
+        <div class="info-grid">
+            <p><b>📞 Phone:</b> <span id="pPhone"></span></p>
+            <p><b>⏳ Experience:</b> <span id="pExp"></span></p>
+            <p><b>🏆 Skill Level:</b> <span id="pSkill"></span>%</p>
+        </div>
+
+        <div class="order-title">📅 New Job Appointments</div>
+        <div id="appointments-list">
+            <p style="text-align: center; color: #999; font-size: 13px;">No bookings found.</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
+        authDomain: "handylanka-6f7b3.firebaseapp.com",
+        databaseURL: "https://handylanka-6f7b3-default-rtdb.firebaseio.com",
+        projectId: "handylanka-6f7b3",
+        storageBucket: "handylanka-6f7b3.firebasestorage.app",
+        messagingSenderId: "932726552349",
+        appId: "1:932726552349:web:e7a51b17fd381b168d93f4"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function getProfile() {
+        const email = document.getElementById('emailInput').value.trim().toLowerCase();
+        if(!email) return alert("Please enter an email!");
+
+        db.ref('employees').orderByChild('email').equalTo(email).once('value', snapshot => {
+            if (snapshot.exists()) {
+                const val = snapshot.val();
+                const key = Object.keys(val)[0];
+                const emp = val[key];
+                const empName = emp.name;
+
+                document.getElementById('pName').innerText = empName;
+                document.getElementById('pService').innerText = emp.service.toUpperCase();
+                document.getElementById('pPhone').innerText = emp.phone;
+                document.getElementById('pExp').innerText = emp.exp;
+                document.getElementById('pSkill').innerText = emp.skill;
+                document.getElementById('pImg').src = (emp.photo === "no-image" || !emp.photo) 
+                    ? "https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
+                    : emp.photo;
+
+                document.getElementById('profileCard').style.display = 'block';
+                document.getElementById('err').style.display = 'none';
+
+                // Sheet එකේ D column එක පරීක්ෂා කිරීමට සේවක email එක යවයි
+                sendToGoogleSheet(email, "Profile Accessed", "Login Success");
+
+                fetchOrders(empName);
+            } else {
+                document.getElementById('profileCard').style.display = 'none';
+                document.getElementById('err').style.display = 'block';
+            }
+        });
+    }
+
+    function fetchOrders(name) {
+        const listContainer = document.getElementById('appointments-list');
+        db.ref('bookings').orderByChild('Professional_Name').equalTo(name.trim()).on('value', snapshot => {
+            listContainer.innerHTML = "";
+            if (snapshot.exists()) {
+                snapshot.forEach(child => {
+                    const order = child.val();
+                    const orderId = child.key; // මෙය Booking ID එක ලෙස ක්‍රියා කරයි
+                    const status = (order.Status || "").toLowerCase();
+                    const isCancelled = status === "cancelled";
+
+                    const html = `
+                        <div class="appointment-item ${isCancelled ? 'status-cancelled' : ''}">
+                            ${isCancelled ? '<span class="badge" style="background:#e74c3c">CANCELLED</span>' : '<span class="badge" style="background:#f5b400">PENDING</span>'}
+                            <div style="font-weight:bold; color:#333;">👤 ${order.Customer_Name}</div>
+                            <div class="order-info">🛠️ <b>Job:</b> ${order.Work_Description || 'Not Specified'}</div>
+                            <div class="order-info">📅 ${order.Date} | ⏰ ${order.Time}</div>
+                            ${isCancelled ? `<div class="order-info" style="color:#e74c3c; font-size:12px;">❗ Reason: ${order.Cancellation_Reason || 'N/A'}</div>` : 
+                            `<button class="cancel-order-btn" onclick="cancelOrder('${orderId}', '${order.Customer_Name}')">Cancel Order</button>`}
+                        </div>
+                    `;
+                    listContainer.innerHTML += html;
+                });
+            } else {
+                listContainer.innerHTML = `<p style="text-align: center; color: #999; font-size: 13px; padding:20px;">No appointments found.</p>`;
+            }
+        });
+    }
+    function cancelOrder(orderId, customerName) {
+    const reason = prompt("Please enter the reason for cancellation:");
+    if (!reason || reason.trim() === "") return;
+
+    const employeeEmail = document.getElementById('emailInput').value.trim().toLowerCase();
+
+    // 1. Firebase එකෙන් ඇණවුමේ සියලුම විස්තර ලබාගැනීම
+    db.ref('bookings/' + orderId).once('value', snapshot => {
+        if (snapshot.exists()) {
+            const orderData = snapshot.val();
+
+            // 2. Firebase Database එක Update කිරීම
+            db.ref('bookings/' + orderId).update({
+                Status: "Cancelled",
+                Cancellation_Reason: reason
+            }).then(() => {
+                // 3. Google Sheet එක Update කිරීමට දත්ත යැවීම
+                sendToGoogleSheet(
+                    employeeEmail, 
+                    orderData.Customer_Name, 
+                    orderData.Customer_Phone, // Phone එක අනිවාර්යයෙන්ම යැවිය යුතුයි
+                    reason
+                );
+                alert("Order Cancelled Successfully!");
+            }).catch(err => {
+                alert("Error: " + err.message);
+            });
+        }
+    });
+}
+
+function sendToGoogleSheet(email, customer, phone, reason) {
+    // ඔබ ලබාගත් අලුත්ම Deployment URL එක මෙතැනට ඇතුළත් කරන්න
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwK_aWFnANascCbA698bNKtlESBMSosyQKIddg0LcvLTzsha56-kgQJi4Jm1JH3PEBEMQ/exec";
+    
+    const formData = new URLSearchParams();
+    formData.append("mode", "cancel"); 
+    formData.append("reference", email);   // D Column සෙවීමට
+    formData.append("customer", customer); // E Column සෙවීමට
+    formData.append("phone", phone);       // F Column සෙවීමට
+    formData.append("reason", reason);     // Cancel විස්තරය සඳහා
+
+    fetch(scriptURL, { 
+        method: 'POST', 
+        body: formData, 
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .then(response => console.log('Sheet Update Request Sent'))
+    .catch(error => console.error('Sheet Update Error!', error.message));
+}
+   
+</script>
+</body>
+</html>

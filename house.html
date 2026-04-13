@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cleaning & Painting - HANDY LANKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --yellow: #f9c846;
+      --dark-yellow: #eab308;
+      --black: #1f2937;
+      --card-bg: #ffffff;
+      --text: #374151;
+      --primary: #d97706;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ---------- DYNAMIC ANIMATED BG ---------- */
+    body {
+      background: linear-gradient(-45deg, #e4c3c2, #ded4af, #a8d3e0, #eab5b5);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    .n_logo {
+      height: auto;
+      width: 130px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 600;
+      font-size: 18px;
+      margin-left: 20px;
+      transition: 0.3s;
+    }
+    nav a:hover { color: var(--primary); }
+
+    /* Language Switcher */
+    .lang-switcher {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .lang-btn {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--black);
+      padding: 5px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+    .lang-btn:hover { background: var(--yellow); }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 20px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span { color: var(--primary); }
+
+    .hero p {
+      color: #4b5563;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    /* ---------- SERVICES GRID ---------- */
+    .services-grid {
+      max-width: 1100px;
+      margin: 20px auto 60px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      padding: 40px 30px;
+      border-radius: 30px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      border: 2px solid transparent;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border-color: var(--yellow);
+    }
+
+    .icon-box {
+      width: 80px;
+      height: 80px;
+      background: #fffbeb;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+
+    .service-card:hover .icon-box {
+      background: var(--yellow);
+      transform: rotate(-5deg);
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    .btn-select {
+      background: #f3f4f6;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+
+    .service-card:hover .btn-select {
+      background: var(--black);
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      nav a { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <img src="n logo.png" class="n_logo" alt="Logo">
+    </div>
+    <nav>
+      <a href="page1.html" id="nav-home">Home</a>
+      <a href="help.html" id="nav-help">Help</a>
+    </nav>
+  </header>
+
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
+  </div>
+
+  <section class="hero">
+    <h1 id="hero-title">Cleaning & <span>Painting</span></h1>
+    <p id="hero-desc">Professional solutions for a spotless home and vibrant, fresh walls.</p>
+  </section>
+
+  <section class="services-grid">
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Deep Cleaning')">
+      <div class="icon-box">✨</div>
+      <h3 id="s1-title">Full House Cleaning</h3>
+      <p id="s1-desc">Complete deep cleaning from floors to ceiling for a fresh start.</p>
+      <div class="btn-select" id="btn1">Select Service</div>
+    </div>
+
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Kitchen & Bath')">
+      <div class="icon-box">🧼</div>
+      <h3 id="s2-title">Kitchen & Bathroom</h3>
+      <p id="s2-desc">Specialized scrubbing and sanitization for your home's vital areas.</p>
+      <div class="btn-select" id="btn2">Select Service</div>
+    </div>
+
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Interior Painting')">
+      <div class="icon-box">🎨</div>
+      <h3 id="s3-title">Interior Painting</h3>
+      <p id="s3-desc">Premium wall painting and color matching for your indoor spaces.</p>
+      <div class="btn-select" id="btn3">Select Service</div>
+    </div>
+
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Exterior Painting')">
+      <div class="icon-box">🏠</div>
+      <h3 id="s4-title">Exterior Painting</h3>
+      <p id="s4-desc">Weather-resistant coatings to protect and beautify your outer walls.</p>
+      <div class="btn-select" id="btn4">Select Service</div>
+    </div>
+  </section>
+
+  <footer>
+    <span id="footer-text">&copy; 2026 Handy Lanka. All rights reserved.</span>
+  </footer>
+
+  <script>
+    let currentLang = 'en';
+
+    const translations = {
+      en: {
+        navHome: "Home",
+        navHelp: "Help",
+        langBtn: "Switch to සිංහල",
+        heroTitle: "Cleaning & <span>Painting</span>",
+        heroDesc: "Professional solutions for a spotless home and vibrant, fresh walls.",
+        s1Title: "Full House Cleaning",
+        s1Desc: "Complete deep cleaning from floors to ceiling for a fresh start.",
+        s2Title: "Kitchen & Bathroom",
+        s2Desc: "Specialized scrubbing and sanitization for your home's vital areas.",
+        s3Title: "Interior Painting",
+        s3Desc: "Premium wall painting and color matching for your indoor spaces.",
+        s4Title: "Exterior Painting",
+        s4Desc: "Weather-resistant coatings to protect and beautify your outer walls.",
+        btnSelect: "Select Service",
+        footer: "&copy; 2026 Handy Lanka. All rights reserved."
+      },
+      si: {
+        navHome: "ප්‍රධාන පිටුව",
+        navHelp: "උදවු",
+        langBtn: "Switch to English",
+        heroTitle: "පිරිසිදු කිරීම සහ <span>තීන්ත ආලේපනය</span>",
+        heroDesc: "පිරිසිදු නිවසක් සහ අලංකාර වර්ණවත් බිත්ති සඳහා වෘත්තීය විසඳුම්.",
+        s1Title: "සම්පූර්ණ නිවස පිරිසිදු කිරීම",
+        s1Desc: "පොළොවේ සිට වහලය දක්වා සම්පූර්ණ ගැඹුරු පිරිසිදු කිරීමේ සේවාව.",
+        s2Title: "කුස්සිය සහ නානකාමරය",
+        s2Desc: "විශේෂිත පිරිසිදු කිරීමේ දියර යොදා විෂබීජහරණය කිරීම.",
+        s3Title: "ඇතුළත තීන්ත ආලේපනය",
+        s3Desc: "නිවසේ ඇතුළත බිත්ති සඳහා උසස් තත්ත්වයේ තීන්ත ආලේප කිරීම.",
+        s4Title: "පිටත තීන්ත ආලේපනය",
+        s4Desc: "කාලගුණයට ඔරොත්තු දෙන පරිදි පිටත බිත්ති ආරක්ෂා කර අලංකාර කිරීම.",
+        btnSelect: "සේවාව තෝරන්න",
+        footer: "&copy; 2026 Handy Lanka. සියලුම හිමිකම් ඇවිරිණි."
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'si' : 'en';
+      updateContent();
+    }
+
+    function updateContent() {
+      const t = translations[currentLang];
+      document.getElementById('nav-home').textContent = t.navHome;
+      document.getElementById('nav-help').textContent = t.navHelp;
+      document.querySelector('.lang-btn').textContent = t.langBtn;
+      document.getElementById('hero-title').innerHTML = t.heroTitle;
+      document.getElementById('hero-desc').textContent = t.heroDesc;
+      document.getElementById('s1-title').textContent = t.s1Title;
+      document.getElementById('s1-desc').textContent = t.s1Desc;
+      document.getElementById('s2-title').textContent = t.s2Title;
+      document.getElementById('s2-desc').textContent = t.s2Desc;
+      document.getElementById('s3-title').textContent = t.s3Title;
+      document.getElementById('s3-desc').textContent = t.s3Desc;
+      document.getElementById('s4-title').textContent = t.s4Title;
+      document.getElementById('s4-desc').textContent = t.s4Desc;
+      document.getElementById('footer-text').innerHTML = t.footer;
+      
+      for(let i=1; i<=4; i++) {
+        document.getElementById(`btn${i}`).textContent = t.btnSelect;
+      }
+    }
+
+    function bookService(mainCat, subType) {
+      window.location.href = `submi00.html?service=${mainCat}&type=${encodeURIComponent(subType)}`;
+    }
+  </script>
+
+</body>
+</html>

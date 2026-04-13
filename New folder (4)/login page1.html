@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 Document</title>
+    <style>
+        body {
+  background-image: url('picture.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
+}
+*{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: aliceblue;
+            padding-left: 30px;
+          
+        }
+        header{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+        .logo{
+            font-size: 2em;
+            color: rgb(0, 0, 0);
+            user-select: none;
+        
+        }
+        .logo .lanka {
+            font-size: 0.9em;
+            color: rgb(156, 151, 9); /* change to any color you like */
+            }
+
+        .navigation{
+            position: relative;
+            font-size: 1.1em;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 40px;
+            transition: 5s;
+            
+  
+            
+        }
+      
+
+        
+        .btnlogin-popup{
+            width: 90px;
+            height: 30px;
+            background-color: rgb(5, 124, 242);
+            border-radius: 6px;
+            font-size: 18px;
+            
+            margin-left:80px;
+            padding-left: 1px;
+            border-width: 2px;
+            border-color: aliceblue;
+            transition: 2s;
+            
+        }
+        .btnlogin-popup:hover{
+            background-color: aliceblue;
+           
+            color: black;
+        }
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .word {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #000000;
+        }
+
+        .word::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #080808;
+            transition: width 1s ease;
+        }
+
+        .word:hover::after {
+            margin-left: 30px;
+             width: 70%;
+             transition: width 1s ease;
+        }
+
+         .word:hover {
+             animation: fadeOutUnderline 5s forwards;
+
+        }
+ 
+        @keyframes fadeOutUnderline {
+             0%   { opacity: 1; }
+             90%  { opacity: 1; }
+             100% { opacity: 0; }
+             
+        }
+        .ib{
+            color: black;
+        }
+        .text{
+            color: #050505;
+        }
+        .fb1{
+           margin-right: 300px;
+        }
+        .wrapper{
+            position: relative;
+            width: 490px;
+            height: 440px;
+            background: transparent;
+            border-radius: 20px;
+            border: 2px solid rgba(225,225,225,.5);
+            backdrop-filter:blur(20px);
+            box-shadow: 0 0 30px rgba(0,0,0,.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -40px;
+            margin-left: 500px;
+            padding-right: 60px;
+            /* overflow: hidden;*/
+
+        }
+        .wrapper.form-box{
+            width: 100%;
+            padding: 40px;
+        }
+          .wrapper.form-box2{
+            width: 100%;
+            padding: 40px;
+        }
+        .wrapper.form-box{
+            display: none;
+        }
+
+        .form-box h2{
+            font-size: 2em;
+            color: #000000;
+            text-align: center;
+        }
+          .form-box2 h2{
+            font-size: 2em;
+            color: #000000;
+            text-align: center;
+        }
+        .uu{
+            color: rgb(126, 38, 215);
+        }
+        .b2{
+            position: absolute;
+            top: 165px;
+            left: 70px;
+            font-size: 15px;
+            color: #0b0b0b;
+            height: 35px;
+            width: 250px;
+            border-width: 3px;
+            border-radius: 10px;
+          
+        }
+        .a1{
+            color: #000000;
+            
+        }
+        .d1{
+           margin-top: -10px;
+           margin-left: 100px;
+        }
+        .fa-envelope{
+            margin-left: 0px;
+        }
+        .ib{
+            position: relative;
+            width: 100%;
+            height: 50px;
+            border-bottom: 2px solid #162938;
+            margin: 30px 0;
+        }
+        .ib label{
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            transform: translateY(-50px);
+            font-size: 1em;
+            color: #050505;
+            font-weight: 500;
+            pointer-events: none;
+           
+        }
+        .ib input{
+            width: 95%;
+            height: 60%;
+            background: transparent;
+            outline: none;
+            border-width: 0px;
+            font-size: 1em;
+            font-weight: 600;
+         
+        }
+        .fa-lock {
+            position: absolute;
+            right:30px;
+            top: 10px;
+        }
+        .fa-envelope{
+            position: absolute;
+            right:30px;
+            
+        }
+        .ib input:focus~label,
+        .ib input input:valid~label{
+            top:49px;
+        }
+        .rf label{
+            position: absolute;
+            left: 80px;
+        }
+        .rf a{
+             position: absolute;
+            left: 240px;
+        }
+        .rf a1{
+             position: absolute;
+            left: 190px;
+            color: rgb(3, 36, 250);
+           
+        }
+         .rf label1{
+            position: absolute;
+            left: 100px;
+        }
+         .b2 a{
+            color: #000000;
+            font-weight: 100;
+            font-size: larger;
+            position: absolute;
+            top: 6px;
+            left: 60px;
+
+        }
+        .b2{
+            cursor: pointer;
+
+        }
+        .b3{
+            position: absolute;
+            top: -167px;
+            left: 359px;
+            width: 60px;
+            height: 60px;
+            background-color: #525151;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-width: 0px;
+            cursor: pointer;
+        }
+        .fa-xmark{
+            position: absolute;
+            left: 5px;
+        }
+        .cc{
+            font-size: 40px;
+            position: absolute;
+            top: 10px;
+            left: -10px;
+            color: rgb(238, 34, 34);
+
+        }
+        .a11{
+            cursor: pointer;
+            border-width: 0px;
+            font-size:17px ;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: -3px;
+            margin-left: 145px;
+            height: 0.1px;
+            width: 1px;
+            color: #1403ff;
+            position: absolute;
+            left: 220px;
+            padding:1px 10px ;
+        }
+        .a11:hover{
+            text-decoration: underline;
+
+        }
+      
+       
+    </style>
+    <script src="https://kit.fontawesome.com/4915b25f03.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <header>
+
+    <h2 class="logo">
+    HADY<br>
+    <span class="lanka">LANKA</span>
+    </h2>
+    
+    <nav class="navigation">
+        <a class="word" onclick="openNewPage1()" >Home</a>
+        <a class="word" onclick="openNewPage2()">About</a>
+        <a class="word" onclick="openNewPage3()">Services</a>
+        <a class="word" onclick="openNewPage5()" >Contac Us</a>
+        <script>
+            function openNewPage1() {
+                window.location.href="home.html";}
+             function openNewPage2() {
+                window.location.href="about.html";}
+            function openNewPage3() {
+                window.location.href="servise.html";}
+            function openNewPage5() {
+                window.location.href="contact us.html";}
+   
+</script>
+        
+    </nav>
+   
+  </header>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+  <div class="wrapper">
+    <div class="form-box">
+
+        <h2>Login</h2>
+<form onsubmit="return validateLogin()">
+    <div class="ib">
+                <span class="icon">
+                 <i class="fa-solid fa-envelope fa-sm" style="color: #000000;"></i>
+                </span>&nbsp;&nbsp;
+  <label class="text" for="email">Email:</label><br>
+  <input class="a1" type="email" id="email" required><br><br>
+</div>
+<div class="ib">
+    <span class="icon">
+                   <i class="fa-solid fa-lock fa-sm" style="color: #050505;"></i>
+                </span>&nbsp;&nbsp;
+  <label class="text" for="password">Password:</label><br>
+  <input class="a1" type="password" id="password" required><br><br>
+</div>
+  
+
+<script>
+  function validateLogin() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    // Replace these with your actual credentials
+    const correctEmail = "universityofruhuna@gmail.com";
+    const correctPassword = "123456789";
+
+    if (email === correctEmail && password === correctPassword) {
+      window.location.href="page1.html"; 
+      return false; 
+    } else {
+      alert("Invalid email or password.");
+      return false;
+    }
+  }
+</script>
+ 
+               
+            <div class="rf">&nbsp;&nbsp;&nbsp;&nbsp;
+                <label class="text"><input type="checkbox">Remember me...</label>
+                <a class="uu" href="#"> Forgot Password?</a>
+            </div>
+            <div class="b2">
+                <button class="b2" type="submit" onclick="openNewPage4()"><a>Login</a></button>
+               
+            </div><br><br><br>
+            <div class="rf">
+               <label1 class="text">Don't have an account?</label> 
+                <label class="a11" type="submit" onclick="openNewPage()">Register.</label>
+<script>
+  function openNewPage() {
+    window.location.href="regis.html";}
+  
+</script>
+
+
+
+               
+            </div>
+        </form>
+    </div>
+    
+  </div>
+
+    
+</body>
+</html>
