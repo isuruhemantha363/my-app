@@ -2,243 +2,235 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Expert Profile - HANDY LANKA</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { 
             --primary: #f5b400; 
-            --secondary: #eb9f08; 
+            --secondary: #eab308; 
             --dark: #111827; 
             --accent: #059669; 
             --bg: #f3f4f6; 
-            --reject-color: #dc2626; 
-            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --white: #ffffff;
+            --text-muted: #6b7280;
+            --reject: #ef4444;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
         }
 
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
             background: var(--bg); 
-            margin: 0; 
+            color: var(--dark); 
+            padding-bottom: 30px;
+        }
+
+        /* --- Loading Animation --- */
+        #loading-overlay { 
+            position: fixed; 
+            inset: 0; 
+            background: var(--white); 
             display: flex; 
+            flex-direction: column; 
             justify-content: center; 
             align-items: center; 
-            min-height: 100vh; 
-            color: var(--dark); 
+            z-index: 2000; 
         }
-
-        .profile-container { 
-            width: 95%; 
-            max-width: 500px; 
-            background: white; 
-            border-radius: 40px; 
-            box-shadow: var(--card-shadow); 
-            overflow: hidden; 
-            position: relative; 
-            margin: 20px 0;
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
-        }
-
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(40px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
-        .header-visual { 
-            height: 140px; 
-            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
-            position: relative; 
-        }
-
-        .profile-image-wrapper { 
-            position: absolute; 
-            bottom: -60px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-        }
-
-        .profile-image-wrapper img { 
-            width: 130px; 
-            height: 130px; 
+        .spinner { 
+            width: 45px; 
+            height: 45px; 
+            border: 4px solid #f3f3f3; 
+            border-top: 4px solid var(--primary); 
             border-radius: 50%; 
-            border: 6px solid white; 
-            object-fit: cover; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-            background: #fff; 
+            animation: spin 1s linear infinite; 
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- Profile Header --- */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            height: 180px;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            margin-bottom: 70px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        .status-badge { 
-            position: absolute; 
-            bottom: 12px; 
-            right: 12px; 
-            background: var(--accent); 
-            width: 22px; 
-            height: 22px; 
-            border-radius: 50%; 
-            border: 4px solid white; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        .profile-pic-container {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
         }
 
-        .profile-content { padding: 80px 25px 40px; text-align: center; }
+        .profile-pic-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid var(--white);
+            object-fit: cover;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            background: #eee;
+        }
 
-        .expert-name { font-size: 28px; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
+        .online-dot {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 18px;
+            height: 18px;
+            background: var(--accent);
+            border: 3px solid var(--white);
+            border-radius: 50%;
+        }
+
+        /* --- Content Area --- */
+        .main-content { padding: 0 20px; max-width: 500px; margin: 0 auto; }
+
+        .expert-info { text-align: center; margin-bottom: 25px; }
+        .expert-name { font-size: 24px; font-weight: 800; color: var(--dark); }
+        .expert-tag { color: var(--secondary); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .expert-title { 
-            color: var(--secondary); 
-            font-weight: 700; 
-            font-size: 13px; 
-            text-transform: uppercase; 
-            letter-spacing: 1.5px; 
-            margin-top: 8px; 
-        }
-
-        .rating-box { 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 6px; 
-            background: #fffbeb; 
-            padding: 6px 18px; 
-            border-radius: 25px; 
-            margin-top: 15px; 
-            color: #b45309; 
-            font-weight: 700; 
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
             font-size: 14px;
+            margin-top: 10px;
         }
 
-        .info-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
-            margin-top: 35px; 
-            text-align: left; 
+        /* --- Stats Grid --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 30px;
         }
-
-        .info-item { 
-            background: #f8fafc; 
-            padding: 16px; 
-            border-radius: 20px; 
-            border: 1px solid #f1f5f9;
-            transition: 0.3s;
+        .stat-card {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
+        .stat-card span { display: block; font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+        .stat-card b { font-size: 14px; color: var(--dark); }
 
-        .info-item:hover { transform: translateY(-3px); border-color: var(--primary); }
-
-        .info-item span { display: block; font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
-        
-        .info-item b { font-size: 14px; color: var(--dark); }
-
-        .full-width { grid-column: span 2; }
-
-        /* Appointments Section */
-        .appointments-section {
-            margin-top: 40px; 
-            border-top: 2px solid #f1f5f9; 
-            padding-top: 25px; 
+        /* --- Appointments Section --- */
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .appointment-card {
-            background: white; 
-            padding: 20px; 
-            border-radius: 24px; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
+            background: var(--white);
+            border-radius: 22px;
+            padding: 20px;
             margin-bottom: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+            border-left: 6px solid var(--primary);
             transition: 0.3s;
-            position: relative;
         }
 
-        .appointment-card:hover { transform: scale(1.02); }
-
-        .order-btn-group { display: flex; gap: 10px; margin-top: 18px; }
-        
-        .btn-sm { 
-            flex: 1; 
-            padding: 12px; 
-            border-radius: 14px; 
-            font-size: 13px; 
-            font-weight: 700; 
-            border: none; 
-            cursor: pointer; 
-            transition: 0.2s; 
+        .status-pill {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 8px;
+            text-transform: uppercase;
         }
 
-        .btn-confirm { background: var(--dark); color: white; }
-        .btn-confirm:hover { background: var(--accent); }
-        .btn-reject { background: #f1f5f9; color: #64748b; }
-        .btn-reject:hover { background: var(--reject-color); color: white; }
+        .details-box {
+            background: #f0fdf4;
+            border: 1px dashed var(--accent);
+            border-radius: 15px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 13px;
+        }
 
-        .btn-back { 
-            width: 100%; 
-            padding: 16px; 
-            border-radius: 20px; 
-            background: #f1f5f9; 
-            color: #475569; 
-            font-weight: 800; 
-            border: none; 
-            margin-top: 20px;
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-app {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 13px;
             cursor: pointer;
         }
+        .btn-confirm { background: var(--accent); color: white; }
+        .btn-reject { background: #e5e7eb; color: var(--text-muted); }
 
-        /* Loading Spinner */
-        #loading-overlay { 
-            position: fixed; inset: 0; background: white; 
-            display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; z-index: 1000; 
+        .back-nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            backdrop-filter: blur(5px);
         }
-        .spinner { 
-            width: 50px; height: 50px; border: 5px solid #f3f3f3; 
-            border-top: 5px solid var(--primary); border-radius: 50%; 
-            animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite; 
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
     </style>
 </head>
 <body>
 
 <div id="loading-overlay">
     <div class="spinner"></div>
-    <p style="margin-top:20px; font-weight:700; color:#1e293b; letter-spacing: 0.5px;">දත්ත ලබා ගනිමින් පවතී...</p>
+    <p style="margin-top:15px; font-weight:600; color:var(--text-muted);">Loading Profile...</p>
 </div>
 
-<div class="profile-container" id="profile-card" style="display:none;">
-    <div class="header-visual">
-        <div class="profile-image-wrapper">
+<div id="profile-container" style="display:none;">
+    <div class="profile-header">
+        <a href="login page1.html" class="back-nav">⬅</a>
+        <div class="profile-pic-container">
             <img id="emp-photo" src="" alt="Expert">
-            <div class="status-badge"></div>
+            <div class="online-dot"></div>
         </div>
     </div>
-    <div class="profile-content">
-        <h1 class="expert-name" id="emp-name">Loading...</h1>
-        <div class="expert-title" id="emp-sub-service">Verified Professional</div>
-        
-        <div class="rating-box">
-            <span style="font-size: 18px;">★</span> 
-            <span id="emp-rating">0.0</span> 
-            <span style="font-size: 11px; opacity: 0.7; margin-left: 4px;">Rating</span>
+
+    <div class="main-content">
+        <div class="expert-info">
+            <h1 class="expert-name" id="emp-name">Expert Name</h1>
+            <p class="expert-tag" id="emp-sub-service">Specialist</p>
+            <div class="rating-badge">⭐ <span id="emp-rating">0.0</span> Rating</div>
         </div>
 
-        <div class="info-grid">
-            <div class="info-item"><span>EXPERIENCE</span><b id="emp-exp">N/A</b></div>
-            <div class="info-item"><span>HOURLY RATE</span><b id="emp-rate" style="color: var(--accent);">Rs. 0.00</b></div>
-            <div class="info-item full-width"><span>MAIN SERVICE</span><b id="emp-service">-</b></div>
-            <div class="info-item full-width"><span>LOCATION</span><b id="emp-location">-</b></div>
-            <div class="info-item full-width"><span>SKILLS</span><b id="emp-skill">-</b></div>
+        <div class="stats-grid">
+            <div class="stat-card"><span>Experience</span><b id="emp-exp">N/A</b></div>
+            <div class="stat-card"><span>Hourly Rate</span><b id="emp-rate" style="color:var(--accent);">Rs. 0</b></div>
+            <div class="stat-card" style="grid-column: span 2;"><span>Location</span><b id="emp-location">Sri Lanka</b></div>
         </div>
 
-        <div class="appointments-section">
-            <h2 style="font-size: 18px; color: var(--dark); font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                📅 නව රැකියා අවස්ථාවන්
-            </h2>
-            <div id="appointments-list"></div>
-        </div>
-
-        <button class="btn-back" onclick="window.location='login page1.html'">පිටුපසට යන්න (Go Back)</button>
+        <div class="section-title">📅 Job Appointments</div>
+        <div id="appointments-list">
+            </div>
     </div>
 </div>
 
 <script>
-    // Firebase Setup (Same as yours)
+    // Firebase Configuration (ඔබේ පැරණි කේතයෙන් ලබාගන්නා ලදී)
     const firebaseConfig = {
         apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
         authDomain: "handylanka-6f7b3.firebaseapp.com",
@@ -248,7 +240,6 @@
         messagingSenderId: "932726552349",
         appId: "1:932726552349:web:e7a51b17fd381b168d93f4"
     };
-    
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
     const loggedInEmail = localStorage.getItem("userEmail");
@@ -259,27 +250,20 @@
             if (snapshot.exists()) {
                 const key = Object.keys(snapshot.val())[0];
                 const data = snapshot.val()[key];
-                
-                document.getElementById('emp-name').innerText = data.name;
+                const expertName = data.name;
+
+                document.getElementById('emp-name').innerText = expertName;
                 document.getElementById('emp-sub-service').innerText = data.sub_service || 'Expert Professional';
                 document.getElementById('emp-photo').src = data.photo || 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
                 document.getElementById('emp-rating').innerText = data.rating || 'New';
-                document.getElementById('emp-exp').innerText = data.exp || 'Not Specified';
-                document.getElementById('emp-rate').innerText = data.hourly_rate ? `Rs. ${data.hourly_rate}` : 'Negotiable';
-                document.getElementById('emp-service').innerText = data.service || 'General';
+                document.getElementById('emp-exp').innerText = data.exp || 'Not Set';
+                document.getElementById('emp-rate').innerText = "Rs. " + (data.hourly_rate || '0');
                 document.getElementById('emp-location').innerText = data.address || 'Island Wide';
-                document.getElementById('emp-skill').innerText = data.skill || 'Handy Lanka Verified';
+
+                fetchAppointments(expertName);
                 
-                fetchAppointments(data.name);
-                
-                document.getElementById('loading-overlay').style.fadeOut = "slow";
-                setTimeout(() => {
-                    document.getElementById('loading-overlay').style.display = 'none';
-                    document.getElementById('profile-card').style.display = 'block';
-                }, 500);
-            } else {
-                alert("Profile not found. Please login again.");
-                window.location.href = "login.html";
+                document.getElementById('loading-overlay').style.display = 'none';
+                document.getElementById('profile-container').style.display = 'block';
             }
         });
     }
@@ -292,70 +276,72 @@
                 snapshot.forEach((childSnapshot) => {
                     const booking = childSnapshot.val();
                     const bookingId = childSnapshot.key;
-                    const status = (booking.Confirm || "").toLowerCase();
+                    const status = (booking.Confirm || "pending").toLowerCase();
                     
-                    let statusColor = "#f5b400"; // Pending
-                    let statusText = "PENDING";
+                    let borderColor = "#f5b400"; 
+                    let statusLabel = "PENDING";
+                    let statusColor = "#f5b400";
 
-                    if(status === "confirmed") { statusColor = "#059669"; statusText = "CONFIRMED"; }
-                    if(status === "rejected") { statusColor = "#dc2626"; statusText = "REJECTED"; }
+                    if(status === "confirmed") {
+                        borderColor = "#059669";
+                        statusLabel = "CONFIRMED";
+                        statusColor = "#059669";
+                    } else if(status === "rejected") {
+                        borderColor = "#6b7280";
+                        statusLabel = "REJECTED";
+                        statusColor = "#6b7280";
+                    }
 
-                    const detailsSection = status === "confirmed" ? `
-                        <div style="margin-top:15px; padding:15px; background:#f0fdf4; border:1px solid #bcf0da; border-radius:15px; font-size:13px;">
-                            <p style="margin:0; font-weight:800; color:#065f46; margin-bottom:10px;">📞 Customer Contact Details</p>
-                            <p style="margin:4px 0;"><b>Phone:</b> ${booking.Customer_Phone}</p>
-                            <p style="margin:4px 0;"><b>Location:</b> ${booking.Customer_Location}</p>
-                            <p style="margin:4px 0;"><b>Address:</b> ${booking.Customer_Address}</p>
-                        </div>
-                    ` : '';
+                    const isConfirmed = status === "confirmed";
 
                     container.innerHTML += `
-                        <div class="appointment-card" style="border-left: 6px solid ${statusColor}">
+                        <div class="appointment-card" style="border-left-color: ${borderColor}">
                             <div style="display:flex; justify-content:space-between; align-items:start;">
-                                <div>
-                                    <h4 style="margin:0; font-size:16px;">${booking.Customer_Name}</h4>
-                                    <p style="margin:5px 0; font-size:13px; color:#64748b;">${booking.Work_Description}</p>
-                                </div>
-                                <span style="font-size:9px; font-weight:800; color:white; background:${statusColor}; padding:4px 10px; border-radius:10px;">${statusText}</span>
+                                <h4 style="font-size:16px;">${booking.Customer_Name}</h4>
+                                <span class="status-pill" style="background:${statusColor}; color:white;">${statusLabel}</span>
                             </div>
-                            
-                            <div style="display:flex; gap:15px; margin-top:10px; font-size:11px; font-weight:700; color:#94a3b8;">
-                                <span>📅 ${booking.Date}</span>
-                                <span>⏰ ${booking.Time}</span>
+                            <p style="font-size:13px; color:#4b5563; margin-top:5px;"><b>Work:</b> ${booking.Work_Description}</p>
+                            <div style="margin-top:10px; font-size:11px; font-weight:700; color:var(--text-muted);">
+                                📅 ${booking.Date} &nbsp; ⏰ ${booking.Time}
                             </div>
 
-                            ${detailsSection}
-
-                            ${status !== "confirmed" && status !== "rejected" ? `
-                                <div class="order-btn-group">
-                                    <button class="btn-sm btn-confirm" onclick="updateStatus('${bookingId}', 'confirmed')">Confirm Job</button>
-                                    <button class="btn-sm btn-reject" onclick="updateStatus('${bookingId}', 'rejected')">Reject</button>
+                            ${isConfirmed ? `
+                                <div class="details-box">
+                                    <p style="color:var(--accent); font-weight:800; margin-bottom:5px;">📞 Contact Info</p>
+                                    <b>Phone:</b> ${booking.Customer_Phone}<br>
+                                    <b>Address:</b> ${booking.Customer_Address}
                                 </div>
-                            ` : ''}
-                        </div>
-                    `;
+                            ` : (status !== "rejected" ? `
+                                <div class="btn-group">
+                                    <button class="btn-app btn-confirm" onclick="updateStatus('${bookingId}', 'confirmed')">Confirm</button>
+                                    <button class="btn-app btn-reject" onclick="updateStatus('${bookingId}', 'rejected')">Reject</button>
+                                </div>
+                            ` : '')}
+                        </div>`;
                 });
             } else {
-                container.innerHTML = `<p style="text-align:center; color:#94a3b8; padding:30px; font-size:14px;">තාමත් රැකියා ඇණවුම් ලැබී නොමැත.</p>`;
+                container.innerHTML = `<div style="text-align:center; padding:40px; color:#9ca3af; font-size:14px;">No appointments yet.</div>`;
             }
         });
     }
 
     function updateStatus(id, action) {
-        const reason = action === 'rejected' ? prompt("ප්‍රතික්ෂේප කිරීමට හේතුව (Reason for rejection):") : "";
-        if (action === 'rejected' && reason === null) return;
-
-        const updates = {
-            'Confirm': action === 'confirmed' ? 'confirmed' : 'rejected',
-            'Status': action === 'confirmed' ? 'Active' : 'Rejected',
-            'Cancellation_Reason': reason || (action === 'confirmed' ? "" : "Rejected by Professional")
-        };
+        const updates = {};
+        if (action === 'confirmed') {
+            updates['Confirm'] = 'Confirmed';
+            updates['Status'] = 'Active';
+        } else {
+            const reason = prompt("Reason for rejection:");
+            if (reason === null) return;
+            updates['Confirm'] = 'Rejected';
+            updates['Status'] = 'Rejected';
+            updates['Cancellation_Reason'] = reason || "Rejected by Expert";
+        }
 
         database.ref('bookings/' + id).update(updates).then(() => {
-            alert(action === 'confirmed' ? "රැකියාව ස්ථිර කළා! පාරිභෝගික තොරතුරු දැන් දැකිය හැක." : "රැකියාව ප්‍රතික්ෂේප කළා.");
-        }).catch(err => alert("Error: " + err.message));
+            alert(action === 'confirmed' ? "Appointment Confirmed!" : "Appointment Rejected.");
+        });
     }
 </script>
-
 </body>
 </html>

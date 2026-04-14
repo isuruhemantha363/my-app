@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
   <title>Handy Lanka | Home Services</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --yellow: #f9c846;
       --dark-yellow: #eab308;
-      --black: #1f2937;
-      --gray: #f9fafb;
-      --bg: #ffffff;
-      --card: #ffffff;
-      --text: #374151;
-      --muted: #6b7280;
-      --accent: #d97706;
-      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --black: #111827;
+      --gray-bg: #f3f4f6;
+      --white: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     }
 
     * {
@@ -25,333 +24,346 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth; 
+      -webkit-tap-highlight-color: transparent;
+      scroll-behavior: smooth;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--gray-bg);
+      color: var(--text-main);
       overflow-x: hidden;
+      padding-bottom: 80px; /* Bottom Nav එක සඳහා ඉඩ තැබීම */
     }
 
-    /* ---------- HEADER ---------- */
+    /* ---------- MOBILE HEADER ---------- */
     header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 10px 8%;
+      background: var(--white);
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      box-shadow: var(--shadow-sm);
     }
 
     .n_logo {
-      height: 60px;
+      height: 40px;
       width: auto;
       cursor: pointer;
-      transition: 0.3s;
     }
 
-    nav { display: flex; gap: 10px; flex-wrap: wrap; }
+    /* Top Utility Bar */
+    .top-nav {
+      display: flex;
+      gap: 12px;
+    }
 
-    nav a {
+    .top-nav a {
       text-decoration: none;
-      color: var(--black);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: 0.3s;
+      color: var(--text-main);
+      font-size: 18px;
     }
 
-    nav a:hover {
-      background: var(--yellow);
-      color: #000;
-    }
-
-    .nav-cancel {
-      color: #ef4444 !important;
-    }
-    .nav-cancel:hover {
-      background: #fee2e2 !important;
-    }
-
-    /* ---------- HERO ---------- */
+    /* ---------- HERO SECTION (App Banner Style) ---------- */
     .hero {
-      height: 80vh;
+      height: 300px;
       display: flex;
       align-items: center;
-      padding: 0 8%;
+      padding: 20px;
       color: #fff;
       position: relative;
       background: url('image2.jpg') center/cover no-repeat;
-      background-attachment: fixed;
+      margin: 15px;
+      border-radius: 25px;
+      overflow: hidden;
     }
 
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
     }
 
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 700px;
-      animation: fadeInUp 1s ease;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      width: 100%;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1.2;
-      margin-bottom: 25px;
+      font-size: 1.5rem;
       font-weight: 800;
+      margin-bottom: 15px;
     }
 
     .hero h1 span { color: var(--yellow); }
 
-    .search-box {
+    /* Modern App Search Box */
+    .search-container {
+      background: var(--white);
+      border-radius: 15px;
       display: flex;
-      background: #fff;
-      border-radius: 50px;
-      padding: 6px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      align-items: center;
+      padding: 5px 10px;
+      box-shadow: var(--shadow-lg);
     }
 
-    .search-box input {
+    .search-container input {
       flex: 1;
       border: none;
-      padding: 12px 20px;
-      font-size: 15px;
+      padding: 12px;
+      font-size: 14px;
       outline: none;
-      border-radius: 50px;
       color: var(--black);
     }
 
-    .search-box button {
+    .search-container button {
       background: var(--yellow);
       border: none;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      font-size: 16px;
       cursor: pointer;
-      transition: 0.3s;
     }
 
-    .tag-container { display: flex; gap: 10px; margin-top: 10px; }
-    .tag {
-      background: rgba(255,255,255,0.2);
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* ---------- SERVICES SECTION ---------- */
-    .services-section {
-      padding: 80px 8% 60px;
-      background: #fff;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-header h2 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--black);
+    /* ---------- SERVICES GRID (App Tile Style) ---------- */
+    .section-title {
+      padding: 0 20px;
+      margin: 20px 0 15px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 0 20px;
     }
 
     .service-card {
-      background: var(--card);
+      background: var(--white);
       border-radius: 20px;
-      padding: 40px 30px;
+      padding: 20px;
       text-align: center;
-      border: 1px solid #f0f0f0;
-      transition: 0.3s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: 0.2s;
+      border: 1px solid rgba(0,0,0,0.02);
     }
 
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow);
-      border-color: var(--yellow);
+    .service-card:active {
+      transform: scale(0.95);
+      background: #fffcf0;
     }
 
     .service-card .icon {
-      font-size: 40px;
-      margin-bottom: 15px;
+      font-size: 32px;
+      margin-bottom: 10px;
       display: block;
-      transition: 0.3s;
     }
 
-    .service-card:hover .icon { transform: scale(1.2); }
-
-    /* ---------- HOW IT WORKS ---------- */
-    .how {
-      background: var(--gray);
-      padding: 60px 8%;
+    .service-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--black);
     }
 
-    .how-box {
-      background: #111827;
+    .service-card p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+      line-height: 1.2;
+    }
+
+    /* ---------- HOW IT WORKS (Mobile Card Style) ---------- */
+    .how-section {
+      background: var(--black);
+      margin: 30px 20px;
+      padding: 25px;
+      border-radius: 25px;
       color: #fff;
-      padding: 40px;
-      border-radius: 30px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: center;
     }
 
-    .steps div {
-      background: rgba(255,255,255,0.05);
-      margin-bottom: 12px;
-      padding: 18px;
+    .how-steps {
+      margin-top: 15px;
+    }
+
+    .step-item {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
       border-radius: 15px;
-      font-weight: 600;
-      cursor: pointer;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 500;
       transition: 0.3s;
-      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .steps div:hover {
-      background: var(--yellow);
-      color: #000;
-      transform: translateX(10px);
-    }
+    .step-item:active { background: var(--yellow); color: #000; }
 
     #stepDescription {
       background: var(--yellow);
       color: #000;
       padding: 15px;
       border-radius: 12px;
-      margin-top: 15px;
+      font-size: 12px;
+      margin-top: 10px;
       display: none;
-      animation: fadeIn 0.3s;
     }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 768px) {
-      header { flex-direction: column; padding: 15px; gap: 15px; }
-      nav { justify-content: center; }
-      .how-box { grid-template-columns: 1fr; text-align: center; }
-      .hero { height: 70vh; text-align: center; }
-      .tag-container { justify-content: center; }
-      .hero-content { width: 100%; }
+    /* ---------- BOTTOM APP NAVIGATION ---------- */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--white);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0 25px; /* iPhones වල පහළ ඉඩ සඳහා */
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+      z-index: 2000;
+      border-radius: 25px 25px 0 0;
     }
+
+    .nav-item {
+      text-decoration: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .nav-item.active { color: var(--yellow); }
+    .nav-item i { font-size: 20px; }
+    
+    .cancel-btn { color: #ef4444 !important; }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      text-align: center;
+      padding: 20px 20px 40px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Search Result Message */
+    #no-result-msg {
+      grid-column: 1 / -1;
+      padding: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
   </style>
 </head>
 <body>
 
 <header>
   <img src="n logo.png" class="n_logo" onclick="window.location.reload()" alt="Logo">
-  <nav>
-    <a href="#popular-services">Find Services</a>
-    <a href="feedback.html">Feedback</a>
-    <a href="help.html">Help</a>
-    <a href="cancel-booking.html" class="nav-cancel">Cancel Booking</a>
-  </nav>
+  <div class="top-nav">
+    <a href="help.html">❔</a>
+    <a href="feedback.html">⭐</a>
+  </div>
 </header>
 
 <section class="hero">
   <div class="hero-content">
-    <h1>Trusted Professionals <br>for <span>Handy Lanka</span></h1>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search for cleaning, plumbing..." oninput="searchServices()">
+    <h1>Trusted Pros for <br><span>Handy Lanka</span></h1>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="What do you need help with?" oninput="searchServices()">
       <button onclick="searchServices()">🔍</button>
     </div>
-    <div class="tag-container">
-      <span class="tag">✓ Verified Pros</span>
-      <span class="tag">✓ 24/7 Support</span>
-    </div>
   </div>
 </section>
 
-<section class="services-section" id="popular-services">
-  <div class="section-header">
-    <h2>Popular Services</h2>
-    <p>Choose from our top-rated professional services</p>
-  </div>
+<div class="section-title" id="popular-services">
+  <span>Top Services</span>
+  <span style="font-size: 12px; color: var(--dark-yellow);">See All</span>
+</div>
 
-  <div class="services-grid" id="servicesContainer">
-    <div class="service-card" onclick="window.location.href='house.html'">
-      <span class="icon">🧹</span>
-      <h3>House Cleaning</h3>
-      <p>Professional deep cleaning for your home.</p>
-    </div>
-    <div class="service-card" onclick="window.location.href='plumb.html'">
-      <span class="icon">🔧</span>
-      <h3>Plumbing</h3>
-      <p>Expert fixes for leaks and installations.</p>
-    </div>
-    <div class="service-card" onclick="window.location.href='elec.html'">
-      <span class="icon">💡</span>
-      <h3>Electrical</h3>
-      <p>Safe wiring and electronic troubleshooting.</p>
-    </div>
-    <div class="service-card" onclick="window.location.href='gard.html'">
-      <span class="icon">🌳</span>
-      <h3>Gardening</h3>
-      <p>Expert landscaping and outdoor care.</p>
-    </div>
-    <div class="service-card" onclick="window.location.href='handy.html'">
-      <span class="icon">🛠️</span>
-      <h3>Handyman</h3>
-      <p>Home repairs and furniture assembly.</p>
-    </div>
-    <div class="service-card" onclick="window.location.href='movi.html'">
-      <span class="icon">🚚</span>
-      <h3>Moving Help</h3>
-      <p>Stress-free packing and relocation.</p>
-    </div>
+<section class="services-grid" id="servicesContainer">
+  <div class="service-card" onclick="window.location.href='house.html'">
+    <span class="icon">🧹</span>
+    <h3>Cleaning</h3>
+    <p>Sparkling clean homes</p>
+  </div>
+  <div class="service-card" onclick="window.location.href='plumb.html'">
+    <span class="icon">🔧</span>
+    <h3>Plumbing</h3>
+    <p>Fix leaks & pipes</p>
+  </div>
+  <div class="service-card" onclick="window.location.href='elec.html'">
+    <span class="icon">💡</span>
+    <h3>Electrical</h3>
+    <p>Safe wiring fixes</p>
+  </div>
+  <div class="service-card" onclick="window.location.href='gard.html'">
+    <span class="icon">🌳</span>
+    <h3>Gardening</h3>
+    <p>Outdoor care</p>
+  </div>
+  <div class="service-card" onclick="window.location.href='handy.html'">
+    <span class="icon">🛠️</span>
+    <h3>Handyman</h3>
+    <p>Repairs & more</p>
+  </div>
+  <div class="service-card" onclick="window.location.href='movi.html'">
+    <span class="icon">🚚</span>
+    <h3>Moving</h3>
+    <p>Easy relocation</p>
   </div>
 </section>
 
-<section class="how">
-  <div class="how-box">
-    <div class="steps">
-      <h2 style="margin-bottom: 20px;">How It Works</h2>
-      <div onclick="showStep(1)">01. Book Your Service</div>
-      <div onclick="showStep(2)">02. Expert Arrives</div>
-      <div onclick="showStep(3)">03. Task Completed!</div>
-      <div id="stepDescription"></div>
-    </div>
-    <div style="text-align: center;">
-        <span style="font-size: 80px;">🏠</span>
-        <h3 style="margin-top: 15px;">Quality Guaranteed</h3>
-    </div>
+<section class="how-section">
+  <h2 style="font-size: 1.1rem; margin-bottom: 15px;">How It Works</h2>
+  <div class="how-steps">
+    <div class="step-item" onclick="showStep(1)">01. Book Your Service</div>
+    <div class="step-item" onclick="showStep(2)">02. Expert Arrives</div>
+    <div class="step-item" onclick="showStep(3)">03. Task Completed!</div>
+    <div id="stepDescription"></div>
+  </div>
+  <div style="text-align: center; margin-top: 20px; opacity: 0.8;">
+    <span style="font-size: 50px;">🏠</span>
+    <p style="font-size: 12px;">Quality Guaranteed</p>
   </div>
 </section>
 
-<footer style="background: #000; color: #fff; padding: 40px 8%; text-align: center;">
-  <h2 style="color: var(--yellow);">Handy Lanka</h2>
-  <p style="margin-top: 10px; color: #888;">&copy; 2026 Handy Lanka. All rights reserved.</p>
+<footer>
+  <h3 style="color: var(--black); margin-bottom: 5px;">Handy Lanka</h3>
+  <p>&copy; 2026. Connecting Sri Lanka with trusted experts.</p>
 </footer>
 
+<nav class="bottom-nav">
+  <a href="#" class="nav-item active">
+    <i>🏠</i>
+    <span>Home</span>
+  </a>
+  <a href="#popular-services" class="nav-item">
+    <i>🛠️</i>
+    <span>Services</span>
+  </a>
+  <a href="help.html" class="nav-item">
+    <i>❓</i>
+    <span>Help</span>
+  </a>
+  <a href="cancel-booking.html" class="nav-item cancel-btn">
+    <i>❌</i>
+    <span>Cancel</span>
+  </a>
+</nav>
+
 <script>
+    // Search Function (පැරණි ක්‍රියාකාරීත්වය එලෙසම ඇත)
     function searchServices() {
         let searchTerm = document.getElementById('searchInput').value.toLowerCase();
         let cards = document.getElementsByClassName('service-card');
@@ -374,10 +386,7 @@
                 let msg = document.createElement('p');
                 msg.id = 'no-result-msg';
                 msg.style.textAlign = 'center';
-                msg.style.width = '100%';
-                msg.style.gridColumn = '1 / -1';
-                msg.style.padding = '40px';
-                msg.innerHTML = "🔍 සමාවන්න, එවැනි සේවාවක් සොයාගත නොහැක.";
+                msg.innerHTML = "🔍 No service found.";
                 container.appendChild(msg);
             }
         } else if (existingMsg) {
@@ -385,6 +394,7 @@
         }
     }
 
+    // Step Description Function
     function showStep(n) {
         let d = document.getElementById('stepDescription');
         d.style.display = "block";

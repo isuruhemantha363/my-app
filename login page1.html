@@ -2,14 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Login | HANDY LANKA</title>
     
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4915b25f03.js" crossorigin="anonymous"></script>
 
     <style>
+        :root {
+            --primary-color: #d97706;
+            --accent-color: #fbbf24;
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,281 +29,241 @@
         }
 
         body {
-            background-image: url('picture.jpeg');
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('picture.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Header / Logo Section for Mobile App Look */
+        .app-header {
+            position: absolute;
+            top: 40px;
+            text-align: center;
             width: 100%;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
         }
 
         .n_logo {
-            width: 180px;
-            height: auto;
-            transition: 0.3s;
+            width: 140px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
         }
 
-        .navigation {
-            display: flex;
-            gap: 30px;
-        }
-
-        .word {
-            font-size: 1.1em;
-            color: #000;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .word::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 0%;
-            height: 3px;
-            background-color: #d97706;
-            transition: 0.3s;
-        }
-
-        .word:hover::after {
-            width: 100%;
-        }
-
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 120px 20px;
-        }
-
+        /* Main Container */
         .wrapper {
-            width: 450px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(25px);
-            border-radius: 30px;
-            padding: 50px 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-            transition: 0.4s;
+            width: 100%;
+            max-width: 400px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 40px 30px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-box h2 {
-            font-size: 2.5em;
-            color: #000;
+            font-size: 2rem;
+            color: var(--white);
             text-align: center;
             font-weight: 800;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
-        .form-box p.subtitle {
+        .subtitle {
             text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 35px;
+            font-size: 0.85rem;
+            font-weight: 300;
         }
 
+        /* Mobile Style Input Boxes */
         .ib {
             position: relative;
             width: 100%;
-            height: 55px;
-            border-bottom: 2px solid #000;
-            margin: 35px 0;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 10px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .ib:focus-within {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .ib label {
             position: absolute;
             top: 50%;
-            left: 5px;
+            left: 50px;
             transform: translateY(-50%);
-            font-size: 1em;
-            color: #000;
-            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
             pointer-events: none;
-            transition: .5s;
+            transition: 0.3s;
         }
 
         .ib input {
             width: 100%;
-            height: 100%;
+            height: 40px;
             background: transparent;
             border: none;
             outline: none;
-            font-size: 1em;
-            color: #000;
-            font-weight: 600;
-            padding: 0 35px 0 5px;
+            font-size: 1rem;
+            color: var(--white);
+            padding-left: 35px;
         }
 
         .ib input:focus~label,
         .ib input:valid~label {
-            top: -5px;
-            font-size: 0.85em;
-            color: #d97706;
+            top: 5px;
+            left: 50px;
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            font-weight: 600;
         }
 
         .icon {
             position: absolute;
-            right: 10px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #000;
+            color: var(--accent-color);
+            font-size: 1.1rem;
         }
 
+        /* Forgot Pass & Checkbox */
         .rf {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9em;
-            color: #000;
-            font-weight: 600;
-            margin: -15px 0 25px;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .rf label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
         }
 
         .rf input {
-            accent-color: #d97706;
-            margin-right: 5px;
+            accent-color: var(--primary-color);
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
         }
 
         .uu {
-            color: #000;
+            color: var(--accent-color);
             text-decoration: none;
-        }
-
-        .uu:hover {
-            text-decoration: underline;
-            color: #d97706;
-        }
-
-        .b2-btn {
-            width: 100%;
-            height: 50px;
-            background: #000;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1.1em;
-            color: #fff;
-            font-weight: 700;
-            transition: .3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .b2-btn:hover {
-            background: #d97706;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(217, 119, 6, 0.3);
-        }
-
-        .login-register {
-            font-size: .95em;
-            color: #000;
-            text-align: center;
-            margin-top: 25px;
             font-weight: 500;
         }
 
+        /* App Button Style */
+        .b2-btn {
+            width: 100%;
+            height: 55px;
+            background: linear-gradient(45deg, var(--primary-color), #f59e0b);
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--white);
+            font-weight: 700;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .b2-btn:active {
+            transform: scale(0.96);
+        }
+
+        .login-register {
+            font-size: 0.9rem;
+            color: var(--white);
+            text-align: center;
+            margin-top: 30px;
+        }
+
         .a11 {
-            color: #d97706;
+            color: var(--accent-color);
             font-weight: 700;
             cursor: pointer;
-            margin-left: 5px;
             text-decoration: none;
+            margin-left: 5px;
         }
 
-        .a11:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Mobile Responsive Style --- */
-        @media (max-width: 768px) {
-            header { 
-                padding: 15px 5%; 
-                justify-content: center;
+        /* Mobile specific adjustments */
+        @media (max-width: 480px) {
+            .wrapper {
+                padding: 35px 25px;
+                border-radius: 35px;
             }
-            .navigation { display: none; } /* Mobile වල Navigation හංගන්න */
-            .wrapper { 
-                width: 90%; 
-                padding: 40px 25px; 
-            }
-            .form-box h2 { font-size: 2em; }
-            .n_logo { width: 140px; }
+            .form-box h2 { font-size: 1.7rem; }
+            .app-header { top: 20px; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/4915b25f03.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <img src="n logo.png" class="n_logo" alt="Handy Lanka">
-        </div>
-        
-        <nav class="navigation">
-            <a class="word" href="home.html#home">Home</a>
-            <a class="word" href="home.html#about">About</a>
-            <a class="word" href="home.html#services">Services</a>
-            <a class="word" href="home.html#contact">Contact</a>
-        </nav>
-    </header>
+    <div class="app-header">
+        <img src="n logo.png" class="n_logo" alt="Logo">
+    </div>
 
-    <div class="main-content">
-        <div class="wrapper">
-            <div class="form-box">
-                <h2>Login</h2>
-                <p class="subtitle">Please enter your details to continue</p>
-                
-                <form onsubmit="event.preventDefault(); validateLogin();">
-                    <div class="ib">
-                        <span class="icon"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="email" id="email" required>
-                        <label>Email Address</label>
-                    </div>
+    <div class="wrapper">
+        <div class="form-box">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Log in to your Handy Lanka account</p>
+            
+            <form onsubmit="event.preventDefault(); validateLogin();">
+                <div class="ib">
+                    <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+                    <input type="email" id="email" required>
+                    <label>Email Address</label>
+                </div>
 
-                    <div class="ib">
-                        <span class="icon"><i class="fa-solid fa-lock"></i></span>
-                        <input type="password" id="password" required>
-                        <label>Password</label>
-                    </div>
+                <div class="ib">
+                    <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" id="password" required>
+                    <label>Password</label>
+                </div>
 
-                    <div class="rf">
-                        <label><input type="checkbox"> Remember me</label>
-                        <a href="#" class="uu">Forgot Password?</a>
-                    </div>
+                <div class="rf">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#" class="uu">Forgot Password?</a>
+                </div>
 
-                    <button type="submit" class="b2-btn">Login Now</button>
+                <button type="submit" class="b2-btn">Login Now</button>
 
-                    <div class="login-register">
-                        <p>New to Handy Lanka? 
-                            <span class="a11" onclick="location.href='regis.html'">Register here</span>
-                        </p>
-                    </div>
-                </form>
-            </div>
+                <div class="login-register">
+                    <p>New here? 
+                        <span class="a11" onclick="location.href='regis.html'">Register Now</span>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
-        // Firebase Configuration
+        // Firebase Config (ඔබේ පැරණි කේතය එලෙසම ඇත)
         const firebaseConfig = {
             apiKey: "AIzaSyDDXkRpZm2JA_Dz4U8iemCoFNtu9_3ebqI",
             authDomain: "handylanka.firebaseapp.com",
@@ -303,43 +274,32 @@
             measurementId: "G-9FHZXXPBZD"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
         async function validateLogin() {
-            const email = document.getElementById("email").value.trim();
+            const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const btn = document.querySelector(".b2-btn");
 
-            // Empty field validation
-            if (!email || !password) {
-                alert("Please fill all fields.");
-                return;
-            }
-
-            // Owner Login (Hardcoded)
+            // Owner Check
             if (email === "isuru123@gmail.com" && password === "123321123") {
                 window.location.href = "owner.html";
                 return;
             }
 
             try {
-                btn.innerHTML = "Authenticating...";
+                btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Please wait...";
                 btn.disabled = true;
 
-                // Sign in with Firebase Auth
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
                 const user = userCredential.user;
 
-                // Fetch User Data from Firestore
                 const doc = await db.collection("users").doc(user.uid).get();
 
                 if (doc.exists) {
                     const userData = doc.data();
-                    
-                    // Route based on role
                     if (userData.role === 'customer') {
                         window.location.href = "page1.html";
                     } else {
@@ -347,20 +307,11 @@
                         window.location.href = "profile.html";
                     }
                 } else {
-                    alert("User record not found in database.");
+                    alert("User data not found.");
                 }
 
             } catch (error) {
-                // Better error messages
-                let errorMsg = "Login Failed: ";
-                if (error.code === 'auth/wrong-password') {
-                    errorMsg += "Incorrect password.";
-                } else if (error.code === 'auth/user-not-found') {
-                    errorMsg += "No account found with this email.";
-                } else {
-                    errorMsg += error.message;
-                }
-                alert(errorMsg);
+                alert("Login Failed: " + error.message);
             } finally {
                 btn.innerHTML = "Login Now";
                 btn.disabled = false;

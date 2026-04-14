@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Handyman Services - HANDY LANKA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary: #d97706; /* Handyman Orange/Brown */
-      --secondary: #1e293b;
-      --bg-light: #fffbeb;
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-sub: #64748b;
+      --primary: #d97706; /* Handyman Orange */
+      --secondary: #1f2937;
       --accent: #f9c846;
+      --bg: #fffbeb;
+      --card-white: #ffffff;
     }
 
     * {
@@ -26,218 +24,277 @@
     }
 
     body {
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      color: var(--secondary);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-bottom: 40px;
     }
 
-    /* Header */
+    /* ---------- MOBILE APP HEADER ---------- */
     header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-      z-index: 100;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .n_logo {
-      width: 90px;
-      height: auto;
-      cursor: pointer;
+      height: 35px;
+      width: auto;
     }
 
-    .lang-btn {
-      background: #f1f5f9;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 11px;
+    nav a {
+      text-decoration: none;
+      color: var(--secondary);
       font-weight: 700;
-      color: var(--primary);
+      font-size: 0.9rem;
+      margin-left: 15px;
+      background: rgba(0,0,0,0.05);
+      padding: 8px 15px;
+      border-radius: 12px;
     }
 
-    /* Scrollable Content */
-    .scroll-container {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-      padding-bottom: 40px;
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      padding: 30px 20px;
+      text-align: left;
     }
 
-    .hero-section {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .hero-section h1 {
-      font-size: 22px;
+    .hero h1 {
+      font-size: 1.8rem;
       font-weight: 800;
+      line-height: 1.2;
     }
 
-    .hero-section h1 span { color: var(--primary); }
+    .hero h1 span { color: var(--primary); }
 
-    .hero-section p {
-      font-size: 13px;
-      color: var(--text-sub);
-      margin-top: 5px;
+    .hero p {
+      color: #64748b;
+      margin-top: 10px;
+      font-size: 0.95rem;
     }
 
-    /* Service Cards */
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* Language Switcher */
+    .lang-switcher {
+      padding: 0 20px;
+      margin-bottom: 10px;
+    }
+    
+    .lang-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* ---------- SERVICES LIST (Mobile App Style) ---------- */
+    .services-container {
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
       gap: 15px;
     }
 
     .service-card {
-      background: var(--card-bg);
-      padding: 20px 15px;
+      background: var(--card-white);
       border-radius: 24px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-      border: 1.5px solid transparent;
-      transition: 0.2s;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.02);
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .service-card:active {
-      transform: scale(0.96);
-      border-color: var(--accent);
+      transform: scale(0.97);
+      background: #fffbeb;
     }
 
     .icon-box {
-      width: 55px;
-      height: 55px;
-      background: #fffbeb;
-      border-radius: 16px;
+      width: 65px;
+      height: 65px;
+      background: #fff7ed;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      margin: 0 auto 12px;
+      font-size: 30px;
+      flex-shrink: 0;
     }
 
-    .service-card h3 {
-      font-size: 13px;
+    .card-content {
+      flex-grow: 1;
+    }
+
+    .card-content h3 {
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 5px;
-      line-height: 1.2;
+      color: var(--secondary);
     }
 
-    .service-card p {
-      font-size: 10px;
-      color: var(--text-sub);
-      line-height: 1.4;
+    .card-content p {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin: 4px 0 10px 0;
     }
 
-    .select-label {
+    .btn-select {
       display: inline-block;
-      margin-top: 12px;
-      font-size: 11px;
+      background: var(--primary);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 10px;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--primary);
       text-transform: uppercase;
     }
 
     footer {
       text-align: center;
-      padding: 20px;
-      font-size: 10px;
+      padding: 30px 20px;
       color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    /* Animation */
+    .service-card {
+      animation: slideIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="n logo.png" class="n_logo" onclick="window.location.href='page1.html'">
-    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">සිංහල</button>
+    <a href="page1.html">
+      <img src="n logo.png" class="n_logo" alt="HANDY LANKA Logo">
+    </a>
+    <nav>
+      <a href="page1.html" id="nav-home">Home</a>
+      <a href="help.html" id="nav-help">Help</a>
+    </nav>
   </header>
 
-  <div class="scroll-container">
-    <div class="hero-section">
-      <h1 id="hero-title">Handyman <span>Services</span></h1>
-      <p id="hero-desc">Professional repair and maintenance solutions</p>
-    </div>
+  <section class="hero">
+    <h1 id="hero-title">Handyman <span>Services</span></h1>
+    <p id="hero-desc">Professional repair and maintenance solutions for all your household needs.</p>
+  </section>
 
-    <div class="services-grid">
-      <div class="service-card" onclick="triggerBooking('General Repairs')">
-        <div class="icon-box">🔧</div>
-        <h3 id="s1-title">General Repairs</h3>
-        <p id="s1-desc">Doors, windows, and everyday fixes.</p>
-        <span class="select-label" id="sel1">Select</span>
-      </div>
-
-      <div class="service-card" onclick="triggerBooking('Furniture Assembly')">
-        <div class="icon-box">🪛</div>
-        <h3 id="s2-title">Furniture Assembly</h3>
-        <p id="s2-desc">Expert assembly of flat-pack furniture.</p>
-        <span class="select-label" id="sel2">Select</span>
-      </div>
-
-      <div class="service-card" onclick="triggerBooking('Wall Mounting')">
-        <div class="icon-box">🖼️</div>
-        <h3 id="s3-title">Wall Mounting</h3>
-        <p id="s3-desc">Secure TV and shelf installations.</p>
-        <span class="select-label" id="sel3">Select</span>
-      </div>
-
-      <div class="service-card" onclick="triggerBooking('Minor Carpentry')">
-        <div class="icon-box">🚪</div>
-        <h3 id="s4-title">Minor Carpentry</h3>
-        <p id="s4-desc">Small wood adjustments and fittings.</p>
-        <span class="select-label" id="sel4">Select</span>
-      </div>
-    </div>
-
-    <footer>
-      &copy; 2026 Handy Lanka. All rights reserved.
-    </footer>
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
   </div>
+
+  <section class="services-container">
+    <div class="service-card" onclick="triggerBooking('General Repairs')" style="animation-delay: 0.1s;">
+      <div class="icon-box">🔧</div>
+      <div class="card-content">
+        <h3 id="s1-title">General Repairs</h3>
+        <p id="s1-desc">Fixing doors, windows, locks, and everyday household issues.</p>
+        <div class="btn-select" id="btn1">Select Service</div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="triggerBooking('Furniture Assembly')" style="animation-delay: 0.2s;">
+      <div class="icon-box">🪛</div>
+      <div class="card-content">
+        <h3 id="s2-title">Furniture Assembly</h3>
+        <p id="s2-desc">Professional assembly of flat-pack furniture and installations.</p>
+        <div class="btn-select" id="btn2">Select Service</div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="triggerBooking('Wall Mounting')" style="animation-delay: 0.3s;">
+      <div class="icon-box">🖼️</div>
+      <div class="card-content">
+        <h3 id="s3-title">Wall Mounting</h3>
+        <p id="s3-desc">Secure installation of shelves, TVs, and decorative items.</p>
+        <div class="btn-select" id="btn3">Select Service</div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="triggerBooking('Minor Carpentry')" style="animation-delay: 0.4s;">
+      <div class="icon-box">🚪</div>
+      <div class="card-content">
+        <h3 id="s4-title">Minor Carpentry</h3>
+        <p id="s4-desc">Small carpentry tasks like adjustments, fittings, and repairs.</p>
+        <div class="btn-select" id="btn4">Select Service</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span id="footer-text">&copy; 2026 Handy Lanka. All rights reserved.</span>
+  </footer>
 
   <script>
     let currentLang = 'en';
 
     const translations = {
       en: {
-        langBtn: "සිංහල",
+        navHome: "Home",
+        navHelp: "Help",
+        langBtn: "Switch to සිංහල",
         heroTitle: "Handyman <span>Services</span>",
-        heroDesc: "Professional repair and maintenance solutions",
+        heroDesc: "Professional repair and maintenance solutions for all your household needs.",
         s1Title: "General Repairs",
-        s1Desc: "Doors, windows, and everyday fixes.",
+        s1Desc: "Fixing doors, windows, locks, and everyday household issues.",
         s2Title: "Furniture Assembly",
-        s2Desc: "Expert assembly of flat-pack furniture.",
+        s2Desc: "Professional assembly of flat-pack furniture and installations.",
         s3Title: "Wall Mounting",
-        s3Desc: "Secure TV and shelf installations.",
+        s3Desc: "Secure installation of shelves, TVs, and decorative items.",
         s4Title: "Minor Carpentry",
-        s4Desc: "Small wood adjustments and fittings.",
-        sel: "Select"
+        s4Desc: "Small carpentry tasks like adjustments, fittings, and repairs.",
+        btnSelect: "Select Service",
+        footer: "&copy; 2026 Handy Lanka. All rights reserved."
       },
       si: {
-        langBtn: "English",
+        navHome: "ප්‍රධාන පිටුව",
+        navHelp: "උදවු",
+        langBtn: "Switch to English",
         heroTitle: "අත්උදවු <span>සේවාවන්</span>",
-        heroDesc: "වෘත්තීය මට්ටමේ අලුත්වැඩියා සහ නඩත්තු විසඳුම්",
+        heroDesc: "ඔබේ සියලුම ගෘහස්ත අවශ්‍යතා සඳහා වෘත්තීය මට්ටමේ අලුත්වැඩියා සහ නඩත්තු විසඳුම්.",
         s1Title: "සාමාන්‍ය අලුත්වැඩියාවන්",
-        s1Desc: "දොර ජනෙල් සහ එදිනෙදා අලුත්වැඩියා කටයුතු.",
+        s1Desc: "දොර ජනෙල්, අගුල් සහ එදිනෙදා ගෘහස්ථ දෝෂ නිරාකරණය කිරීම.",
         s2Title: "ගෘහ භාණ්ඩ සවි කිරීම",
-        s2Desc: "ගෘහ භාණ්ඩ වෘත්තීය මට්ටමින් සවි කර දීම.",
+        s2Desc: "අලුතින් මිලදී ගත් ගෘහ භාණ්ඩ සහ උපකරණ වෘත්තීය මට්ටමින් සවි කර දීම.",
         s3Title: "බිත්ති සවිකිරීම්",
-        s3Desc: "TV සහ රාක්ක ආරක්ෂිතව සවි කිරීම.",
+        s3Desc: "රාක්ක, රූපවාහිනී සහ අලංකාර භාණ්ඩ බිත්තියේ ආරක්ෂිතව සවි කිරීම.",
         s4Title: "සුළු වඩු වැඩ",
-        s4Desc: "ගෘහස්ථ සුළු වඩු වැඩ සහ වෙනස් කිරීම්.",
-        sel: "තෝරන්න"
+        s4Desc: "ගෘහස්ථව අවශ්‍ය සුළු වඩු වැඩ, වෙනස් කිරීම් සහ අලුත්වැඩියා කිරීම්.",
+        btnSelect: "සේවාව තෝරන්න",
+        footer: "&copy; 2026 Handy Lanka. සියලුම හිමිකම් ඇවිරිණි."
       }
     };
 
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'si' : 'en';
+      updateContent();
+    }
+
+    function updateContent() {
       const t = translations[currentLang];
-      
-      document.getElementById('langBtn').textContent = t.langBtn;
+      document.getElementById('nav-home').textContent = t.navHome;
+      document.getElementById('nav-help').textContent = t.navHelp;
+      document.querySelector('.lang-btn').textContent = t.langBtn;
       document.getElementById('hero-title').innerHTML = t.heroTitle;
       document.getElementById('hero-desc').textContent = t.heroDesc;
       document.getElementById('s1-title').textContent = t.s1Title;
@@ -248,9 +305,10 @@
       document.getElementById('s3-desc').textContent = t.s3Desc;
       document.getElementById('s4-title').textContent = t.s4Title;
       document.getElementById('s4-desc').textContent = t.s4Desc;
+      document.getElementById('footer-text').innerHTML = t.footer;
       
       for(let i=1; i<=4; i++) {
-        document.getElementById(`sel${i}`).textContent = t.sel;
+        document.getElementById(`btn${i}`).textContent = t.btnSelect;
       }
     }
 
@@ -259,5 +317,6 @@
       window.location.href = `submi00.html?service=${mainCat}&type=${encodeURIComponent(subType)}`;
     }
   </script>
+
 </body>
 </html>

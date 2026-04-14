@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <title>Electrical Repairs - HANDY LANKA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cleaning & Painting - HANDY LANKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary: #f5b400;
-      --secondary: #1e293b;
-      --bg-light: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-sub: #64748b;
+      --primary: #d97706; /* Painting Orange/Theme Color */
+      --secondary: #1f2937;
+      --accent: #f9c846;
+      --bg: #f8fafc;
+      --card-white: #ffffff;
     }
 
     * {
@@ -25,208 +24,220 @@
     }
 
     body {
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(135deg, #fdf2f2 0%, #fffbeb 100%);
+      color: var(--secondary);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-bottom: 40px;
     }
 
-    /* Header Styling */
+    /* ---------- MOBILE APP HEADER ---------- */
     header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-      z-index: 100;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .n_logo {
-      width: 100px;
-      height: auto;
-      cursor: pointer;
+      height: 35px;
+      width: auto;
     }
 
-    .nav-icons {
-      display: flex;
-      gap: 15px;
-    }
-
-    .nav-link {
+    nav a {
       text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
       color: var(--secondary);
-      background: #f1f5f9;
-      padding: 6px 12px;
-      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-left: 15px;
+      background: rgba(0,0,0,0.05);
+      padding: 8px 15px;
+      border-radius: 12px;
     }
 
-    /* Hero Section */
+    /* ---------- HERO SECTION ---------- */
     .hero {
-      padding: 25px 20px 15px;
+      padding: 30px 20px;
       text-align: left;
     }
 
-    .lang-switcher {
-      margin-bottom: 15px;
-    }
-
-    .lang-btn {
-      background: var(--secondary);
-      color: white;
-      border: none;
-      padding: 5px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 11px;
-    }
-
     .hero h1 {
-      font-size: 24px;
+      font-size: 1.8rem;
       font-weight: 800;
-      margin-bottom: 8px;
+      line-height: 1.2;
     }
 
     .hero h1 span { color: var(--primary); }
 
     .hero p {
-      font-size: 13px;
-      color: var(--text-sub);
-      line-height: 1.5;
+      color: #64748b;
+      margin-top: 10px;
+      font-size: 0.95rem;
     }
 
-    /* Scrollable Service Area */
+    /* Language Switcher */
+    .lang-switcher {
+      padding: 0 20px;
+      margin-bottom: 10px;
+    }
+    
+    .lang-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* ---------- SERVICES LIST (Mobile App Style) ---------- */
     .services-container {
-      flex: 1;
       padding: 10px 20px;
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 15px;
-      padding-bottom: 30px;
     }
 
     .service-card {
-      background: var(--card-bg);
+      background: var(--card-white);
+      border-radius: 24px;
       padding: 20px;
-      border-radius: 20px;
       display: flex;
       align-items: center;
       gap: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-      border: 1px solid #f1f5f9;
-      transition: transform 0.2s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.02);
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .service-card:active {
       transform: scale(0.97);
-      background: #fafafa;
+      background: #fefce8;
     }
 
     .icon-box {
-      width: 60px;
-      height: 60px;
-      background: #fffbeb;
-      border-radius: 15px;
+      width: 65px;
+      height: 65px;
+      background: #fff7ed;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      font-size: 30px;
       flex-shrink: 0;
     }
 
-    .service-info {
-      flex: 1;
+    .card-content {
+      flex-grow: 1;
     }
 
-    .service-info h3 {
-      font-size: 15px;
+    .card-content h3 {
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      color: var(--secondary);
     }
 
-    .service-info p {
-      font-size: 12px;
-      color: var(--text-sub);
-      line-height: 1.4;
+    .card-content p {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin: 4px 0 10px 0;
     }
 
-    .select-arrow {
-      color: var(--primary);
-      font-weight: bold;
-      font-size: 18px;
+    .btn-select {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
     footer {
       text-align: center;
-      padding: 15px;
-      background: white;
-      font-size: 11px;
+      padding: 30px 20px;
       color: #94a3b8;
-      border-top: 1px solid #f1f5f9;
+      font-size: 0.8rem;
+    }
+
+    /* Animation */
+    .service-card {
+      animation: slideIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <a href="page1.html">
-      <img src="n logo.png" class="n_logo" alt="HANDY LANKA">
-    </a>
-    <div class="nav-icons">
-      <a href="page1.html" class="nav-link" id="nav-home">Home</a>
-      <a href="help.html" class="nav-link" id="nav-help">Help</a>
+    <div>
+      <img src="n logo.png" class="n_logo" alt="Logo">
     </div>
+    <nav>
+      <a href="page1.html" id="nav-home">Home</a>
+      <a href="help.html" id="nav-help">Help</a>
+    </nav>
   </header>
 
   <section class="hero">
-    <div class="lang-switcher">
-      <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
-    </div>
-    <h1 id="hero-title">Electrical <span>Repairs</span></h1>
-    <p id="hero-desc">Safe and certified electrical solutions for all your wiring and installation needs.</p>
+    <h1 id="hero-title">Cleaning & <span>Painting</span></h1>
+    <p id="hero-desc">Professional solutions for a spotless home and vibrant, fresh walls.</p>
   </section>
 
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
+  </div>
+
   <section class="services-container">
-    <div class="service-card" onclick="triggerBooking('Lighting Installation')">
-      <div class="icon-box">💡</div>
-      <div class="service-info">
-        <h3 id="s1-title">Lighting Installation</h3>
-        <p id="s1-desc">Professional setup for lights, ceiling fans, and decorative fixtures.</p>
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Deep Cleaning')" style="animation-delay: 0.1s;">
+      <div class="icon-box">✨</div>
+      <div class="card-content">
+        <h3 id="s1-title">Full House Cleaning</h3>
+        <p id="s1-desc">Complete deep cleaning from floors to ceiling.</p>
+        <div class="btn-select" id="btn1">Select Service</div>
       </div>
-      <div class="select-arrow">→</div>
     </div>
 
-    <div class="service-card" onclick="triggerBooking('Wiring & Rewiring')">
-      <div class="icon-box">🔌</div>
-      <div class="service-info">
-        <h3 id="s2-title">Wiring & Rewiring</h3>
-        <p id="s2-desc">Modern wiring solutions ensuring safety for home renovations.</p>
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Kitchen & Bath')" style="animation-delay: 0.2s;">
+      <div class="icon-box">🧼</div>
+      <div class="card-content">
+        <h3 id="s2-title">Kitchen & Bathroom</h3>
+        <p id="s2-desc">Specialized scrubbing and sanitization services.</p>
+        <div class="btn-select" id="btn2">Select Service</div>
       </div>
-      <div class="select-arrow">→</div>
     </div>
 
-    <div class="service-card" onclick="triggerBooking('Power Outlets')">
-      <div class="icon-box">⚡</div>
-      <div class="service-info">
-        <h3 id="s3-title">Power Outlets</h3>
-        <p id="s3-desc">Repairing sockets, switches, and troubleshooting circuit breakers.</p>
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Interior Painting')" style="animation-delay: 0.3s;">
+      <div class="icon-box">🎨</div>
+      <div class="card-content">
+        <h3 id="s3-title">Interior Painting</h3>
+        <p id="s3-desc">Premium wall painting and color matching solutions.</p>
+        <div class="btn-select" id="btn3">Select Service</div>
       </div>
-      <div class="select-arrow">→</div>
     </div>
 
-    <div class="service-card" onclick="triggerBooking('Appliance Setup')">
-      <div class="icon-box">⚙️</div>
-      <div class="service-info">
-        <h3 id="s4-title">Appliance Setup</h3>
-        <p id="s4-desc">Installing and fixing household electronics with professional care.</p>
+    <div class="service-card" onclick="bookService('house_cleaning_painting', 'Exterior Painting')" style="animation-delay: 0.4s;">
+      <div class="icon-box">🏠</div>
+      <div class="card-content">
+        <h3 id="s4-title">Exterior Painting</h3>
+        <p id="s4-desc">Weather-resistant coatings to protect outer walls.</p>
+        <div class="btn-select" id="btn4">Select Service</div>
       </div>
-      <div class="select-arrow">→</div>
     </div>
   </section>
 
@@ -242,32 +253,34 @@
         navHome: "Home",
         navHelp: "Help",
         langBtn: "Switch to සිංහල",
-        heroTitle: "Electrical <span>Repairs</span>",
-        heroDesc: "Safe and certified electrical solutions for all your wiring and installation needs.",
-        s1Title: "Lighting Installation",
-        s1Desc: "Professional setup for lights, ceiling fans, and decorative fixtures.",
-        s2Title: "Wiring & Rewiring",
-        s2Desc: "Modern wiring solutions ensuring safety for home renovations.",
-        s3Title: "Power Outlets",
-        s3Desc: "Repairing sockets, switches, and troubleshooting circuit breakers.",
-        s4Title: "Appliance Setup",
-        s4Desc: "Installing and fixing household electronics with professional care.",
+        heroTitle: "Cleaning & <span>Painting</span>",
+        heroDesc: "Professional solutions for a spotless home and vibrant, fresh walls.",
+        s1Title: "Full House Cleaning",
+        s1Desc: "Complete deep cleaning from floors to ceiling.",
+        s2Title: "Kitchen & Bathroom",
+        s2Desc: "Specialized scrubbing and sanitization services.",
+        s3Title: "Interior Painting",
+        s3Desc: "Premium wall painting and color matching solutions.",
+        s4Title: "Exterior Painting",
+        s4Desc: "Weather-resistant coatings to protect outer walls.",
+        btnSelect: "Select Service",
         footer: "&copy; 2026 Handy Lanka. All rights reserved."
       },
       si: {
         navHome: "ප්‍රධාන පිටුව",
         navHelp: "උදවු",
         langBtn: "Switch to English",
-        heroTitle: "විදුලි <span>අලුත්වැඩියාවන්</span>",
-        heroDesc: "ඔබේ සියලුම වයර් පද්ධති සහ සවිකිරීම් අවශ්‍යතා සඳහා ආරක්ෂිත සහ සහතික ලත් විදුලි විසඳුම්.",
-        s1Title: "ආලෝක පද්ධති සවිකිරීම",
-        s1Desc: "විදුලි බුබුළු, සීලිං ෆැන් සහ අලංකාර විදුලි පද්ධති සඳහා වෘත්තීයමය සේවාව.",
-        s2Title: "වයර් පද්ධති සකස් කිරීම",
-        s2Desc: "නිවසේ ආරක්ෂාව සහතික කෙරෙන නවීන වයර් පද්ධති විසඳුම්.",
-        s3Title: "විදුලි පේනු සහ ස්විච්",
-        s3Desc: "ස්විච්, සොකට් අලුත්වැඩියාව සහ සර්කිට් බ්‍රේකර් දෝෂ නිරාකරණය කිරීම.",
-        s4Title: "විදුලි උපකරණ සවිකිරීම",
-        s4Desc: "ගෘහස්ථ විදුලි උපකරණ වෘත්තීයමය මට්ටමින් සවිකිරීම සහ අලුත්වැඩියා කිරීම.",
+        heroTitle: "පිරිසිදු කිරීම සහ <span>තීන්ත ආලේපනය</span>",
+        heroDesc: "පිරිසිදු නිවසක් සහ අලංකාර වර්ණවත් බිත්ති සඳහා වෘත්තීය විසඳුම්.",
+        s1Title: "සම්පූර්ණ නිවස පිරිසිදු කිරීම",
+        s1Desc: "පොළොවේ සිට වහලය දක්වා සම්පූර්ණ ගැඹුරු පිරිසිදු කිරීම.",
+        s2Title: "කුස්සිය සහ නානකාමරය",
+        s2Desc: "විශේෂිත පිරිසිදු කිරීමේ දියර යොදා විෂබීජහරණය කිරීම.",
+        s3Title: "ඇතුළත තීන්ත ආලේපනය",
+        s3Desc: "නිවසේ ඇතුළත බිත්ති සඳහා උසස් තත්ත්වයේ තීන්ත ආලේප කිරීම.",
+        s4Title: "පිටත තීන්ත ආලේපනය",
+        s4Desc: "පිටත බිත්ති ආරක්ෂා කර අලංකාර කිරීමේ සේවාව.",
+        btnSelect: "සේවාව තෝරන්න",
         footer: "&copy; 2026 Handy Lanka. සියලුම හිමිකම් ඇවිරිණි."
       }
     };
@@ -293,14 +306,16 @@
       document.getElementById('s4-title').textContent = t.s4Title;
       document.getElementById('s4-desc').textContent = t.s4Desc;
       document.getElementById('footer-text').innerHTML = t.footer;
+      
+      for(let i=1; i<=4; i++) {
+        document.getElementById(`btn${i}`).textContent = t.btnSelect;
+      }
     }
 
-    function triggerBooking(subType) {
-      const mainCat = 'electrical_repairs';
+    function bookService(mainCat, subType) {
       window.location.href = `submi00.html?service=${mainCat}&type=${encodeURIComponent(subType)}`;
     }
   </script>
 
 </body>
 </html>
-

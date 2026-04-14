@@ -31,6 +31,29 @@
       padding: 20px;
       text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    /* Translate Button Styling */
+    .lang-switch {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--dark);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .lang-switch:hover {
+      background: var(--primary);
+      color: var(--dark);
     }
 
     .logo {
@@ -129,24 +152,25 @@
 
   <header>
     <div class="logo">HANDY <span class="lanka">LANKA</span></div>
+    <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">English</button>
   </header>
 
   <div class="main-content">
     <div class="thankyou-card">
       <div class="success-icon">✓</div>
-      <h2>Thank You!</h2>
-      <p>ඔබේ වෙන්කරවා ගැනීම සාර්ථකව ලැබුණි. සේවාව ස්ථිර කිරීම සඳහා අපගේ නියෝජිතයෙකු කෙටි වේලාවකින් ඔබව අමතනු ඇත.</p>
+      <h2 id="title">ස්තූතියි!</h2>
+      <p id="desc">ඔබේ වෙන්කරවා ගැනීම සාර්ථකව ලැබුණි. සේවාව ස්ථිර කිරීම සඳහා අපගේ නියෝජිතයෙකු කෙටි වේලාවකින් ඔබව අමතනු ඇත.</p>
       
       <div class="info-box">
-        <strong>මීළඟ පියවර:</strong>
-        <ul style="margin: 10px 0 0 18px; padding: 0;">
+        <strong id="nextStep">මීළඟ පියවර:</strong>
+        <ul id="stepList" style="margin: 10px 0 0 18px; padding: 0;">
           <li>ඇමතුමක් මගින් දිනය සහ වේලාව තහවුරු කිරීම.</li>
           <li>සේවකයා ඔබේ නිවසට පැමිණීම.</li>
           <li>සේවාව අවසානයේ ගෙවීම් සිදු කිරීම.</li>
         </ul>
       </div>
 
-      <a href="page1.html" class="btn-home">Back to Home</a>
+      <a href="page1.html" class="btn-home" id="homeBtn">Back to Home</a>
     </div>
   </div>
 
@@ -157,7 +181,58 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // පිටුව Load වන විට Confetti animation එක පෙන්වීම
+    // Translation Data
+    const translations = {
+      si: {
+        btn: "English",
+        title: "ස්තූතියි!",
+        desc: "ඔබේ වෙන්කරවා ගැනීම සාර්ථකව ලැබුණි. සේවාව ස්ථිර කිරීම සඳහා අපගේ නියෝජිතයෙකු කෙටි වේලාවකින් ඔබව අමතනු ඇත.",
+        nextStep: "මීළඟ පියවර:",
+        steps: [
+          "ඇමතුමක් මගින් දිනය සහ වේලාව තහවුරු කිරීම.",
+          "සේවකයා ඔබේ නිවසට පැමිණීම.",
+          "සේවාව අවසානයේ ගෙවීම් සිදු කිරීම."
+        ],
+        home: "මුල් පිටුවට"
+      },
+      en: {
+        btn: "සිංහල",
+        title: "Thank You!",
+        desc: "Your booking has been successfully received. One of our agents will call you shortly to confirm the service.",
+        nextStep: "Next Steps:",
+        steps: [
+          "Confirm date and time via phone call.",
+          "Professional arrives at your doorstep.",
+          "Make payment after the service is completed."
+        ],
+        home: "Back to Home"
+      }
+    };
+
+    let currentLang = 'si';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'si' ? 'en' : 'si';
+      const data = translations[currentLang];
+
+      // Update Text
+      document.getElementById('langBtn').textContent = data.btn;
+      document.getElementById('title').textContent = data.title;
+      document.getElementById('desc').textContent = data.desc;
+      document.getElementById('nextStep').textContent = data.nextStep;
+      document.getElementById('homeBtn').textContent = data.home;
+
+      // Update List
+      const list = document.getElementById('stepList');
+      list.innerHTML = '';
+      data.steps.forEach(step => {
+        const li = document.createElement('li');
+        li.textContent = step;
+        list.appendChild(li);
+      });
+    }
+
+    // Confetti on load
     window.onload = function() {
       confetti({
         particleCount: 150,

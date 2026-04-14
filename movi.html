@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Moving Assistance - HANDY LANKA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --yellow: #f9c846;
-      --dark-yellow: #eab308;
-      --black: #1f2937;
-      --card-bg: #ffffff;
-      --text: #374151;
-      --primary: #d97706;
+      --primary: #2563eb; /* Transport Blue */
+      --secondary: #1f2937;
+      --accent: #f9c846;
+      --bg: #f1f5f9;
+      --card-white: #ffffff;
     }
 
     * {
@@ -21,173 +20,165 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* ---------- DYNAMIC ANIMATED BG ---------- */
     body {
-      background: linear-gradient(-45deg, #e5e7eb, #fef3c7, #dbeafe, #fde68a);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: var(--text);
-      line-height: 1.6;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f1f5f9 100%);
+      color: var(--secondary);
+      line-height: 1.5;
       min-height: 100vh;
-      overflow-x: hidden;
+      padding-bottom: 40px;
     }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ---------- HEADER ---------- */
+    /* ---------- MOBILE APP HEADER ---------- */
     header {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      padding: 10px 5%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .n_logo {
-      height: auto;
-      width: 110px; /* Scaled for mobile */
-      transition: 0.3s;
+      height: 35px;
+      width: auto;
     }
 
     nav a {
       text-decoration: none;
-      color: var(--black);
-      font-weight: 600;
-      font-size: 15px; /* Better mobile size */
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 0.9rem;
       margin-left: 15px;
-      transition: 0.3s;
-    }
-    nav a:hover { color: var(--primary); }
-
-    .lang-switcher {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .lang-btn {
-      background: white;
-      border: 1px solid #ccc;
-      padding: 6px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 13px;
+      background: rgba(0,0,0,0.05);
+      padding: 8px 15px;
+      border-radius: 12px;
     }
 
     /* ---------- HERO SECTION ---------- */
     .hero {
-      text-align: center;
-      padding: 30px 15px 10px;
-      animation: fadeIn 0.8s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      padding: 30px 20px;
+      text-align: left;
     }
 
     .hero h1 {
-      font-size: 1.8rem; /* Mobile first font size */
+      font-size: 1.8rem;
       font-weight: 800;
-      color: var(--black);
-      margin-bottom: 10px;
+      line-height: 1.2;
     }
 
     .hero h1 span { color: var(--primary); }
 
     .hero p {
-      color: #4b5563;
-      max-width: 90%;
-      margin: 0 auto;
+      color: #64748b;
+      margin-top: 10px;
       font-size: 0.95rem;
     }
 
-    /* ---------- SERVICES GRID ---------- */
-    .services-grid {
-      max-width: 1100px;
-      margin: 20px auto 40px;
-      padding: 0 15px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+    /* Language Switcher */
+    .lang-switcher {
+      padding: 0 20px;
+      margin-bottom: 10px;
+    }
+    
+    .lang-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* ---------- SERVICES LIST (Mobile App Style) ---------- */
+    .services-container {
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .service-card {
-      background: var(--card-bg);
-      padding: 30px 20px;
-      border-radius: 25px;
-      text-align: center;
-      transition: 0.3s ease;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      background: var(--card-white);
+      border-radius: 24px;
+      padding: 20px;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      gap: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.02);
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .service-card:active { /* Mobile touch feedback */
+    .service-card:active {
       transform: scale(0.97);
+      background: #eff6ff;
     }
 
     .icon-box {
-      width: 70px;
-      height: 70px;
-      background: #f3f4f6;
+      width: 65px;
+      height: 65px;
+      background: #eff6ff;
       border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 35px;
-      margin-bottom: 15px;
+      font-size: 30px;
+      flex-shrink: 0;
     }
 
-    .service-card h3 {
-      font-size: 1.1rem;
+    .card-content {
+      flex-grow: 1;
+    }
+
+    .card-content h3 {
+      font-size: 1rem;
       font-weight: 700;
-      color: var(--black);
-      margin-bottom: 8px;
+      color: var(--secondary);
     }
 
-    .service-card p {
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-bottom: 15px;
+    .card-content p {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin: 4px 0 10px 0;
     }
 
     .btn-select {
-      background: #1f2937;
+      display: inline-block;
+      background: var(--primary);
       color: white;
-      padding: 10px 20px;
-      border-radius: 12px;
+      padding: 6px 15px;
+      border-radius: 10px;
+      font-size: 0.75rem;
       font-weight: 700;
-      font-size: 0.85rem;
-      width: 100%; /* Tap-friendly buttons */
+      text-transform: uppercase;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
-      color: #6b7280;
+      padding: 30px 20px;
+      color: #94a3b8;
       font-size: 0.8rem;
     }
 
-    /* ---------- DESKTOP TWEAKS ---------- */
-    @media (min-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1.1rem; }
-      .n_logo { width: 130px; }
-      nav a { font-size: 18px; }
-      .btn-select { width: auto; }
+    /* Animation */
+    .service-card {
+      animation: slideIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
   </style>
 </head>
@@ -203,42 +194,50 @@
     </nav>
   </header>
 
-  <div class="lang-switcher">
-    <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
-  </div>
-
   <section class="hero">
     <h1 id="hero-title">Moving <span>Assistance</span></h1>
     <p id="hero-desc">Reliable and stress-free transport solutions for your home or office relocation.</p>
   </section>
 
-  <section class="services-grid">
-    <div class="service-card" onclick="triggerBooking('Packing & Unpacking')">
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
+  </div>
+
+  <section class="services-container">
+    <div class="service-card" onclick="triggerBooking('Packing & Unpacking')" style="animation-delay: 0.1s;">
       <div class="icon-box">📦</div>
-      <h3 id="s1-title">Packing & Unpacking</h3>
-      <p id="s1-desc">Careful packing and organized unpacking of your belongings.</p>
-      <div class="btn-select" id="btn1">Select Service</div>
+      <div class="card-content">
+        <h3 id="s1-title">Packing & Unpacking</h3>
+        <p id="s1-desc">Careful packing and organized unpacking of your belongings.</p>
+        <div class="btn-select" id="btn1">Select Service</div>
+      </div>
     </div>
 
-    <div class="service-card" onclick="triggerBooking('Transport Services')">
+    <div class="service-card" onclick="triggerBooking('Transport Services')" style="animation-delay: 0.2s;">
       <div class="icon-box">🚚</div>
-      <h3 id="s2-title">Transport Services</h3>
-      <p id="s2-desc">Safe and reliable moving trucks for local relocations.</p>
-      <div class="btn-select" id="btn2">Select Service</div>
+      <div class="card-content">
+        <h3 id="s2-title">Transport Services</h3>
+        <p id="s2-desc">Safe and reliable moving trucks for local relocations.</p>
+        <div class="btn-select" id="btn2">Select Service</div>
+      </div>
     </div>
 
-    <div class="service-card" onclick="triggerBooking('Furniture Handling')">
+    <div class="service-card" onclick="triggerBooking('Furniture Handling')" style="animation-delay: 0.3s;">
       <div class="icon-box">🛋️</div>
-      <h3 id="s3-title">Furniture Handling</h3>
-      <p id="s3-desc">Professional disassembly and reassembly of large items.</p>
-      <div class="btn-select" id="btn3">Select Service</div>
+      <div class="card-content">
+        <h3 id="s3-title">Furniture Handling</h3>
+        <p id="s3-desc">Professional disassembly and reassembly of large items.</p>
+        <div class="btn-select" id="btn3">Select Service</div>
+      </div>
     </div>
 
-    <div class="service-card" onclick="triggerBooking('Office Relocation')">
+    <div class="service-card" onclick="triggerBooking('Office Relocation')" style="animation-delay: 0.4s;">
       <div class="icon-box">🏢</div>
-      <h3 id="s4-title">Office Relocation</h3>
-      <p id="s4-desc">Efficient moving solutions tailored for business needs.</p>
-      <div class="btn-select" id="btn4">Select Service</div>
+      <div class="card-content">
+        <h3 id="s4-title">Office Relocation</h3>
+        <p id="s4-desc">Efficient moving solutions tailored for business needs.</p>
+        <div class="btn-select" id="btn4">Select Service</div>
+      </div>
     </div>
   </section>
 
@@ -272,15 +271,15 @@
         navHelp: "උදවු",
         langBtn: "Switch to English",
         heroTitle: "ප්‍රවාහන <span>සහය</span>",
-        heroDesc: "ඔබේ නිවස හෝ කාර්යාලය මාරු කිරීම සඳහා විශ්වාසදායක ප්‍රවාහන විසඳුම්.",
+        heroDesc: "ඔබේ නිවස හෝ කාර්යාලය මාරු කිරීම සඳහා විශ්වාසදායක සහ කරදරයකින් තොර ප්‍රවාහන විසඳුම්.",
         s1Title: "ඇසුරුම් කිරීම සහ ඉවත් කිරීම",
-        s1Desc: "ඔබේ බඩු බාහිරාදිය ප්‍රවේශමෙන් ඇසුරුම් කර පිළිවෙළකට ඉවත් කර දීම.",
+        s1Desc: "ඔබේ බඩු බාහිරාදිය ප්‍රවේශමෙන් ඇසුරුම් කිරීම සහ පිළිවෙළකට ඉවත් කිරීම.",
         s2Title: "ප්‍රවාහන සේවාවන්",
-        s2Desc: "දේශීය අවශ්‍යතා සඳහා ආරක්ෂිත සහ විශ්වාසදායක ලොරි රථ සේවාව.",
+        s2Desc: "දේශීය ප්‍රවාහන අවශ්‍යතා සඳහා ආරක්ෂිත සහ විශ්වාසදායක ලොරි රථ සේවාව.",
         s3Title: "ගෘහ භාණ්ඩ හැසිරවීම",
         s3Desc: "විශාල ගෘහ භාණ්ඩ ගලවා නැවත සවි කිරීම පිළිබඳ වෘත්තීය සහය.",
         s4Title: "කාර්යාල මාරු කිරීම",
-        s4Desc: "ව්‍යාපාරික අවශ්‍යතා සඳහා සකස් කරන ලද ප්‍රවාහන විසඳුම්.",
+        s4Desc: "ව්‍යාපාරික අවශ්‍යතා සඳහා සකස් කරන ලද කාර්යක්ෂම ප්‍රවාහන විසඳුම්.",
         btnSelect: "සේවාව තෝරන්න",
         footer: "&copy; 2026 Handy Lanka. සියලුම හිමිකම් ඇවිරිණි."
       }

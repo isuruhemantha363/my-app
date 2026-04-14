@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gardening Services - HANDY LANKA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary: #15803d; /* Green for Gardening */
-      --secondary: #1e293b;
-      --bg-light: #f0fdf4; /* Light green tint */
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-sub: #64748b;
+      --primary: #15803d; /* Gardening Green */
+      --secondary: #1f2937;
+      --accent: #bbf7d0;
+      --bg: #f0fdf4;
+      --card-white: #ffffff;
     }
 
     * {
@@ -25,217 +24,277 @@
     }
 
     body {
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
+      color: var(--secondary);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-bottom: 40px;
     }
 
-    /* Header */
+    /* ---------- MOBILE APP HEADER ---------- */
     header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-      z-index: 100;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .n_logo {
-      width: 90px;
-      height: auto;
-      cursor: pointer;
+      height: 35px;
+      width: auto;
     }
 
-    .lang-btn {
-      background: #f1f5f9;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 11px;
+    nav a {
+      text-decoration: none;
+      color: var(--secondary);
       font-weight: 700;
-      color: var(--primary);
+      font-size: 0.9rem;
+      margin-left: 15px;
+      background: rgba(0,0,0,0.05);
+      padding: 8px 15px;
+      border-radius: 12px;
     }
 
-    /* Scrollable Content */
-    .scroll-container {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-      padding-bottom: 40px;
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      padding: 30px 20px;
+      text-align: left;
     }
 
-    .hero-section {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .hero-section h1 {
-      font-size: 22px;
+    .hero h1 {
+      font-size: 1.8rem;
       font-weight: 800;
+      line-height: 1.2;
     }
 
-    .hero-section h1 span { color: var(--primary); }
+    .hero h1 span { color: var(--primary); }
 
-    .hero-section p {
-      font-size: 13px;
-      color: var(--text-sub);
-      margin-top: 5px;
+    .hero p {
+      color: #64748b;
+      margin-top: 10px;
+      font-size: 0.95rem;
     }
 
-    /* Service Cards */
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* Language Switcher */
+    .lang-switcher {
+      padding: 0 20px;
+      margin-bottom: 10px;
+    }
+    
+    .lang-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(21, 128, 61, 0.2);
+    }
+
+    /* ---------- SERVICES LIST (Mobile App Style) ---------- */
+    .services-container {
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
       gap: 15px;
     }
 
     .service-card {
-      background: var(--card-bg);
-      padding: 20px 15px;
+      background: var(--card-white);
       border-radius: 24px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-      border: 1.5px solid transparent;
-      transition: 0.2s;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.02);
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .service-card:active {
-      transform: scale(0.96);
-      border-color: var(--primary);
+      transform: scale(0.97);
+      background: #f0fdf4;
     }
 
     .icon-box {
-      width: 55px;
-      height: 55px;
+      width: 65px;
+      height: 65px;
       background: #f0fdf4;
-      border-radius: 16px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      margin: 0 auto 12px;
+      font-size: 30px;
+      flex-shrink: 0;
     }
 
-    .service-card h3 {
-      font-size: 14px;
+    .card-content {
+      flex-grow: 1;
+    }
+
+    .card-content h3 {
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 5px;
+      color: var(--secondary);
     }
 
-    .service-card p {
-      font-size: 10px;
-      color: var(--text-sub);
-      line-height: 1.4;
+    .card-content p {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin: 4px 0 10px 0;
     }
 
-    .select-label {
+    .btn-select {
       display: inline-block;
-      margin-top: 12px;
-      font-size: 11px;
+      background: var(--primary);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 10px;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--primary);
       text-transform: uppercase;
     }
 
     footer {
       text-align: center;
-      padding: 20px;
-      font-size: 10px;
+      padding: 30px 20px;
       color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    /* Animation for cards */
+    .service-card {
+      animation: slideIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="n logo.png" class="n_logo" onclick="window.location.href='page1.html'">
-    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">සිංහල</button>
+    <a href="page1.html">
+      <img src="n logo.png" class="n_logo" alt="HANDY LANKA Logo">
+    </a>
+    <nav>
+      <a href="page1.html" id="nav-home">Home</a>
+      <a href="help.html" id="nav-help">Help</a>
+    </nav>
   </header>
 
-  <div class="scroll-container">
-    <div class="hero-section">
-      <h1 id="hero-title">Gardening <span>Services</span></h1>
-      <p id="hero-desc">Professional care for your outdoor space</p>
-    </div>
+  <section class="hero">
+    <h1 id="hero-title">Gardening <span>Services</span></h1>
+    <p id="hero-desc">Professional lawn care and landscaping solutions to transform your outdoor space.</p>
+  </section>
 
-    <div class="services-grid">
-      <div class="service-card" onclick="triggerBooking('Lawn Care')">
-        <div class="icon-box">🌿</div>
-        <h3 id="s1-title">Lawn Care</h3>
-        <p id="s1-desc">Mowing and maintenance for a lush lawn.</p>
-        <span class="select-label" id="sel1">Book Now</span>
-      </div>
-
-      <div class="service-card" onclick="triggerBooking('Tree Trimming')">
-        <div class="icon-box">✂️</div>
-        <h3 id="s2-title">Tree Trimming</h3>
-        <p id="s2-desc">Safe pruning and healthy tree care.</p>
-        <span class="select-label" id="sel2">Book Now</span>
-      </div>
-
-      <div class="service-card" onclick="triggerBooking('Flower Planting')">
-        <div class="icon-box">🌸</div>
-        <h3 id="s3-title">Flower Planting</h3>
-        <p id="s3-desc">Seasonal design and planting.</p>
-        <span class="select-label" id="sel3">Book Now</span>
-      </div>
-
-      <div class="service-card" onclick="triggerBooking('Landscaping')">
-        <div class="icon-box">🏡</div>
-        <h3 id="s4-title">Landscaping</h3>
-        <p id="s4-desc">Stunning custom garden solutions.</p>
-        <span class="select-label" id="sel4">Book Now</span>
-      </div>
-    </div>
-
-    <footer>
-      &copy; 2026 Handy Lanka. All rights reserved.
-    </footer>
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="toggleLanguage()">Switch to සිංහල</button>
   </div>
+
+  <section class="services-container">
+    <div class="service-card" onclick="triggerBooking('Lawn Care')" style="animation-delay: 0.1s;">
+      <div class="icon-box">🌿</div>
+      <div class="card-content">
+        <h3 id="s1-title">Lawn Care</h3>
+        <p id="s1-desc">Regular mowing and maintenance to keep your lawn lush and green.</p>
+        <div class="btn-select" id="btn1">Select Service</div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="triggerBooking('Tree Trimming')" style="animation-delay: 0.2s;">
+      <div class="icon-box">✂️</div>
+      <div class="card-content">
+        <h3 id="s2-title">Tree Trimming</h3>
+        <p id="s2-desc">Safe trimming and pruning to keep your trees healthy.</p>
+        <div class="btn-select" id="btn2">Select Service</div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="triggerBooking('Flower Planting')" style="animation-delay: 0.3s;">
+      <div class="icon-box">🌸</div>
+      <div class="card-content">
+        <h3 id="s3-title">Flower Planting</h3>
+        <p id="s3-desc">Seasonal flower planting and garden design solutions.</p>
+        <div class="btn-select" id="btn3">Select Service</div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="triggerBooking('Landscaping')" style="animation-delay: 0.4s;">
+      <div class="icon-box">🏡</div>
+      <div class="card-content">
+        <h3 id="s4-title">Landscaping</h3>
+        <p id="s4-desc">Custom landscaping to create stunning outdoor spaces.</p>
+        <div class="btn-select" id="btn4">Select Service</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span id="footer-text">&copy; 2026 Handy Lanka. All rights reserved.</span>
+  </footer>
 
   <script>
     let currentLang = 'en';
 
     const translations = {
       en: {
-        langBtn: "සිංහල",
+        navHome: "Home",
+        navHelp: "Help",
+        langBtn: "Switch to සිංහල",
         heroTitle: "Gardening <span>Services</span>",
-        heroDesc: "Professional care for your outdoor space",
+        heroDesc: "Professional lawn care and landscaping solutions to transform your outdoor space.",
         s1Title: "Lawn Care",
-        s1Desc: "Mowing and maintenance for a lush lawn.",
+        s1Desc: "Regular mowing and maintenance to keep your lawn lush and green.",
         s2Title: "Tree Trimming",
-        s2Desc: "Safe pruning and healthy tree care.",
+        s2Desc: "Safe trimming and pruning to keep your trees healthy.",
         s3Title: "Flower Planting",
-        s3Desc: "Seasonal design and planting.",
+        s3Desc: "Seasonal flower planting and garden design solutions.",
         s4Title: "Landscaping",
-        s4Desc: "Stunning custom garden solutions.",
-        sel: "Book Now"
+        s4Desc: "Custom landscaping to create stunning outdoor spaces.",
+        btnSelect: "Select Service",
+        footer: "&copy; 2026 Handy Lanka. All rights reserved."
       },
       si: {
-        langBtn: "English",
+        navHome: "ප්‍රධාන පිටුව",
+        navHelp: "උදවු",
+        langBtn: "Switch to English",
         heroTitle: "ගෙවතු <span>සේවාවන්</span>",
-        heroDesc: "ඔබේ මිදුල අලංකාර කිරීමට වෘත්තීය විසඳුම්",
-        s1Title: "තණකොළ කැපීම",
-        s1Desc: "නිසි නඩත්තුව සහ තණකොළ කැපීම.",
-        s2Title: "අතු කප්පාදු කිරීම",
-        s2Desc: "ගස් නිරෝගීව සහ අලංකාරව තබා ගැනීම.",
+        heroDesc: "ඔබේ මිදුල අලංකාර කිරීමට වෘත්තීය මට්ටමේ තණකොළ කැපීම සහ භූමි අලංකරණ විසඳුම්.",
+        s1Title: "තණකොළ රැකවරණය",
+        s1Desc: "ඔබේ තණකොළ පිටිය සාරවත්ව තබා ගැනීමට නිතිපතා කැපීම සහ නඩත්තුව.",
+        s2Title: "ගස් කැපීම/නඩත්තුව",
+        s2Desc: "ගස් නිරෝගීව තබා ගැනීම සඳහා ආරක්ෂිතව අතු කැපීම සහ කප්පාදු කිරීම.",
         s3Title: "මල් පැළ සිටුවීම",
-        s3Desc: "උද්‍යානයට අලංකාරයක් එක් කිරීම.",
+        s3Desc: "කාලීන මල් පැළ සිටුවීම සහ උද්‍යානයට අලංකාරයක් එක් කරන සැලසුම්.",
         s4Title: "භූමි අලංකරණය",
-        s4Desc: "විස්මිත එළිමහන් අවකාශ නිර්මාණය.",
-        sel: "තෝරන්න"
+        s4Desc: "විස්මිත එළිමහන් අවකාශයක් නිර්මාණය කිරීම සඳහා භූමි අලංකරණ විසඳුම්.",
+        btnSelect: "සේවාව තෝරන්න",
+        footer: "&copy; 2026 Handy Lanka. සියලුම හිමිකම් ඇවිරිණි."
       }
     };
 
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'si' : 'en';
+      updateContent();
+    }
+
+    function updateContent() {
       const t = translations[currentLang];
-      
-      document.getElementById('langBtn').textContent = t.langBtn;
+      document.getElementById('nav-home').textContent = t.navHome;
+      document.getElementById('nav-help').textContent = t.navHelp;
+      document.querySelector('.lang-btn').textContent = t.langBtn;
       document.getElementById('hero-title').innerHTML = t.heroTitle;
       document.getElementById('hero-desc').textContent = t.heroDesc;
       document.getElementById('s1-title').textContent = t.s1Title;
@@ -246,16 +305,18 @@
       document.getElementById('s3-desc').textContent = t.s3Desc;
       document.getElementById('s4-title').textContent = t.s4Title;
       document.getElementById('s4-desc').textContent = t.s4Desc;
+      document.getElementById('footer-text').innerHTML = t.footer;
       
       for(let i=1; i<=4; i++) {
-        document.getElementById(`sel${i}`).textContent = t.sel;
+        document.getElementById(`btn${i}`).textContent = t.btnSelect;
       }
     }
 
     function triggerBooking(subType) {
-      const mainCat = 'gardening';
+      const mainCat = 'gardening_services';
       window.location.href = `submi00.html?service=${mainCat}&type=${encodeURIComponent(subType)}`;
     }
   </script>
+
 </body>
 </html>

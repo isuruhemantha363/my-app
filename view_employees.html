@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Employee Database - HANDY LANKA</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
@@ -12,13 +12,18 @@
             --primary: #d97706;
             --accent: #f5b400;
             --bg-gradient: linear-gradient(-45deg, #fdfc47, #fef3c7, #a7f3d0, #fef3c7);
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.9);
             --text-main: #111827;
-            --shadow: 0 10px 25px rgba(0,0,0,0.08);
+            --shadow: 0 8px 30px rgba(0,0,0,0.08);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             min-height: 100vh;
@@ -27,7 +32,7 @@
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
             color: var(--text-main);
-            overflow-x: hidden;
+            padding-bottom: 20px;
         }
 
         @keyframes gradientAnimation {
@@ -39,231 +44,269 @@
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
-            padding: 15px 50px;
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
         }
 
-        .n_logo { height: 70px; width: auto; cursor: pointer; transition: 0.3s; }
-        .n_logo:hover { transform: scale(1.05); }
+        .n_logo { height: 60px; width: auto; transition: var(--transition); }
+        .n_logo:active { transform: scale(0.9); }
 
         .add-btn {
             background: var(--primary);
             color: white;
-            padding: 12px 28px;
-            border-radius: 15px;
+            padding: 10px 16px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 700;
+            font-size: 0.85rem;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(217, 119, 6, 0.3);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
         }
 
-        .add-btn:hover { background: #b45309; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(217, 119, 6, 0.4); }
+        .add-btn:active { transform: scale(0.95); background: #b45309; }
 
         .container {
-            max-width: 1300px;
-            margin: 40px auto;
-            padding: 0 25px;
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 0 15px;
         }
 
-        h2 { text-align: center; font-size: 2.8rem; margin-bottom: 25px; font-weight: 800; color: #1f2937; }
+        h2 { 
+            text-align: center; 
+            font-size: 1.8rem; 
+            margin-bottom: 20px; 
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
         h2 span { color: var(--primary); }
 
         .search-container {
-            max-width: 650px;
-            margin: 0 auto 35px;
-            position: relative;
+            width: 100%;
+            margin: 0 auto 20px;
         }
 
         .search-container input {
             width: 100%;
-            padding: 15px 25px;
-            border-radius: 20px;
+            padding: 14px 20px;
+            border-radius: 18px;
             border: 2px solid transparent;
             outline: none;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
+            background: white;
             box-shadow: var(--shadow);
             font-size: 1rem;
-            transition: 0.3s;
+            transition: var(--transition);
         }
 
-        .search-container input:focus { border-color: var(--primary); background: #fff; }
+        .search-container input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.1);
+        }
 
+        /* Mobile Optimized Horizontal Scroll Tabs */
         .filter-tabs {
             display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 45px;
-            flex-wrap: wrap;
+            overflow-x: auto;
+            padding: 5px 2px 15px 2px;
+            gap: 10px;
+            margin-bottom: 20px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
         }
 
+        .filter-tabs::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
         .tab-btn {
-            padding: 10px 24px;
+            padding: 8px 20px;
             border: none;
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(5px);
-            border-radius: 50px;
+            background: white;
+            white-space: nowrap;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             color: #4b5563;
         }
 
-        .tab-btn.active, .tab-btn:hover {
+        .tab-btn.active {
             background: var(--primary);
             color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(217, 119, 6, 0.2);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
         }
 
         .employee-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr; /* Stacked on mobile */
+            gap: 20px;
         }
 
         .emp-card {
             background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            padding: 25px;
-            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 24px;
             box-shadow: var(--shadow);
             border: 1px solid rgba(255,255,255,0.5);
-            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            animation: cardAppear 0.5s ease backwards;
+            position: relative;
+            overflow: hidden;
         }
-
-        @keyframes cardAppear {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .emp-card:hover { transform: translateY(-12px); background: #fff; border-color: var(--primary); }
-
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
 
         .category-tag {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 0.75rem;
+            background: var(--accent);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
-        }
-
-        .hourly-badge {
-            background: #dcfce7;
-            color: #166534;
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-
-        .emp-card h3 { font-size: 1.4rem; color: #111827; margin-bottom: 5px; }
-        
-        .full-service-type {
-            font-size: 0.85rem;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 15px;
-            padding: 6px 12px;
-            background: rgba(217, 119, 6, 0.08);
-            border-radius: 10px;
+            margin-bottom: 12px;
             display: inline-block;
         }
 
-        .info-group { margin-bottom: 15px; }
-        .info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; color: #4b5563; }
-        .info-row span { font-size: 1.1rem; }
+        .hourly-badge {
+            float: right;
+            background: #10b981;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
 
-        .experience-box {
-            background: #f3f4f6;
-            padding: 15px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--primary);
+        .emp-card h3 { 
+            font-size: 1.25rem; 
+            margin-bottom: 10px; 
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .full-service-type {
+            font-size: 0.8rem;
+            color: #b45309;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: rgba(245, 180, 0, 0.15);
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-row { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            margin-bottom: 8px;
+            padding: 2px 0;
+        }
+        .info-row span { font-size: 1rem; width: 20px; text-align: center; }
+        .info-row p { font-size: 0.85rem; color: #4b5563; word-break: break-word; }
+
+        .cust-options-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .opt-tag {
+            background: rgba(0,0,0,0.05);
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
             color: #374151;
         }
 
-        .skill-section { margin-top: auto; }
-        .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 700; font-size: 0.85rem; }
+        .experience-box {
+            background: rgba(255,255,255,0.5);
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 0.82rem;
+            margin: 12px 0;
+            border-left: 4px solid var(--primary);
+            line-height: 1.5;
+        }
 
-        .skill-bar-bg { height: 10px; background: #e5e7eb; border-radius: 10px; overflow: hidden; }
-        .skill-bar-fill { 
-            height: 100%; 
-            background: linear-gradient(90deg, var(--accent), var(--primary)); 
+        .skill-container { margin-top: 10px; }
+        .skill-header { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; }
+
+        .skill-level-bg {
+            background: rgba(0,0,0,0.08);
+            height: 10px;
             border-radius: 10px;
-            transition: width 1.5s ease-out;
+            overflow: hidden;
+        }
+
+        .skill-level-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent), var(--primary));
         }
 
         .delete-btn {
-            margin-top: 20px;
             background: #fee2e2;
             color: #ef4444;
             border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
+            margin-top: 20px;
+            transition: var(--transition);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             gap: 8px;
-            width: 100%;
+            width: 100%; /* Full width for better mobile touch */
         }
 
-        .delete-btn:hover { background: #ef4444; color: white; }
+        .delete-btn:active { background: #fecaca; transform: scale(0.98); }
 
-        .no-data { 
-            grid-column: 1/-1; 
-            text-align: center; 
-            padding: 60px; 
-            background: var(--card-bg); 
-            border-radius: 30px;
-            font-weight: 600;
-        }
+        .no-data { text-align: center; padding: 40px 20px; font-weight: 600; color: #b45309; font-size: 0.9rem; }
 
-        footer { text-align: center; padding: 50px; color: #6b7280; font-size: 0.9rem; }
+        footer { text-align: center; padding: 30px 15px; color: #9ca3af; font-size: 0.75rem; font-weight: 500; }
 
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .n_logo { height: 50px; }
-            h2 { font-size: 2rem; }
-            .employee-grid { grid-template-columns: 1fr; }
+        /* Tablet Support */
+        @media (min-width: 768px) {
+            .employee-grid { grid-template-columns: repeat(2, 1fr); }
+            header { padding: 10px 50px; }
+            .container { padding: 0 30px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="n logo.png" class="n_logo" alt="Logo" onclick="window.location.href='owner.html'">
-    <button class="add-btn" onclick="window.location.href='employee1.html'">+ Add Professional</button>
+    <div class="logo-container">
+        <img src="n logo.png" class="n_logo" alt="Logo" onclick="window.location.href='owner.html'">
+    </div>
+    <button class="add-btn" onclick="window.location.href='employee1.html'">+ Add New</button>
 </header>
 
 <div class="container">
-    <h2>Handy Lanka <span>Database</span></h2>
+    <h2>Employee <span>Database</span></h2>
 
     <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search by name, specialty, or city..." onkeyup="searchEmployees()">
+        <input type="text" id="searchInput" placeholder="Search by name, specialty..." onkeyup="searchEmployees()">
     </div>
 
     <div class="filter-tabs">
-        <button class="tab-btn active" onclick="filterData('all', this)">All Experts</button>
-        <button class="tab-btn" onclick="filterData('house_cleaning_painting', this)">Cleaning & Painting</button>
+        <button class="tab-btn active" onclick="filterData('all', this)">All</button>
+        <button class="tab-btn" onclick="filterData('house_cleaning_painting', this)">Cleaning</button>
         <button class="tab-btn" onclick="filterData('electrical', this)">Electrical</button>
         <button class="tab-btn" onclick="filterData('plumbing', this)">Plumbing</button>
         <button class="tab-btn" onclick="filterData('gardening', this)">Gardening</button>
@@ -272,17 +315,17 @@
     </div>
 
     <div class="employee-grid" id="employeeGrid">
-        <div class="no-data">Fetching professionals from the database...</div>
+        <div class="no-data">Connecting to Database...</div>
     </div>
 </div>
 
-<footer>&copy; 2026 HANDY LANKA - Secure Management Portal</footer>
+<footer>&copy; 2026 HANDY LANKA - Management Panel</footer>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
 <script>
-    // Firebase Configuration
+    // --- KISIMA DEYAK WENAS NOKALA (FUNCTIONALITY) ---
     const firebaseConfig = {
         apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
         authDomain: "handylanka-6f7b3.firebaseapp.com",
@@ -298,13 +341,14 @@
 
     let allEmployees = [];
 
-    // Real-time Database Listener
     database.ref('employees').on('value', (snapshot) => {
         const data = snapshot.val();
         allEmployees = [];
         if (data) {
             for (let id in data) {
-                allEmployees.push({ ...data[id], id: id });
+                let emp = data[id];
+                emp.id = id;
+                allEmployees.push(emp);
             }
         }
         displayEmployees(allEmployees);
@@ -315,79 +359,82 @@
         grid.innerHTML = "";
 
         if (dataList.length === 0) {
-            grid.innerHTML = `
-                <div class="no-data">
-                    <p style="font-size: 1.5rem; margin-bottom: 10px;">🔍 No Professionals Found</p>
-                    <p style="font-weight: 400; color: #6b7280;">Try adjusting your search or filters.</p>
-                </div>`;
+            grid.innerHTML = '<div class="no-data">No matching professionals found.</div>';
             return;
         }
 
-        dataList.forEach((emp, index) => {
-            const serviceLabel = (emp.service || 'Expert').replace(/_/g, ' ');
-            const subServiceLabel = (emp.sub_service || 'Professional').replace(/_/g, ' ');
+        dataList.forEach(emp => {
+            const serviceName = emp.service ? emp.service.replace(/_/g, ' ') : 'General';
+            const fullServiceType = emp.sub_service ? emp.sub_service.replace(/_/g, ' ') : 'General Professional';
+            const rate = emp.hourly_rate ? `Rs. ${emp.hourly_rate}/hr` : 'N/A';
+            const address = emp.address ? emp.address : 'Not Provided';
             
+            let optionTags = '';
+            if (emp.customer_options && Array.isArray(emp.customer_options)) {
+                optionTags = emp.customer_options.map(opt => `<span class="opt-tag">✓ ${opt}</span>`).join('');
+            }
+
             grid.innerHTML += `
-                <div class="emp-card" style="animation-delay: ${index * 0.05}s">
-                    <div class="card-header">
-                        <span class="category-tag">${serviceLabel}</span>
-                        <span class="hourly-badge">Rs. ${emp.hourly_rate || '0'}/hr</span>
+                <div class="emp-card">
+                    <div>
+                        <span class="hourly-badge">${rate}</span>
+                        <span class="category-tag">${serviceName}</span>
                     </div>
-                    
                     <h3>${emp.name}</h3>
-                    <div class="full-service-type">🛠️ ${subServiceLabel}</div>
+                    <div class="full-service-type">🛠️ ${fullServiceType}</div>
                     
-                    <div class="info-group">
-                        <div class="info-row"><span>📍</span> ${emp.address || 'Location Hidden'}</div>
-                        <div class="info-row"><span>📞</span> ${emp.phone || 'No Phone'}</div>
-                        <div class="info-row"><span>📧</span> ${emp.email || 'No Email'}</div>
+                    <div class="info-row"><span>📍</span><p>${address}</p></div>
+                    <div class="info-row"><span>📧</span><p>${emp.email}</p></div>
+                    <div class="info-row"><span>📞</span><p>${emp.phone}</p></div>
+                    
+                    <div class="cust-options-container">
+                        ${optionTags}
                     </div>
 
                     <div class="experience-box">
-                        <strong>Bio:</strong> ${emp.exp || 'Experienced professional ready to help.'}
+                        <strong>Work Experience:</strong><br>
+                        ${emp.exp}
                     </div>
 
-                    <div class="skill-section">
-                        <div class="skill-info">
-                            <span>Proficiency Level</span>
-                            <span>${emp.skill || '0'}%</span>
+                    <div class="skill-container">
+                        <div class="skill-header">
+                            <span>Proficiency</span>
+                            <span>${emp.skill}%</span>
                         </div>
-                        <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" style="width: ${emp.skill || 0}%"></div>
+                        <div class="skill-level-bg">
+                            <div class="skill-level-fill" style="width: ${emp.skill}%"></div>
                         </div>
                     </div>
 
-                    <button class="delete-btn" onclick="deleteEmployee('${emp.id}')">
-                        🗑️ Delete Record
-                    </button>
+                    <button class="delete-btn" onclick="deleteEmployee('${emp.id}')">🗑️ Delete Professional Data</button>
                 </div>
             `;
         });
     }
 
     function deleteEmployee(id) {
-        if (confirm("🚨 PERMANENT ACTION: Delete this professional from Handy Lanka database?")) {
+        if (confirm("Are you sure you want to delete this employee's data?")) {
             database.ref('employees/' + id).remove()
-                .then(() => alert("Success: Record removed."))
-                .catch((err) => alert("Error: Could not delete."));
+                .then(() => alert("Employee data deleted successfully!"))
+                .catch((error) => alert("Error deleting data."));
         }
     }
 
     function searchEmployees() {
         const term = document.getElementById('searchInput').value.toLowerCase().trim();
-        const filtered = allEmployees.filter(e => 
-            (e.name || "").toLowerCase().includes(term) ||
-            (e.service || "").toLowerCase().includes(term) ||
-            (e.address || "").toLowerCase().includes(term) ||
-            (e.sub_service || "").toLowerCase().includes(term)
-        );
+        const filtered = allEmployees.filter(e => {
+            const name = (e.name || "").toLowerCase();
+            const service = (e.service || "").toLowerCase();
+            const address = (e.address || "").toLowerCase();
+            const subService = (e.sub_service || "").toLowerCase();
+            return name.includes(term) || service.includes(term) || address.includes(term) || subService.includes(term);
+        });
         displayEmployees(filtered);
     }
 
     function filterData(category, btn) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         if (category === 'all') {
             displayEmployees(allEmployees);
         } else {
