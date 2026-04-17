@@ -21,9 +21,10 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* ---------- DYNAMIC ANIMATED BG ---------- */
+    /* ---------- MOBILE-FIRST ANIMATED BG ---------- */
     body {
       background: linear-gradient(-45deg, #e4c3c2, #ded4af, #a8d3e0, #eab308);
       background-size: 400% 400%;
@@ -31,6 +32,7 @@
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     @keyframes gradientBG {
@@ -39,162 +41,150 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* ---------- HEADER ---------- */
+    /* ---------- HEADER (APP STYLE) ---------- */
     header {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
-      padding: 10px 5%;
+      padding: 12px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
     .n_logo {
       height: auto;
-      width: 130px;
+      width: 100px;
       transition: 0.3s;
     }
-    .n_logo:hover { transform: scale(1.05); }
 
     nav a {
       text-decoration: none;
       color: var(--black);
       font-weight: 600;
-      font-size: 18px;
-      margin-left: 20px;
-      transition: 0.3s;
+      font-size: 14px;
+      margin-left: 15px;
     }
-    nav a:hover { color: var(--primary); }
 
     /* ---------- HERO SECTION ---------- */
     .hero {
       text-align: center;
-      padding: 40px 20px 20px;
-      animation: fadeIn 0.8s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      padding: 30px 20px 10px;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       font-weight: 800;
       color: var(--black);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      line-height: 1.2;
     }
 
     .hero h1 span { color: var(--primary); }
 
     .hero p {
       color: #4b5563;
-      max-width: 700px;
-      margin: 0 auto;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
+      max-width: 100%;
     }
 
-    /* Language Switcher Style */
+    /* Language Switcher */
     .lang-switcher {
       text-align: center;
-      margin-bottom: 10px;
+      margin: 10px 0;
     }
     .lang-btn {
-      background: rgba(255,255,255,0.7);
+      background: white;
       border: 1px solid var(--black);
       padding: 5px 15px;
       border-radius: 20px;
       cursor: pointer;
       font-weight: 600;
-      transition: 0.3s;
-      font-size: 14px;
+      font-size: 12px;
     }
-    .lang-btn:hover { background: var(--yellow); }
 
-    /* ---------- SERVICES GRID ---------- */
+    /* ---------- SERVICES GRID (SINGLE COLUMN FOR MOBILE) ---------- */
     .services-grid {
-      max-width: 1100px;
-      margin: 20px auto 60px;
-      padding: 0 20px;
+      padding: 15px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
+      grid-template-columns: 1fr; 
+      gap: 15px;
+      max-width: 450px;
+      margin: 0 auto 50px;
     }
 
     .service-card {
       background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 30px;
+      padding: 25px 20px;
+      border-radius: 20px;
       text-align: center;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      cursor: pointer;
-      border: 2px solid transparent;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.03);
     }
 
-    .service-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      border-color: var(--yellow);
+    .service-card:active {
+      transform: scale(0.98);
+      background: #fafafa;
     }
 
     .icon-box {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       background: #fffbeb;
-      border-radius: 20px;
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
-      margin-bottom: 20px;
-      transition: 0.3s;
-    }
-
-    .service-card:hover .icon-box {
-      background: var(--yellow);
-      transform: rotate(-5deg);
+      font-size: 28px;
+      margin-bottom: 12px;
+      border: 1px solid var(--yellow);
     }
 
     .service-card h3 {
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--black);
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
     .service-card p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #6b7280;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .btn-select {
-      background: #f3f4f6;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      transition: 0.3s;
-    }
-
-    .service-card:hover .btn-select {
       background: var(--black);
       color: #fff;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tablet/Desktop View */
+    @media (min-width: 600px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 900px;
+      }
+      .hero h1 { font-size: 2.5rem; }
     }
 
     footer {
       text-align: center;
-      padding: 40px;
+      padding: 30px 20px;
       color: #6b7280;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
     }
   </style>
 </head>
@@ -315,14 +305,12 @@
       document.getElementById('s4-desc').textContent = t.s4Desc;
       document.getElementById('footer-text').innerHTML = t.footer;
       
-      // Update all select buttons
       for(let i=1; i<=4; i++) {
         document.getElementById(`btn${i}`).textContent = t.btnSelect;
       }
     }
 
     function triggerBooking(subType) {
-      // Logic for redirection
       const mainCat = 'electrical_repairs';
       window.location.href = `submi00.html?service=${mainCat}&type=${encodeURIComponent(subType)}`;
     }
