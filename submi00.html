@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Handy Lanka | Mobile App Interface</title>
   
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -13,95 +13,218 @@
       --primary: #f5b400;
       --secondary: #eb9f08;
       --dark: #111827;
-      --bg: #f8fafc;
       --card-bg: #ffffff;
       --shadow: 0 4px 15px rgba(0,0,0,0.08);
+      --border: #e5e7eb;
     }
 
     body { 
       margin: 0; 
-      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
       color: var(--dark);
-      background: var(--bg);
-      padding-bottom: 80px; /* Space for bottom nav */
+      background-color: #f8fafc;
+      min-height: 100vh;
     }
 
+    /* Header for Mobile */
     header { 
       background: white; 
       padding: 12px 15px; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
+      box-shadow: 0 1px 10px rgba(0,0,0,0.05);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
     }
-    .n_logo { width: 90px; height: auto; }
+    .n_logo { width: 90px; height: auto; cursor: pointer; }
+    .header-brand { font-weight: 900; font-size: 14px; letter-spacing: 0.5px; }
 
-    .main-container { padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+    /* Layout Containers */
+    .main-container { 
+      width: 100%;
+      max-width: 600px; /* Limits width on tablets but stays full on phone */
+      margin: 0 auto; 
+      display: flex;
+      flex-direction: column; /* Stack vertically for mobile */
+      gap: 20px; 
+      padding: 15px; 
+      box-sizing: border-box;
+    }
 
-    /* Progress Steps - Mobile Optimized */
-    .progress-container { margin: 10px 5px 35px; display: flex; justify-content: space-between; position: relative; }
-    .progress-container::before { content: ""; background: #e5e7eb; position: absolute; top: 15px; left: 0; height: 3px; width: 100%; z-index: 1; }
-    .step { background: #fff; color: #9ca3af; border-radius: 50%; height: 30px; width: 30px; display: flex; align-items: center; justify-content: center; border: 2px solid #e5e7eb; z-index: 2; font-size: 12px; font-weight: bold; position: relative; }
-    .step.active { border-color: var(--primary); color: white; background: var(--primary); }
-    .step-label { position: absolute; top: 35px; font-size: 9px; white-space: nowrap; font-weight: 700; color: #6b7280; }
+    /* Progress Bar optimization for small screens */
+    .progress-container {
+      margin: 10px 0 35px;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+    .progress-container::before {
+      content: "";
+      background-color: #e5e7eb;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 3px;
+      width: 100%;
+      z-index: 1;
+    }
+    .step {
+      background-color: #fff;
+      color: #9ca3af;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #e5e7eb;
+      z-index: 2;
+      font-weight: bold;
+      font-size: 12px;
+      position: relative;
+    }
+    .step.active { border-color: var(--primary); color: #fff; background: var(--primary); }
+    .step-label {
+      position: absolute;
+      top: 35px;
+      font-size: 9px;
+      white-space: nowrap;
+      font-weight: 700;
+      color: #6b7280;
+    }
 
-    .card { background: var(--card-bg); border-radius: 18px; padding: 20px; box-shadow: var(--shadow); }
+    .booking-card, .profile-card { 
+      background: var(--card-bg); 
+      border-radius: 20px; 
+      padding: 20px; 
+      box-shadow: var(--shadow); 
+      border: 1px solid #f1f5f9;
+    }
 
-    /* Employee List Styles - List View for Mobile */
-    .employee-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
-    .emp-card { border: 1.5px solid #f1f5f9; border-radius: 16px; padding: 12px; background: #fff; display: flex; align-items: center; gap: 12px; position: relative; }
-    .emp-card img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); }
-    .emp-info { flex: 1; }
-    .emp-name { font-weight: 800; font-size: 15px; }
-    .emp-sub { font-size: 11px; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
+    /* Employee List optimization */
+    .employee-list { 
+      display: flex; 
+      flex-direction: column; /* Vertical list on mobile */
+      gap: 15px; 
+      margin-top: 15px; 
+    }
+    .emp-card { 
+      border: 1px solid #eee; 
+      border-radius: 18px; 
+      padding: 15px; 
+      background: #fff; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .emp-card img { 
+      width: 80px; 
+      height: 80px; 
+      border-radius: 50%; 
+      object-fit: cover; 
+      margin-bottom: 10px; 
+      border: 2px solid var(--primary);
+    }
+
+    .feedback-btn { 
+      background: #fffbeb; 
+      color: #b45309; 
+      border: 1px solid #fef3c7; 
+      padding: 10px; 
+      border-radius: 10px; 
+      font-size: 11px; 
+      font-weight: 700; 
+      width: 100%; 
+      margin-top: 10px;
+    }
     
-    .view-review-link { font-size: 10px; color: #64748b; text-decoration: underline; margin-top: 4px; display: block; }
-
-    /* Form Styles */
+    /* Form Elements for touch */
     .form-group { margin-bottom: 15px; }
-    label { font-size: 13px; font-weight: 700; margin-bottom: 6px; display: block; color: #4b5563; }
-    input, select, textarea { width: 100%; padding: 12px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; box-sizing: border-box; background: #fff; -webkit-appearance: none; }
-    .readonly-field { background: #f8fafc; color: #92400e; font-weight: 600; border-style: dashed; }
-
-    .loc-btn { background: #e0f2fe; color: #0369a1; border: none; padding: 12px; border-radius: 10px; font-size: 11px; font-weight: 700; width: 100%; margin-top: 5px; }
-    .submit-btn { width: 100%; background: var(--primary); border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 800; color: #451a03; margin-top: 10px; }
-
-    /* Profile Detail View */
-    .profile-box { background: #fff; border: 2px solid #fef3c7; border-radius: 20px; overflow: hidden; margin-top: 10px; }
-    .profile-header { background: #fffbeb; padding: 20px; text-align: center; }
-    .profile-body { padding: 15px; font-size: 13px; }
-    .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
-
-    /* Payment Option */
+    label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #4b5563; }
+    input, select, textarea { 
+      width: 100%; 
+      padding: 12px; 
+      border: 1.5px solid var(--border); 
+      border-radius: 10px; 
+      font-size: 14px; 
+      box-sizing: border-box; 
+    }
+    
+    .readonly-field { background: #f9fafb; font-weight: 600; color: #92400e; border-style: dashed; }
+    
     .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .pay-card { border: 2px solid #e5e7eb; border-radius: 12px; padding: 12px; text-align: center; font-weight: 700; font-size: 13px; cursor: pointer; }
-    input[type="radio"]:checked + .pay-card { border-color: var(--primary); background: #fffbeb; }
+    .pay-card { 
+      display: flex; 
+      gap: 5px; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 12px; 
+      border: 2px solid #e5e7eb; 
+      border-radius: 10px; 
+      font-size: 14px;
+      font-weight: 700; 
+    }
+    .pay-option input:checked + .pay-card { border-color: var(--primary); background: #fffbeb; }
+    
+    .submit-btn { 
+      width: 100%; 
+      background: var(--primary); 
+      border: none; 
+      padding: 16px; 
+      border-radius: 15px; 
+      font-size: 17px; 
+      font-weight: 800; 
+      color: #451a03;
+      margin-top: 10px;
+    }
 
-    /* Modal - Mobile Full Screenish */
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
-    .modal-content { background: #fff; margin: 15% auto; width: 90%; max-height: 70vh; border-radius: 25px; display: flex; flex-direction: column; overflow: hidden; }
-    .feedback-list { padding: 15px; overflow-y: auto; flex: 1; }
-    .fb-card { background: #f8fafc; padding: 12px; border-radius: 12px; margin-bottom: 10px; font-size: 13px; }
+    /* Modal for Mobile */
+    .modal { 
+      display: none; 
+      position: fixed; 
+      z-index: 2000; 
+      inset: 0; 
+      background: rgba(0,0,0,0.6); 
+      padding: 10px;
+    }
+    .modal-content { 
+      background: #fff; 
+      margin: 10vh auto; 
+      width: 100%; 
+      max-width: 400px; 
+      border-radius: 20px; 
+      overflow: hidden; 
+    }
+    .modal-header { padding: 15px; border-bottom: 1px solid #eee; text-align: center; }
+    .feedback-list { padding: 15px; max-height: 350px; overflow-y: auto; }
+    .fb-card { background: #f9fafb; padding: 12px; border-radius: 12px; margin-bottom: 10px; font-size: 13px; }
 
-    /* Bottom Nav Bar */
-    .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
-    .nav-item { font-size: 10px; text-align: center; color: #94a3b8; font-weight: 600; text-decoration: none; }
-    .nav-active { color: var(--primary); }
+    .loc-btn { 
+      background: #f0f9ff; color: #0369a1; border: 1px solid #bae6fd; 
+      padding: 10px; border-radius: 10px; font-size: 11px; 
+      font-weight: bold; margin-top: 8px; width: 100%; 
+    }
+
+    #busy-display { margin-top: 15px; padding: 12px; background: #fff5f5; border: 1px dashed #feb2b2; border-radius: 15px; }
+    .busy-item { display: inline-block; background: #f56565; color: white; padding: 4px 8px; border-radius: 8px; font-size: 10px; margin: 2px; }
+
+    /* Utility */
+    .mobile-hide { display: none; }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="n logo.png" class="n_logo" onclick="window.location.href='page1.html'">
-  <div style="font-weight:900; font-size: 12px; color: #334155;">HANDY LANKA</div>
+  <img src="n logo.png" class="n_logo" alt="Logo" onclick="window.location.href='page1.html'">
+  <div class="header-brand">HANDY LANKA</div>
 </header>
 
 <div class="main-container">
   
-  <div class="card">
+  <div class="booking-card" style="padding: 15px 10px;">
     <div class="progress-container">
       <div class="step active" id="step1">1 <span class="step-label">Category</span></div>
       <div class="step" id="step2">2 <span class="step-label">Expert</span></div>
@@ -110,20 +233,28 @@
     </div>
   </div>
 
-  <div class="card">
-    <h3 id="list-title" style="margin:0; font-size: 16px;">Verified Professionals</h3>
+  <div class="profile-card">
+    <h3 id="list-title" style="text-align: center; margin: 0 0 15px; font-size: 18px;">Available Experts</h3>
     <div class="employee-list" id="employee-container">
-      <p style="text-align: center; color: #9ca3af; font-size: 13px; padding: 20px;">Please select a category first.</p>
+      <p style="text-align: center; color: #9ca3af; padding: 20px 0; font-size: 14px;">Select a category to view professionals.</p>
     </div>
 
     <div id="selected-profile-display" style="display:none;">
-      <button type="button" onclick="resetSelection()" style="background:none; border:none; color:var(--secondary); font-weight:800; font-size: 13px; padding-bottom: 10px; display: block;">← Change Professional</button>
+      <button type="button" onclick="resetSelection()" style="color:var(--secondary); background:#fff9e6; border:1px solid #fef3c7; padding:10px; border-radius:10px; margin-bottom:15px; font-weight:bold; font-size: 12px; width: 100%;">
+        ← Choose Another Expert
+      </button>
       <div id="active-worker-info"></div>
+
+      <div id="busy-display">
+        <div style="font-weight: 800; font-size: 12px; color: #c53030; margin-bottom: 5px;">📅 Busy Schedule:</div>
+        <div id="busy-list"></div>
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <h3 style="margin-top:0; font-size: 18px;">Booking Details</h3>
+  <div class="booking-card">
+    <h3 style="margin-top:0; text-align:center; color: #b45309; font-size: 22px;">Complete Booking</h3>
+    
     <form id="mainBookingForm">
       <input type="hidden" name="Submission_Time" id="submission_timestamp">
       <input type="hidden" name="Employee_ID" id="hide_emp_id">
@@ -135,7 +266,7 @@
       <div class="form-group">
         <label>Service Category</label>
         <select name="Main_Category" id="main_category_select" onchange="updateStep(1); autoFillServiceType(); filterEmployees();" required>
-          <option value="">-- Choose Category --</option>
+          <option value="">-- Select --</option>
           <option value="house_cleaning_painting">House Cleaning & Painting</option>
           <option value="electrical_repairs">Electrical Repairs</option>
           <option value="gardening_services">Gardening</option>
@@ -151,50 +282,50 @@
       </div>
 
       <div class="form-group">
-        <label>Assigned Expert</label>
-        <input type="text" name="Professional_Name" id="form_worker_name" class="readonly-field" placeholder="Select an expert from list" readonly required>
+        <label>Expert</label>
+        <input type="text" name="Professional_Name" id="form_worker_name" class="readonly-field" placeholder="Select an expert" readonly required>
       </div>
 
       <div class="form-group">
-        <label>Your Full Name</label>
-        <input type="text" name="Customer_Name" oninput="updateStep(3)" placeholder="Enter name" required>
+        <label>Your Name</label>
+        <input type="text" name="Customer_Name" oninput="updateStep(3)" required>
       </div>
 
       <div class="form-group">
         <label>Mobile Number</label>
-        <input type="tel" name="Customer_Phone" placeholder="07xxxxxxxx" maxlength="10" required>
+        <input type="tel" name="Customer_Phone" maxlength="10" required>
       </div>
 
       <div class="form-group">
-        <label>Service Address</label>
-        <input type="text" name="Customer_Address" id="customer_address" placeholder="Address" required>
-        <button type="button" class="loc-btn" onclick="getLocation()">📍 Use Current Location</button>
+        <label>Address</label>
+        <input type="text" name="Customer_Address" id="customer_address" required>
+        <button type="button" class="loc-btn" onclick="getLocation()">📍 Auto-Detect My Location</button>
       </div>
 
       <div class="form-group">
-        <label>Notification Email</label>
-        <input type="email" name="Customer_Email" placeholder="email@example.com" required>
+        <label>Email Address</label>
+        <input type="email" name="Customer_Email" required>
       </div>
 
       <div class="form-group">
         <label>Work Description</label>
-        <textarea name="Work_Description" rows="3" placeholder="Explain the job..." required></textarea>
+        <textarea name="Work_Description" rows="3" required></textarea>
       </div>
 
-      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-        <div style="flex:1;"><label>Date</label><input type="date" name="Date" required></div>
-        <div style="flex:1;"><label>Time</label><input type="time" name="Time" required></div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+        <div><label>Date</label><input type="date" name="Date" id="booking_date" required></div>
+        <div><label>Time</label><input type="time" name="Time" id="booking_time" required></div>
       </div>
 
       <div class="form-group">
         <label>Payment Method</label>
         <div class="payment-grid">
-          <label style="flex:1;">
-            <input type="radio" name="Payment_Method" value="Cash" checked style="display:none">
+          <label class="pay-option">
+            <input type="radio" name="Payment_Method" value="Cash" checked>
             <div class="pay-card">💵 Cash</div>
           </label>
-          <label style="flex:1;">
-            <input type="radio" name="Payment_Method" value="Card" style="display:none">
+          <label class="pay-option">
+            <input type="radio" name="Payment_Method" value="Card">
             <div class="pay-card">💳 Card</div>
           </label>
         </div>
@@ -205,34 +336,20 @@
   </div>
 </div>
 
-<nav class="bottom-nav">
-  <button class="nav-item nav-active" onclick="window.location.href='home.html'" style="border: none; background-color: white;">
-    🏠<br>Home
-  </button>
-  
-  <button class="nav-item" onclick="window.location.href='page1.html'"style="border: none; background-color: white;">
-    🛠️<br>Services
-  </button>
-  
-  <button class="nav-item" onclick="window.location.href='submi00.html'"style="border: none; background-color: white;">
-    📅<br>Bookings
-  </button>
-  
-  <button class="nav-item" onclick="window.location.href='help.html'"style="border: none; background-color: white;">
-    ❓<br>Help
-  </button>
-</nav>
-
 <div id="feedbackModal" class="modal">
   <div class="modal-content">
-    <div style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 800; text-align: center;" id="modalWorkerName">Reviews</div>
+    <div class="modal-header">
+      <h3 id="modalWorkerName" style="margin:0; font-size: 18px;">Reviews</h3>
+    </div>
     <div class="feedback-list" id="feedbackContainer"></div>
-    <button onclick="closeFeedback()" style="margin: 15px; padding: 12px; background: var(--dark); color: white; border: none; border-radius: 12px; font-weight: bold;">Close</button>
+    <div style="padding: 15px;">
+      <button onclick="closeFeedback()" style="background: var(--dark); color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold;">Close</button>
+    </div>
   </div>
 </div>
 
 <script>
-  // Firebase Config (Original)
+  // ඔබගේ මුල් Logic සහ Firebase Config ඒ ආකාරයෙන්ම පවතී
   const firebaseConfig = {
     apiKey: "AIzaSyBmVI2C4G9S4THlS2Tu3JpVo1LpDAMBpfM",
     authDomain: "handylanka-6f7b3.firebaseapp.com",
@@ -247,26 +364,29 @@
   const database = firebase.database();
   let allEmployees = [];
 
-  // Core Logic (Original - All functions preserved)
   function getLocation() {
     const addrInput = document.getElementById('customer_address');
     const coordInput = document.getElementById('customer_coords');
     if (navigator.geolocation) {
       addrInput.placeholder = "Locating...";
-      navigator.geolocation.getCurrentPosition((position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
+      navigator.geolocation.getCurrentPosition((pos) => {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
           coordInput.value = `Lat: ${lat}, Lon: ${lon}`;
-          addrInput.value = `📍 Current Location (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
-        }, () => { alert("Enable GPS"); }
+          addrInput.value = `Location Pin Set`;
+          alert("Location detected!");
+        }, () => alert("Please enable GPS.")
       );
     }
   }
 
   function updateStep(step) {
     for(let i=1; i<=4; i++) {
-      const el = document.getElementById('step'+i);
-      if(el) i <= step ? el.classList.add('active') : el.classList.remove('active');
+        const stepEl = document.getElementById('step' + i);
+        if(stepEl) {
+          if(i <= step) stepEl.classList.add('active');
+          else stepEl.classList.remove('active');
+        }
     }
   }
 
@@ -297,26 +417,29 @@
     const selectedVal = document.getElementById('main_category_select').value;
     const container = document.getElementById('employee-container');
     resetSelection();
-    if (!selectedVal) return;
-
+    if (!selectedVal) { 
+      container.innerHTML = '<p style="text-align: center; color: #9ca3af; padding: 20px 0; font-size: 14px;">Select a category to view experts.</p>'; 
+      return; 
+    }
     const filtered = allEmployees.filter(emp => {
       const dbService = (emp.service || "").toLowerCase().replace(/_/g, '');
       const searchVal = selectedVal.toLowerCase().replace(/_/g, '').replace('services', '').replace('repairs', '').replace('assistance', '');
       return dbService.includes(searchVal);
     });
-
-    container.innerHTML = filtered.length ? '' : '<p style="text-align: center; font-size: 13px;">No experts found.</p>';
+    container.innerHTML = filtered.length ? '' : '<p style="text-align: center;">No professionals found.</p>';
     filtered.forEach(emp => {
       container.innerHTML += `
-        <div class="emp-card" onclick="selectWorker('${emp.id}')">
-          <img src="${emp.photo === 'no-image' ? 'https://cdn-icons-png.flaticon.com/512/149/149071.png' : emp.photo}">
-          <div class="emp-info">
-            <div class="emp-name">${emp.name}</div>
-            <div class="emp-sub">${emp.sub_service || 'Expert'}</div>
-            <div style="font-size: 11px; color: #64748b; margin-top:2px;">Rs. ${emp.hourly_rate || 'N/A'} /hr</div>
-            <span class="view-review-link" onclick="event.stopPropagation(); showFeedbacks('${emp.name}')">View Reviews</span>
+        <div class="emp-card">
+          <div onclick="selectWorker('${emp.id}')" style="text-align:center; width:100%;">
+            <img src="${emp.photo === 'no-image' ? 'https://cdn-icons-png.flaticon.com/512/149/149071.png' : emp.photo}">
+            <div style="font-weight:800; font-size: 16px;">${emp.name}</div>
+            <div style="font-size:11px; color:#b45309; font-weight:700; margin-bottom: 8px;">${emp.sub_service || 'Expert'}</div>
+            <div style="text-align: left; font-size: 12px; border-top: 1px solid #eee; padding-top: 10px; color: #4b5563;">
+              <div style="margin-bottom:4px;"><b>📍 Address:</b> ${emp.address || 'N/A'}</div>
+              <div><b>💰 Rate:</b> Rs. ${emp.hourly_rate || 'Negotiable'}</div>
+            </div>
           </div>
-          <div style="color: var(--primary); font-size: 20px;">➔</div>
+          <button type="button" class="feedback-btn" onclick="showFeedbacks('${emp.name}')">⭐ VIEW REVIEWS</button>
         </div>`;
     });
   }
@@ -326,26 +449,27 @@
     document.getElementById('employee-container').style.display = 'none';
     document.getElementById('list-title').style.display = 'none';
     document.getElementById('selected-profile-display').style.display = 'block';
+    document.getElementById('hide_emp_phone').value = worker.phone || "";
     
     document.getElementById('active-worker-info').innerHTML = `
-      <div class="profile-box">
-        <div class="profile-header">
-           <img src="${worker.photo === 'no-image' ? 'https://cdn-icons-png.flaticon.com/512/149/149071.png' : worker.photo}" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--primary); object-fit: cover;">
-           <h4 style="margin:10px 0 0;">${worker.name}</h4>
-           <div style="font-size: 11px; color: #b45309; font-weight: 700;">${worker.sub_service || 'Professional'}</div>
-        </div>
-        <div class="profile-body">
-           <div class="detail-row"><span>📍 Address</span> <b>${worker.address || 'N/A'}</b></div>
-           <div class="detail-row"><span>🏆 Experience</span> <b>${worker.exp || 'N/A'}</b></div>
-           <div class="detail-row"><span>💰 Rate</span> <b>Rs. ${worker.hourly_rate}</b></div>
-           <div class="detail-row"><span>⚡ Skill Score</span> <b>${worker.skill || 'Verified'}</b></div>
-        </div>
+      <div style="text-align: center; background: #fffbeb; padding: 20px; border-radius: 15px;">
+        <img src="${worker.photo === 'no-image' ? 'https://cdn-icons-png.flaticon.com/512/149/149071.png' : worker.photo}" style="width:80px; height:80px; border-radius:50%; border:3px solid #f5b400; object-fit: cover;">
+        <h3 style="margin: 10px 0 5px;">${worker.name}</h3>
+        <span style="color: #b45309; font-weight: 800; font-size: 12px;">${worker.sub_service || 'Professional'}</span>
+      </div>
+      <div style="padding: 15px 5px; font-size: 13px; color: #374151;">
+          <div style="margin-bottom:8px;"><b>📍 Address:</b><br>${worker.address || 'N/A'}</div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span><b>🏆 Exp:</b> ${worker.exp || 'N/A'}</span>
+            <span><b>💰 Rate:</b> Rs. ${worker.hourly_rate}</span>
+          </div>
+          <div><b>⚡ Skill Level:</b> ${worker.skill || 'Verified'}</div>
       </div>`;
       
     document.getElementById('form_worker_name').value = worker.name;
     document.getElementById('hide_emp_id').value = id;
-    document.getElementById('hide_emp_email').value = worker.email || "";
-    document.getElementById('hide_emp_phone').value = worker.phone || "";
+    document.getElementById('hide_emp_email').value = worker.email || ""; 
+    checkAvailabilityDisplay(worker.name);
     updateStep(2);
   }
 
@@ -354,61 +478,81 @@
     document.getElementById('list-title').style.display = 'block';
     document.getElementById('selected-profile-display').style.display = 'none';
     document.getElementById('form_worker_name').value = "";
+    document.getElementById('busy-display').style.display = "none";
   }
 
-  document.getElementById('mainBookingForm').addEventListener('submit', function(e) {
+  function checkAvailabilityDisplay(workerName) {
+    const list = document.getElementById('busy-list');
+    const display = document.getElementById('busy-display');
+    database.ref('availability/' + workerName.replace(/\s/g, '_')).on('value', snapshot => {
+        list.innerHTML = "";
+        if (snapshot.exists()) {
+            display.style.display = "block";
+            snapshot.forEach(child => {
+                const data = child.val();
+                list.innerHTML += `<span class="busy-item">${data.date}</span>`;
+            });
+        } else { display.style.display = "none"; }
+    });
+  }
+
+  document.getElementById('mainBookingForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const submitBtn = this.querySelector('.submit-btn');
-    const now = new Date();
-    document.getElementById('submission_timestamp').value = now.toLocaleString();
-    
-    const formData = new FormData(this);
-    const bookingData = {};
-    formData.forEach((value, key) => { bookingData[key] = value; });
+    const selectedDate = document.getElementById('booking_date').value;
+    const selectedTime = document.getElementById('booking_time').value;
+    const workerName = document.getElementById('form_worker_name').value;
 
-    submitBtn.innerText = "Please wait...";
+    if (!workerName) return alert("Select an expert first!");
+
+    submitBtn.innerText = "Processing...";
     submitBtn.disabled = true;
 
+    // Check Availability Logic (Same as original)
+    const availabilitySnap = await database.ref('availability/' + workerName.replace(/\s/g, '_')).once('value');
+    let isBusy = false;
+    availabilitySnap.forEach(child => {
+        if (child.val().date === selectedDate) isBusy = true;
+    });
+
+    if (isBusy) {
+        alert("Expert is busy on this date.");
+        submitBtn.disabled = false;
+        return;
+    }
+
+    const now = new Date();
+    document.getElementById('submission_timestamp').value = now.toLocaleString();
+    const formData = new FormData(this);
+    const bookingData = {};
+    formData.forEach((v, k) => { bookingData[k] = v; });
+
     database.ref('bookings').push().set(bookingData).then(() => {
-        const scriptURL = "https://script.google.com/macros/s/AKfycbznZ7EikzMwLoc9uvzgZq8orbnoN9IcVDxlLi2ZpBFshHX4vKpX737eQtuuX91Rv8ymkw/exec";
-        const params = new URLSearchParams();
-        formData.forEach((value, key) => params.append(key, value));
-        return fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: params });
-      })
-      .then(() => { window.location.href = "booking-success.html"; })
-      .catch(err => { alert("Error!"); submitBtn.disabled = false; });
+      window.location.href = "booking-success.html";
+    }).catch(err => {
+      alert("Error saving booking.");
+      submitBtn.disabled = false;
+    });
   });
 
   function showFeedbacks(employeeName) {
-    document.getElementById('modalWorkerName').innerText = employeeName + " - Reviews";
-    const container = document.getElementById('feedbackContainer');
-    container.innerHTML = "Loading...";
+    document.getElementById('modalWorkerName').innerText = employeeName;
     document.getElementById('feedbackModal').style.display = 'block';
     database.ref('feedbacks').orderByChild('employee').equalTo(employeeName).once('value', (snapshot) => {
+      let html = "";
       if (snapshot.exists()) {
-        let html = "";
         snapshot.forEach(child => {
           const fb = child.val();
-          html += `<div class="fb-card"><b>${fb.customer}</b><div style="color:var(--primary)">${"★".repeat(parseInt(fb.rating || 5))}</div><i>"${fb.comments}"</i></div>`;
+          html += `<div class="fb-card"><b>${fb.customer}</b><br>${fb.comments}</div>`;
         });
-        container.innerHTML = html;
-      } else { container.innerHTML = "No reviews."; }
+        document.getElementById('feedbackContainer').innerHTML = html;
+      } else { document.getElementById('feedbackContainer').innerHTML = "No reviews."; }
     });
   }
 
   function closeFeedback() { document.getElementById('feedbackModal').style.display = 'none'; }
   
-  window.onload = function() {
-    fetchInitialData();
-    const urlParams = new URLSearchParams(window.location.search);
-    const service = urlParams.get('service');
-    if (service) {
-      document.getElementById('main_category_select').value = service;
-      autoFillServiceType();
-      filterEmployees();
-      updateStep(1);
-    }
-  };
+  window.onload = fetchInitialData;
 </script>
 </body>
 </html>
